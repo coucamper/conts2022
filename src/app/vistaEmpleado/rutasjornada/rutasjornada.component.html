@@ -1,0 +1,115 @@
+<div class="container-fluid" *ngIf="conductor.nomemp">
+
+  <app-navegacionconductor></app-navegacionconductor>
+
+  <div class="col-lg-12">
+    <h2>{{ conductor.nomemp }}, hoy tienes asignada la siguiente ruta: <strong>{{ ruta.denom }}</strong> </h2>
+    <div class="col-lg-8 offset-lg-2">
+      <h3>Contenedores de "{{ ruta.denom }}"</h3>
+      <h3><strong>Respeta el órden del listado</strong></h3>
+    </div>
+  </div>
+  <div class="col-lg-8 offset-lg-2">
+    <button type="button" class="btn ml-3 mt-4 mb-4" mat-raised-button color="warn"  (click)="iniciarRuta()"><i class="far fa-clock mr-2"></i>Iniciar temporizador de ruta</button>
+    <div *ngIf="inicializado"><p class="ml-3">Ruta inicializada a <strong>{{ horaRuta | date:'dd/MM/yy' }}</strong> a las <strong>{{ horaRuta | date:'HH:mm:ss'}}</strong></p></div>
+
+  </div>
+  <div class="col-lg-12">
+    <div *ngFor="let c of contenedores; let i = index " class="col-lg-8 offset-lg-2">
+      <h4><i class="fas fa-long-arrow-alt-down"></i></h4>
+      <div class="card col-lg-12 col-md-12 col-sm-12 col-12 ib mb-4">
+        <div class="card-body">
+          <div class="row align-items-start">
+            <div class="col-lg-8 col-md-6 col-sm-6 ib">
+              <h4 class="card-title ib"><strong>{{ i + 1 }} - {{ c.contenedores.denom | uppercase }}</strong></h4>
+              <p>{{ (i) *12 }} minutos (Tiempo estimado) </p>
+              <p class="card-text">{{ c.contenedores.ubicacion }}</p>
+              <div class="col-lg-12 pl-0">
+                <div class="col-lg-3 pl-0">
+                  <a href="#" class="btn btn-primary mr-3 mb-2" mat-raised-button color="accent" (click)="abrirModal(template)" [routerLink]="['/rutasjornada']">Registrar llenado</a>
+                  <ng-template #template>
+                    <div class="modal-header">
+                      <h4 class="modal-title pull-left">Nivel de llenado de {{ c.contenedores.denom }}</h4>
+                      <button type="button" class="close pull-right" aria-label="close" (click)="modalRef.hide()"></button>
+                      <span aria-hidden="true">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                      <p>Registrado en: {{ timestamp | date:'short'}}</p>
+                      <form>
+                        <label for="llenado">Introducir nivel de llenado</label>
+                        <select name="llenado" id="llenado" class="form-control">
+                          <option *ngFor="let ll of llenados">
+                            {{ ll.nivel }} - {{ ll.denomnivel }}
+                          </option>
+                        </select>
+                        <button type="button" class="btn" mat-raised-button color="accent" class="ml-3" (click)="guardarNivel(); modalRef.hide()">Guardar nivel</button>
+                      </form>
+
+                    </div>
+                  </ng-template>
+                </div>
+                <div class="col-lg-3 pl-0">
+                  <a href="#" class="btn btn-primary mr-3 mb-2" mat-raised-button color="accent" (click)="abrirModal2(template2)" [routerLink]="['/rutasjornada']">Registrar incidencia</a>
+                  <ng-template #template2>
+                    <div class="modal-header">
+                      <h4 class="modal-title pull-left">Registrar incidencias de {{ c.contenedores.denom }}</h4>
+                      <button type="button" class="close pull-right" aria-label="close" (click)="modalRef.hide()"></button>
+                      <span aria-hidden="true">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                      <form>
+                        <label for="incidencia">Registrar incidencia</label>
+                          <select name="incidencia" id="incidencia" class="form-control select-inci">
+                            <option *ngFor="let in of tiposIncidencia" class="form-control">
+                              {{ in.tipoincidencia }}
+
+                            </option>
+
+                          </select>
+
+                        <button type="button" class="btn" mat-raised-button color="accent" class="mt-3" (click)="guardarNivel(); modalRef.hide()">Guardar incidencia</button>
+                      </form>
+                    </div>
+                  </ng-template>
+                </div>
+                <div class="col-lg-3 pl-0">
+                  <a [routerLink]="c.contenedores.mapa" class="btn btn-primary mr-3 mb-2" mat-raised-button color="accent">Ver mapa</a>
+                </div>
+                <div class="col-lg-3 pl-0">
+                  <a href="#" class="btn mr-3 mb-2" mat-raised-button color="warn" [routerLink]="['/rutasjornada']">Final parada</a>
+                </div>
+              </div>
+
+
+
+
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 ib">
+              <h4 class="card-title ib"><strong>Notas de seguimiento:</strong></h4>
+              <p><input type="checkbox">&nbsp;&nbsp; Requiere limpieza</p>
+              <p><input type="checkbox">&nbsp;&nbsp; Requiere mantenimiento</p>
+            </div>
+
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-lg-8 offset-lg-2">
+    <button class="btn ml-3 mb-5" mat-raised-button color="accent">Guardar notas de seguimiento</button>
+  </div>
+
+  <div class="col-lg-8 offset-lg-2">
+    <div *ngIf="finalizado">
+      <p class="ml-3 mb-2">Ruta finalizada a <strong>{{ horaFinRuta | date:'dd/MM/yy' }}</strong> a las <strong>{{ horaFinRuta | date:'HH:mm:ss'}}</strong></p>
+    </div>
+    <button type="button" class="btn ml-3 mt-4 mb-5" mat-raised-button color="warn" (click)="finalizarRuta()"><i class="far fa-clock mr-2"></i>finalizar temporizador de ruta</button>
+
+  </div>
+
+
+
+</div>

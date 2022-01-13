@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h3 class="bordbot pl-2 pb-3" *ngIf="div1"><button (click)="div1Function()" mat-raised-button color="warn" class="btn"><i class="fas fa-chevron-down"></i> &nbsp;Filtros de selección </button></h3>
+    <h3 class="bordbot pl-2 pb-3" *ngIf="!div1"><button (click)="div1Function()" mat-raised-button color="warn" class="btn"><i class="fas fa-chevron-up"></i> &nbsp;Filtros de selección </button></h3>
+  </div>
+  <div class="col-lg-12 mb-5" *ngIf="!div1">
+
+
+
+    <form action="">
+
+
+    <div class="col-lg-2 ib">
+
+      <label for="localidad">Filtrar por Clase: </label>
+      <select name="" id="" class="form-control fc-big">
+        <option value="">Clase no seleccionada</option>
+        <option *ngFor="let c of clases">{{ c.clasedenom}}</option>
+      </select>
+    </div>
+
+    <div class="col-lg-2 ib">
+
+      <label for="localidad">Filtrar por Cliente: </label>
+      <select name="" id="" class="form-control fc-big">
+        <option value="" [disabled]>Cliente no seleccionado</option>
+        <option *ngFor="let c of clientes">{{ c.razonsoc }}</option>
+      </select>
+    </div>
+
+    <div class="col-lg-2 ib">
+
+      <label for="localidad">Filtrar por Estado pago: </label>
+      <select name="" id="" class="form-control fc-big">
+        <option value="" [disabled]>Estado de pago no seleccionado</option>
+        <option *ngFor="let ep of estadopago">{{ ep.estadopago }}</option>
+      </select>
+    </div>
+
+    <div class="col-lg-2 ib">
+
+      <label for="localidad">Filtrar por fecha: </label>
+      <input type="date" class="form-control fc-mid">
+      <small> &nbsp;Fecha inicial</small>
+
+    </div>
+    <div class="col-lg-2 ib">
+
+      <label for="localidad"></label>
+      <input type="date" class="form-control fc-mid">
+      <small> &nbsp;Fecha final</small>
+
+    </div>
+
+    <div class="col-lg-2 ib">
+
+      <button type="submit" class="form-control fc-mid btn" mat-raised-button color="accent"><i class="fas fa-filter"></i>Aplicar filtros</button>
+
+    </div>
+
+
+    </form>
+
+  </div>
+
+
+</div>

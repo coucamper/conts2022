@@ -1,0 +1,92 @@
+<div class="container-fluid">
+
+<app-navegacion></app-navegacion>
+    <div class="col">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light fsmall">
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarNavAltMarkup"
+					aria-controls="navbarNavAltMarkup" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+					<div class="navbar-nav">
+						<a class="nav-link fsmall" href="#">> Fecha</a>
+						<a class="nav-link fsmall" href="#">> Vehículo</a>
+						<a class="nav-link fsmall" href="#">> Operario</a>
+						<a class="nav-link fsmall" href="#">> Peso local</a>
+						<a class="nav-link fsmall" href="#">> Incidencias</a>
+
+					</div>
+				</div>
+			</nav>
+    </div>
+
+    <div class="col-lg-12">
+      <h2 class="pl-2 pt-4">Listado de Contenedores</h2>
+      <app-barra-herramientas></app-barra-herramientas>
+
+      <table class="table table-striped bordbot">
+        <thead class="thead-dark">
+          <tr>
+            <th>ID</th>
+            <th>LOCALIDAD</th>
+            <th>BARRIO</th>
+            <th>DENOMINACION</th>
+            <th>UBICACION</th>
+            <th>COORDENADAS</th>
+            <th>FECHA IMPLANTACION</th>
+            <th>MAPA</th>
+            <th>EDITAR</th>
+            <th>ELIMINAR</th>
+          </tr>
+        </thead>
+        <tbody class="table-striped">
+          <tr *ngFor="let cont of contenedores">
+            <td>{{ cont.idcontenedor }}</td>
+            <td>{{ cont.localidad }}</td>
+            <td>{{ cont.barrio }}</td>
+            <td>{{ cont.denom }}</td>
+            <td>{{ cont.ubicacion }}</td>
+            <td>{{ cont.coordenadas }}</td>
+            <td>{{ cont.fechaimplantacion | date: 'dd-MM-yyyy'}}</td>
+            <td><a mat-raised-button class="btn" [routerLink]="['/contenedores']">Mapa</a></td>
+            <td><a mat-raised-button color="accent" class="btn" color="accent" [routerLink]="['/salvarcontenedor', cont.idcontenedor]">Modificar</a></td>
+            <td><a mat-raised-button color="warn" class="btn" >Eliminar</a>
+            </td>
+
+
+            <!--
+						<td><a th:href="@{/eliminarlinea(idlinea=${linea.idlinea})}" class="links">Eliminar</a></td>
+						<td><a th:href="@{/modificarlinea(idlinea=${linea.idlinea})}" class="links">Modificar</a></td>
+						<td><a th:href="@{/recuperaparadas(idlinea=${linea.idlinea})}" class="links">Paradas</a></td>
+
+					 -->
+
+          </tr>
+
+        </tbody>
+
+      </table>
+      <div class="row">
+        <div class="col">
+          <a mat-raised-button color="warn" class="btn mr-3 mb-5" [routerLink]="['/insertarcontenedor']" routerLinkActive="router-link-active">Añadir Contenedor</a>
+          <a mat-raised-button color="warn" class="btn">Informes</a>
+        </div>
+        <div class="col">
+          <mat-paginator [length]="200" [pageSizeOptions]="[5, 10]" aria-label="Select page">
+          </mat-paginator>
+        </div>
+      </div>
+
+
+    </div>
+
+
+
+  </div>
+
+
+
+
+

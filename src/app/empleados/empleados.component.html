@@ -1,0 +1,156 @@
+
+	<div class="container-fluid">
+
+        <app-navegacion></app-navegacion>
+
+			<div class="col">
+				<nav class="navbar navbar-expand-lg navbar-light bg-light fsmall">
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbarNavAltMarkup"
+						aria-controls="navbarNavAltMarkup" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+						<div class="navbar-nav">
+							<a class="nav-link fsmall" [routerLink]="['/salvarempleado']">> Añadir empleados</a>
+							<a class="nav-link fsmall" [routerLink]="['/vacacionesequipo']">> Vacaciones</a>
+							<a class="nav-link fsmall" href="#">> Incidencias de empleados </a>
+
+						</div>
+					</div>
+				</nav>
+			</div>
+
+
+
+				<div class="col-l-12">
+
+				</div>
+
+			<div class="col-lg-12">
+				<h2 class="pl-2 pt-4">Personas de tu equipo</h2>
+      <!-- menu de filtros local -->
+
+      <div class="row">
+        <div class="col-lg-12 mb-5" *ngIf="!div1">
+
+          <form action="">
+
+            <div class="col-lg-2 ib">
+
+              <label for="localidad">Filtrar por nombre de empleado: </label>
+              <select [(ngModel)]="seleccionado" name="nomemp" id="nomemp" class="form-control fc-big" (ngModelChange)="onSelect()">
+                <option value="">Seleccionar empleado</option>
+                <option *ngFor="let e of empleadosF" [value]="e.nomemp">{{ e.nomemp }}</option>
+              </select>
+
+            </div>
+
+            <div class="col-lg-2 ib">
+              <label for="categoria">Filtrar Categoría: </label>
+
+              <select [(ngModel)]="selected" name="categoria" id="categoria" class="form-control fc-big" (ngModelChange)="onSelect()">
+                <option value="" [disabled]>Categoria no seleccionada</option>
+                <option *ngFor="let c of empleadosF" [value]="c.categoria">{{ c.categoria }}</option>
+              </select>
+
+            </div>
+
+            <div class="col-lg-2 ib">
+              <label for="localidad">Filtrar por fecha de antigüedad: </label>
+              <input type="date" class="form-control fc-mid">
+              <small> &nbsp;Fecha inicial</small>
+
+            </div>
+            <div class="col-lg-2 ib">
+
+              <label for="fecha"></label>
+              <input type="date" class="form-control fc-mid">
+              <small> &nbsp;Fecha final</small>
+
+            </div>
+
+            <div class="col-lg-2 ib">
+
+              <button type="submit" class="form-control fc-mid btn" mat-raised-button color="accent"><i
+                  class="sinfiltro fas fa-filter"></i>Aplicar filtros</button>
+                  <a class="sinfiltro mt-2 ml-4" mat-raised-button color="warn" (click)="removeFilter()">sin filtros</a>
+
+            </div>
+
+
+          </form>
+
+        </div>
+
+
+      </div>
+
+
+
+      <!-- Fín menu de filtros local -->
+				<table class="table bordbot table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th>ID</th>
+              <th>NOMBRE</th>
+              <th>APELLIDO 1</th>
+              <th>APELLIDO 2</th>
+              <th>TELEFONO</th>
+              <th>CATEGORIA</th>
+              <th>ANTIGÜEDAD</th>
+              <th>VACACIONES</th>
+              <th>FICHA EMPLEADO</th>
+              <th>ELIMINAR</th>
+            </tr>
+          </thead>
+          <tbody class="table-striped">
+            <tr *ngFor="let em of empleadosF">
+              <td>{{ em.idempleado }}</td>
+              <td>{{ em.nomemp }}</td>
+              <td>{{ em.ape1emp }}</td>
+              <td>{{ em.ape2emp }}</td>
+              <td>{{ em.telecontacto}}</td>
+              <td>{{ em.categoria }}</td>
+              <td>{{ em.antiguedad }}</td>
+              <td><a mat-raised-button class="btn">Vacaciones</a></td>
+
+              <!-- <td><a mat-raised-button color="accent" class="btn" [routerLink]="['/empleado', em.idempleado]" routerLinkActive="active" (click)="getEmpleado( em.idempleado )">Ficha empleado</a></td> -->
+
+              <td><a mat-raised-button color="accent" class="btn"
+                [routerLink]="['/empleado', em.idempleado]"
+                routerLinkActive="active" (click)="verEmpleado( em.idempleado )">Ficha empleado</a></td>
+
+              <td><a mat-raised-button color="warn" class="btn" [routerLink]="['/empleados']" (click)="borrarEmpleado( em.idempleado )">Eliminar</a></td>
+            </tr>
+          </tbody>
+
+				</table>
+
+
+        <!-- <h2>{{empleadoSelec.idempleado }} Details</h2>
+        <div><span>id: </span>{{empleadoSelec.idempleado }}</div>
+        <div>
+          <label for="hero-name">Hero name: </label>
+          <input id="hero-name" ([ngModel])="empleadoSelec.idempleado" placeholder="name">
+        </div> -->
+
+
+				<div class="row">
+					<div class="col">
+						<a [routerLink]="['/salvarempleado']" routerLinkActive="active"  mat-raised-button color="warn" class="btn mr-3">Añadir Empleado</a>
+						<a href="#" mat-raised-button color="warn" class="btn">Informes</a>
+					</div>
+					<div class="col">
+						<mat-paginator [pageSizeOptions]="[1, 5, 10]" aria-label="Select page" [pageSize]="2" [pageIndex]="pgIndex">
+						</mat-paginator>
+					</div>
+				</div>
+			</div>
+    </div>
+
+
+    <!-- <button class="btn btn-info" routerLink="['/empleado/', empleadoSelec.idempleado ]">
+
+    </button> -->

@@ -1,0 +1,110 @@
+
+	<div class="container-fluid">
+
+    <app-navegacion></app-navegacion>
+
+  <div class="col-lg-12 col-md-12 col-sm-12 mb-5">
+
+
+                <nav class="navbar navbar-expand-lg navbar-light bg-light fsmall">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarNavAltMarkup"
+                        aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <a class="nav-link fsmall" th:href="@{/contenedores}">> Contenedores incluidos</a>
+                            <a class="nav-link fsmall" href="#">> Incidencias en ruta</a>
+                            <a class="nav-link fsmall" href="#">> Avisos <i class="fas fa-envelope red"></i></a>
+
+                        </div>
+                    </div>
+                </nav>
+
+
+
+    <h2 class="pl-2 pt-4" #titulo *ngIf="idExiste">Ruta - {{ ruta.denom }}</h2>
+    <h2 class="pl-2 pt-4" #titulo *ngIf="!idExiste">Listado de rutas</h2>
+
+    <table class="table bordbot table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>DENOMINACION</th>
+                        <th>FECHA IMPLANTACION</th>
+                        <th>PERIODICIDAD</th>
+                        <th>RUTA</th>
+                        <th>EDITAR</th>
+                        <th>ELIMINAR</th>
+                    </tr>
+                </thead>
+                <tbody class="table-striped">
+                    <tr>
+                        <td>{{ ruta.idruta }}</td>
+                        <td>{{ ruta.denom }}</td>
+                        <td>{{ ruta.fechaini}}</td>
+                        <td>{{ ruta.periodo }}</td>
+                        <td><a mat-raised-button class="btn">Ruta</a></td>
+                        <td><a mat-raised-button color="accent" class="btn" [routerLink]="['/salvarruta', ruta.idruta ]">Editar</a></td>
+                        <td><a mat-raised-button color="warn" class="btn">Eliminar</a></td>
+                        <!-- <td><a th:href="@{/empleado(idempleado=${r.idempleado})}" class="btn btn-warning">Ficha empleado</a></td> -->
+                    </tr>
+                </tbody>
+    </table>
+
+
+    <div *ngIf="contenedoresRuta.length < 1">
+
+      <h2>No existen contenedores asociados a esta ruta </h2>
+    </div>
+    <div *ngIf="contenedoresRuta.length > 0">
+      <h3 class="clean pl-2 pt-4" >Contenedores incluidos en la ruta </h3>
+      <table class="table bordbot table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>DENOMINACION</th>
+                <th>UBICACIÓN</th>
+                <th>IMPLANTACION</th>
+                <th>COORDENADAS</th>
+                <th>EDITAR</th>
+                <th>ELIMINAR</th>
+            </tr>
+        </thead>
+        <tbody class="table-striped mb-5">
+            <tr *ngFor="let cr of contenedoresRuta">
+                <td>{{ cr.rutas.idruta }}</td>
+                <td>{{ cr.contenedores.denom }}</td>
+                <td>{{ cr.contenedores.ubicacion }}</td>
+                <td>{{ cr.contenedores.fechaimplantacion }}</td>
+                <td>{{ cr.contenedores.coordenadas }}</td>
+                <td><a mat-raised-button color="accent" class="btn" [routerLink]="['/salvarruta', ruta.idruta ]">Editar</a></td>
+                <td><a mat-raised-button color="warn" class="btn">Eliminar</a></td>
+                <!-- <td><a th:href="@{/empleado(idempleado=${r.idempleado})}" class="btn btn-warning">Ficha empleado</a></td> -->
+            </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+<div class="row">
+  <div class="col">
+      <a routerLinkActive="router-link-active" mat-raised-button color="warn" class="btn mr-3 mb-5" [routerLink]="['/rutas']">Volver</a>
+      <a href="#" mat-raised-button color="warn" class="btn mr-3 mb-5" [routerLink]="['/insertarcontenedor', idx]">Insertar contenedor</a>
+      <a href="#" mat-raised-button color="warn" class="btn mr-3 mb-5">Informes</a>
+  </div>
+  <div class="col">
+
+  </div>
+  <div class="col">
+    <mat-paginator [length]="200" [pageSizeOptions]="[5, 10]" aria-label="Select page">
+    </mat-paginator>
+</div>
+</div>
+
+</div>
+
+
+</div>

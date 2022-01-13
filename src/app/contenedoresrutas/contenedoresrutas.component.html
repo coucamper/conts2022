@@ -1,0 +1,75 @@
+
+	<div class="container-fluid">
+		<!-- cabecera -->
+    <app-navegacion></app-navegacion>
+			<div class="col-lg-12">
+
+
+
+			<div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light fsmall">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarNavAltMarkup"
+                            aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                            <div class="navbar-nav">
+                                <a class="nav-link fsmall" href="#">> Categoría</a>
+                                <a class="nav-link fsmall" href="#">> Niveles</a>
+                                <a class="nav-link fsmall" href="#">> Incidencias</a>
+                                <a class="nav-link fsmall" href="#">> Mantenimiento</a>
+
+                            </div>
+                        </div>
+                    </nav>
+
+			</div>
+				<div class="col-l-12">
+
+				</div>
+
+			<div class="col-lg-12">
+				<h2 class="pl-2 pt-4">Contenedores incluidos en la Ruta</h2>
+
+				<table class="table bordbot">
+					<tr>
+						<th>ID</th>
+						<th>DENOMINACION</th>
+						<th>UBICACION</th>
+						<th>COORDENADAS</th>
+						<th>FECHA IMPLANTACION</th>
+						<th>MAPA</th>
+						<th>EDITAR</th>
+						<th>ELIMINAR</th>
+					</tr>
+					<tr th:each="c : ${idruta}">
+						<td th:text="${c.contenedores.idcontenedor}"></td>
+						<td th:text="${c.contenedores.denom}"></td>
+						<td th:text="${c.contenedores.ubicacion}"></td>
+						<td th:text="${c.contenedores.coordenadas}"></td>
+						<td th:text="${c.contenedores.fechaimplantacion}"></td>
+
+						<td><a th:href="${c.contenedores.mapa}" class="btn btn-light">Mapa</a></td>
+						<td><a href="#" class="btn btn-warning">Modificar</a></td>
+						<td><button class="btn btn-danger" id="eliminar" name="eliminar">Eliminar</button></td>
+
+					<!--
+											<td><a th:href="@{/eliminarlinea(idlinea=${linea.idlinea})}" class="links">Eliminar</a></td>
+						<td><a th:href="@{/modificarlinea(idlinea=${linea.idlinea})}" class="links">Modificar</a></td>
+						<td><a th:href="@{/recuperaparadas(idlinea=${linea.idlinea})}" class="links">Paradas</a></td>
+
+					 -->
+
+					</tr>
+				</table>
+
+
+
+			</div>
+			     <div class="col-lg-12">
+                    <a th:href="@{/insertarcontenedor}" class="enlaces btn btn-danger">Añadir Contenedor</a>
+                    <a th:href="@{/rutas}" class="enlaces btn btn-danger">Volver</a>
+                </div>
+		</div>

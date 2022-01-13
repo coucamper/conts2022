@@ -1,0 +1,81 @@
+<div class="container-fluid" *ngIf="conten">
+  <app-navegacion></app-navegacion>
+<div class="col-lg-12">
+  <h2 class="pl-2 pt-4" *ngIf="!idExiste">Insertar nueva contenedor</h2>
+  <h2 class="pl-2 pt-4" *ngIf="idExiste">Actualizar datos de contenedor - {{ conten.denom }} ({{ conten.barrio}} - {{ conten.localidad }}) </h2>
+
+<form [formGroup]="formContenedor" #f="ngForm" (ngSubmit)="guardarContenedor()">
+
+<label for="idcontenedor">ID contenedor: </label>
+<input type="text" name="idcontenedor" id="idcontenedor" formControlName="idcontenedor" class="form-control" [(ngModel)]="conten.idcontenedor">
+<!-- <input type="text" name="nomemp" id="nomemp" formControlName="nomemp"  class="form-control" [(ngModel)]="empleado.nomemp"> -->
+<br>
+<!-- <small *ngIf="idrutaNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small> -->
+
+
+<label for="denom">Denominación: </label>
+<input type="text" name="denom" id="denom" formControlName="denom" class="form-control" [(ngModel)]="conten.denom">
+<!-- <input type="text" name="nomemp" id="nomemp" formControlName="nomemp"  class="form-control" [(ngModel)]="empleado.nomemp"> -->
+<br>
+<!-- <small *ngIf="idrutaNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small> -->
+
+
+<label for="ubicacion">Ubicación: </label>
+<input type="text" name="ubicacion" id="ubicacion" formControlName="ubicacion" class="form-control" [(ngModel)]="conten.ubicacion">
+<!-- <input type="text" name="nomemp" id="nomemp" formControlName="nomemp"  class="form-control" [(ngModel)]="empleado.nomemp"> -->
+<br>
+<!-- <small *ngIf="idrutaNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small> -->
+
+
+<label for="localidad">Localidad: </label>
+<input type="text" name="localidad" id="localidad" formControlName="localidad" class="form-control" [(ngModel)]="conten.localidad">
+<!-- <input type="text" name="nomemp" id="nomemp" formControlName="nomemp"  class="form-control" [(ngModel)]="empleado.nomemp"> -->
+<br>
+<!-- <small *ngIf="idrutaNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small> -->
+
+
+<label for="barrio">Barrio: </label>
+<input type="text" name="barrio" id="barrio" formControlName="barrio" class="form-control" [(ngModel)]="conten.barrio">
+<!-- <input type="text" name="nomemp" id="nomemp" formControlName="nomemp"  class="form-control" [(ngModel)]="empleado.nomemp"> -->
+<br>
+<!-- <small *ngIf="idrutaNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small> -->
+
+
+<label for="coordenadas">Coordenadas: </label>
+<input type="text" name="coordenadas" id="coordenadas" formControlName="coordenadas" class="form-control" [(ngModel)]="conten.coordenadas">
+<!-- <input type="text" name="nomemp" id="nomemp" formControlName="nomemp"  class="form-control" [(ngModel)]="empleado.nomemp"> -->
+<br>
+<!-- <small *ngIf="idrutaNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small> -->
+
+
+<label for="fechaimplantacion">Fecha Implantación: </label>
+<input type="date" name="fechaimplantacion" id="fechaimplantacion" formControlName="fechaimplantacion" class="form-control" [(ngModel)]="conten.fechaimplantacion">
+<!-- <input type="text" name="nomemp" id="nomemp" formControlName="nomemp"  class="form-control" [(ngModel)]="empleado.nomemp"> -->
+<br>
+<!-- <small *ngIf="idrutaNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small> -->
+
+
+
+
+
+
+  <div class="ml-3 mt-3">
+      <button type="submit" mat-raised-button color="accent" class="btn submit mr-3"
+      (click)="guardarContenedor(); refresh()" [routerLink]="['/contenedores']">Salvar contenedor</button>
+  </div>
+
+</form>
+
+
+
+</div>
+     <div class="col-lg-12 ml-3 mt-3">
+              <a [routerLink]="['/contenedores']" routerLinkActive="router-link-active"  mat-raised-button color="warn" class="btn mb-5">Volver</a>
+     </div>
+
+
+
+
+
+
+

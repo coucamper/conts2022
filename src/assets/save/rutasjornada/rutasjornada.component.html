@@ -1,0 +1,63 @@
+<div class="container-fluid">
+
+  <app-navegacionconductor></app-navegacionconductor>
+
+  <div class="col-lg-12">
+    <h2>{{ conductor.nomemp }}, hoy tienes asignada la siguiente ruta: {{ ruta.denom }} </h2>
+    <div class="col-lg-8 offset-lg-2">
+      <h3>Contenedores de "{{ ruta.denom }}"</h3>
+      <h3><strong>Respeta el órden del listado</strong></h3>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div *ngFor="let c of contenedores; let i = index " class="col-lg-8 offset-lg-2">
+      <h4><i class="fas fa-long-arrow-alt-down"></i></h4>
+      <div class="card col-lg-12 col-md-12 col-sm-12 col-12 ib mb-4">
+        <div class="card-body">
+          <div class="row align-items-start">
+            <div class="col-lg-8 col-md-6 col-sm-6 ib">
+              <h4 class="card-title ib"><strong>{{ i + 1 }} - {{ c.contenedores.denom | uppercase }}</strong></h4>
+              <p>{{ (i) *12 }} minutos (Tiempo estimado) </p>
+              <p class="card-text">{{ c.contenedores.ubicacion }}</p>
+              <div class="col-lg-12 pl-0">
+                <div class="col-lg-3 pl-0">
+                  <a href="#" class="btn btn-primary mr-3 mb-2" mat-raised-button color="accent" (click)="abrirModal()">Registrar llenado</a>
+                </div>
+                <div class="col-lg-3 pl-0">
+                  <a href="#" class="btn btn-primary mr-3 mb-2" mat-raised-button color="accent">Registrar incidencia</a>
+                </div>
+                <div class="col-lg-3 pl-0">
+                  <a href="#" class="btn btn-primary mr-3 mb-2" mat-raised-button color="accent">Ver mapa</a>
+                </div>
+                <div class="col-lg-3 pl-0">
+                  <a href="#" class="btn btn-primary mr-3 mb-2" mat-raised-button color="accent">Coordenadas</a>
+                </div>
+              </div>
+
+
+
+
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 ib">
+              <h4 class="card-title ib"><strong>Notas de seguimiento:</strong></h4>
+              <p><input type="checkbox">&nbsp;&nbsp; Requiere limpieza</p>
+              <p><input type="checkbox">&nbsp;&nbsp; Requiere mantenimiento</p>
+            </div>
+
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-lg-8 offset-lg-2">
+    <button class="btn ml-3 mb-5" mat-raised-button color="accent">Guardar notas de seguimiento</button>
+  </div>
+
+
+
+
+
+</div>

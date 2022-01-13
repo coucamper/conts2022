@@ -1,0 +1,95 @@
+
+	<div class="container-fluid">
+        <app-navegacion></app-navegacion>
+            <div class="col-lg-12">
+				<nav class="navbar navbar-expand-lg navbar-light bg-light fsmall">
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbarNavAltMarkup"
+						aria-controls="navbarNavAltMarkup" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+						<div class="navbar-nav">
+							<a class="nav-link fsmall" [routerLink]="['/clases']" >> Clases </a>
+							<a class="nav-link fsmall" [routerLink]="['/clientes']">> Clientes </a>
+							<a class="nav-link fsmall" href="#">> Agencias </a>
+							<a class="nav-link fsmall" href="#">> Incidencias </a>
+							<a class="nav-link fsmall" href="#" title="Avisos Importantes">> Avisos <i class="fas fa-envelope red"></i></a>
+						</div>
+					</div>
+				</nav>
+			</div>
+
+
+
+			<div class="col-l-12">
+
+			</div>
+
+			<div class="col-lg-12">
+				<h2 class="pl-2 pt-4">Listado de Exportaciones</h2>
+        <app-barra-herramientas-exportacion></app-barra-herramientas-exportacion>
+				<table class="table bordbot table-striped">
+					<thead class="thead-dark">
+						<tr>
+							<th>ID</th>
+							<th>FECHA</th>
+							<th>CLIENTE</th>
+							<th>CANDADO</th>
+							<th>PESO LOCAL</th>
+							<th>PESO CLIENTE</th>
+							<th>CLASE</th>
+							<th>PV/Tm</th>
+							<th>TIPO PAGO</th>
+							<th>IMPORTE</th>
+              <th>ESTADO COBRO</th>
+							<th>EDITAR</th>
+							<th>ELIMINAR</th>
+						</tr>
+					</thead>
+					<tbody class="table-striped">
+						<tr *ngFor="let expor of exportaciones">
+							<td>{{ expor.exportacion.idexport}}</td>
+							<td>{{ expor.exportacion.fechatrans }}</td>
+							<td>{{ expor.exportacion.cliente.razonsoc }}</td>
+							<td>{{ expor.exportacion.numprecinto }}</td>
+							<td>{{ expor.exportacion.pesolocal }} Kg</td>
+							<td>{{ expor.exportacion.pesocliente }} Kg</td>
+							<td>{{ expor.clase.clasedenom}}</td>
+							<td>{{ expor.exportacion.preciov }} €</td>
+							<td>{{ expor.exportacion.tipopago }}</td>
+              <td>{{ expor.exportacion.importe }} €</td>
+              <td>{{ expor.exportacion.estadopago }}</td>
+
+							<td><a mat-raised-button color="accent" class="btn mr-3">Editar</a></td>
+							<td><a mat-raised-button color="warn" class="btn mr-3">Eliminar</a></td>
+
+						</tr>
+					</tbody>
+				</table>
+
+				<div class="row">
+					<div class="col">
+
+							<a [routerLink]="['/insertarcarga']" routerLinkActive="active" mat-raised-button color="warn" class="btn mr-3">Añadir Carga</a>
+							<a href="#" mat-raised-button color="warn" class="btn mr-3">Informes</a>
+
+					</div>
+					<div class="col">
+						<mat-paginator [length]="100" [pageSizeOptions]="[5, 10]" aria-label="Select page">
+						</mat-paginator>
+					</div>
+				</div>
+
+
+
+
+			</div>
+			     <!-- <div class="col-lg-12">
+                    <a [routerLink]="['/insertarcarga']" routerLinkActive="router-link-active" mat-raised-button color="warn" class="btn mr-3">Añadir Carga</a>
+                    <a href="#" mat-raised-button color="warn" class="btn mr-3">Informes</a>
+                </div> -->
+			</div>
+
+

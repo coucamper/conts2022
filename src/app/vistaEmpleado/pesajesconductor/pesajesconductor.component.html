@@ -1,0 +1,64 @@
+
+	<div class="container-fluid">
+    <app-navegacionconductor></app-navegacionconductor>
+       <div class="col-lg-12"></div>
+
+
+
+
+
+  <div class="col-lg-12">
+    <h2 class="pl-2 pt-4">Listado de Pesajes</h2>
+    <app-barra-herramientas-pesajes></app-barra-herramientas-pesajes>
+    <table class="table bordbot table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>FECHA</th>
+          <th>RUTA</th>
+          <th>PESAJE</th>
+          <th>VEHICULO</th>
+          <th>OPERARIO</th>
+          <th>COMPROBANTE</th>
+          <th>NIVELES</th>
+          <th>EDITAR</th>
+          <th>ELIMINAR</th>
+        </tr>
+      </thead>
+      <tbody class="table-striped">
+        <tr *ngFor="let pesa of vehiculosPesajes">
+          <td>{{ pesa.idvehipesaje}}</td>
+          <td>{{ pesa.pesajes.fechapesaje }}</td>
+          <td>{{ pesa.pesajes.ruta.denom }}</td>
+          <td>{{ pesa.pesajes.pesaje }} Kg</td>
+          <td>{{ pesa.vehiculos.marca}}  {{ pesa.vehiculos.matricula }}</td>
+          <td>{{ pesa.pesajes.operario.empleado.nomemp }}</td>
+          <td>{{ pesa.pesajes.comprobante }}</td>
+          <td><a mat-raised-button class="btn" [routerLink]="['/ruta', pesa.idvehipesaje ]">Niveles</a></td>
+          <td><a href="#" mat-raised-button color="accent" class="btn mr-3" (click)="verVehiculoPesaje( pesa.idvehipesaje )" [routerLink]="['/salvarpesaje/', pesa.idvehipesaje ]">Modificar</a></td>
+          <td><button mat-raised-button color="warn" class="btn mr-3" id="eliminar"
+              name="eliminar">Eliminar</button></td>
+
+        <!--
+                    <td><a th:href="@{/eliminarlinea(idlinea=${linea.idlinea})}" class="links">Eliminar</a></td>
+          <td><a th:href="@{/modificarlinea(idlinea=${linea.idlinea})}" class="links">Modificar</a></td>
+          <td><a th:href="@{/recuperaparadas(idlinea=${linea.idlinea})}" class="links">Paradas</a></td>
+
+         -->
+
+        </tr>
+      </tbody>
+    </table>
+    <div class="row">
+      <div class="col">
+        <a [routerLink]="['/insertarpesaje']" routerLinkActive="router-link-active"  mat-raised-button color="warn" class="btn mr-3">Añadir Pesaje</a>
+        <a href="#"  mat-raised-button color="warn" class="btn mr-3">Informes</a>
+      </div>
+      <div class="col">
+        <mat-paginator [length]="200" [pageSizeOptions]="[5, 10]" aria-label="Select page">
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,156 @@
+
+	<div class="container-fluid">
+
+    <app-navegacion></app-navegacion>
+
+  <div class="col-lg-12 col-md-12 col-sm-12">
+
+
+                <nav class="navbar navbar-expand-lg navbar-light bg-light fsmall">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarNavAltMarkup"
+                        aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <a class="nav-link fsmall" [routerLink]="['/revisiones']">> Revisiones </a>
+                            <a class="nav-link fsmall" [routerLink]="['/averias']">> Averias </a>
+                            <a class="nav-link fsmall" href="#">> Incidencias <i class="fas fa-envelope red"></i></a>
+
+                        </div>
+                    </div>
+                </nav>
+
+  </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+
+    </div>
+
+  <div class="col-lg-12 col-md-12 col-sm-12">
+    <h2 class="pl-2 pt-4">Listado de averias de vehiculos</h2>
+
+    <!-- BARRA DE FILTROS AVERIAS -->
+    <div class="row">
+      <div class="col-lg-12">
+        <h3 class="bordbot pl-2 pb-3" *ngIf="div1">
+          <button
+            (click)="div1Function()"
+            mat-raised-button
+            color="warn"
+            class="btn"
+          >
+            <i class="fas fa-chevron-down"></i> &nbsp;Filtros de selección
+          </button>
+        </h3>
+        <h3 class="bordbot pl-2 pb-3" *ngIf="!div1">
+          <button
+            (click)="div1Function()"
+            mat-raised-button
+            color="warn"
+            class="btn"
+          >
+            <i class="fas fa-chevron-up"></i> &nbsp;Filtros de selección
+          </button>
+        </h3>
+      </div>
+      <div class="col-lg-12 mb-5" *ngIf="!div1">
+        <form action="">
+          <div class="col-lg-2 ib">
+            <label for="localidad">Filtrar por vehículo: </label>
+            <select name="" id="" class="form-control fc-big">
+              <option value="">Marca no seleccionada</option>
+              <option *ngFor="let a of averias">{{ a.vehiculo.marca }} {{ a.vehiculo.modelo }} {{ a.vehiculo.matricula}}</option>
+            </select>
+          </div>
+
+          <div class="col-lg-2 ib">
+            <label for="localidad">Filtrar por taller: </label>
+            <select name="" id="" class="form-control fc-big">
+              <option value="">Taller no seleccionado</option>
+              <option *ngFor="let a of averias">{{ a.taller }}</option>
+            </select>
+          </div>
+
+          <div class="col-lg-2 ib">
+            <label for="localidad">Filtrar por fecha averia: </label>
+            <input type="date" class="form-control fc-mid" />
+            <small> &nbsp;Fecha inicial</small>
+          </div>
+
+          <div class="col-lg-2 ib">
+            <label for="fecha"></label>
+            <input type="date" class="form-control fc-mid" />
+            <small> &nbsp;Fecha final</small>
+          </div>
+
+          <div class="col-lg-2 ib">
+            <button
+              type="submit"
+              class="form-control fc-mid btn"
+              mat-raised-button
+              color="accent"
+            >
+              <i class="fas fa-filter"></i>Aplicar filtros
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <!-- FIN DE FILTROS DE AVERIAS -->
+
+
+    <table class="table bordbot table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nº FACTURA</th>
+                        <th>FECHA AVERIA</th>
+                        <th>MARCA</th>
+                        <th>MODELO</th>
+                        <th>MATRICULA</th>
+                        <th>DENOMINACIÓN</th>
+                        <th>GRAVEDAD</th>
+                        <th>IMPORTE</th>
+                        <th>TALLER</th>
+                        <th>EDITAR</th>
+                        <th>ELIMINAR</th>
+                    </tr>
+                </thead>
+                <tbody class="table-striped">
+                    <tr *ngFor="let r of averias">
+                        <td>{{ r.idaveria }}</td>
+                        <td>{{ r.numfactura }}</td>
+                        <td>{{ r.fechaaveria }}</td>
+                        <td>{{ r.vehiculo.marca }}</td>
+                        <td>{{ r.vehiculo.modelo }}</td>
+                        <td>{{ r.vehiculo.matricula }}</td>
+                        <td>{{ r.denom }}</td>
+                        <td>{{ r.gravedad }}</td>
+                        <td>{{ r.importe }} €</td>
+                        <td>{{ r.taller }} </td>
+                        <td><a mat-raised-button color="accent" class="btn">Editar</a></td>
+                        <td><a mat-raised-button color="warn" class="btn">Eliminar</a></td>
+                        <!-- <td><a th:href="@{/empleado(idempleado=${r.idempleado})}" class="btn btn-warning">Ficha empleado</a></td> -->
+
+
+                    </tr>
+                </tbody>
+    </table>
+            <div class="row">
+                <div class="col">
+                    <a [routerLink]="['/salvarvehiculo']" routerLinkActive="router-link-active" mat-raised-button color="warn" class="btn mr-3 mb-5">Añadir Vehiculo</a>
+                    <a href="#" mat-raised-button color="warn" class="btn mr-3 mb-5">Informes</a>
+                </div>
+                <div class="col">
+                    <mat-paginator [length]="200" [pageSizeOptions]="[5, 10]" aria-label="Select page">
+                    </mat-paginator>
+                </div>
+            </div>
+  </div>
+</div>
+
+

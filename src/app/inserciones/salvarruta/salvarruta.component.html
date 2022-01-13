@@ -1,0 +1,72 @@
+	<div class="container-fluid">
+        <app-navegacion></app-navegacion>
+			<div class="col-lg-12">
+				<h2 class="pl-2 pt-4" *ngIf="!idExiste">Insertar nueva Ruta</h2>
+        <h2 class="pl-2 pt-4" *ngIf="idExiste">Actualizar datos de ruta - {{ ruta.denom }} </h2>
+
+		<form [formGroup]="formRuta" #f="ngForm" (ngSubmit)="guardarRuta()">
+
+      <label for="idruta">ID ruta: </label>
+      <input type="text"  value="{{ ruta.idruta }}" name="idruta" id="idruta" formControlName="idruta"
+        class="form-control" [(ngModel)]="ruta.idruta">
+      <br>
+      <small *ngIf="idrutaNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small>
+
+      <label for="denom">Denominación: </label>
+      <input type="text" value="{{ ruta.denom }}" name="denom" id="denom" formControlName="denom" [class.is-invalid]="denomNoValida"
+        class="form-control" [(ngModel)]="ruta.denom">
+      <br>
+      <small *ngIf="denomNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small>
+
+      <label for="zona">Zona: </label>
+      <select name="zona" class="form-control" formControlName="zona" [(ngModel)]="ruta.zona">
+        <option *ngFor="let z of zonas" [value]="z.denom">{{ z.denom }}</option>
+      </select>
+      <br>
+      <small *ngIf="zonaNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small>
+
+
+      <label for="localidad">Localidad: </label>
+      <select name="localidad" class="form-control" formControlName="localidad" [(ngModel)]="ruta.localidad">
+        <option *ngFor="let l of localidades" [value]="l.localidad">{{ l.localidad }}</option>
+      </select>
+      <br>
+      <small *ngIf="zonaNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small>
+
+
+
+		<label for="ubicacion">Fecha Implantación: </label>
+		<input type="date" value="{{ ruta.fechaini }}" name="fechaini" id="fechaini" formControlName="fechaini" [class.is-invalid]="fechainiNoValida" class="form-control" [(ngModel)]="ruta.fechaini">
+        <br>
+        <small *ngIf="fechainiNoValida" class="text-danger ml-3">Insertar fecha de inicio de la ruta</small>
+
+		<label for="coordenadas">Periodicidad: </label>
+		<input type="text" value="{{ ruta.periodo }}" name="periodo" id="periodo" formControlName="periodo" [class.is-invalid]="periodoNoValida" class="form-control" [(ngModel)]="ruta.periodo">
+        <br>
+        <small *ngIf="periodoNoValida" class="text-danger ml-3">Mínimo 6 carácteres</small>
+
+		<label for="ruta">Ruta: (KML)</label>
+		<input type="file" name="ruta" id="ruta" formControlName="ruta" [class.is-invalid]="rutaNoValida" [(ngModel)]="ruta.ruta">
+        <br>
+        <small *ngIf="rutaNoValida" class="text-danger ml-3">Insertar fichero KML</small>
+
+        <div class="ml-3 mt-3">
+            <button type="submit" value="Salvar Ruta" mat-raised-button color="accent" class="btn submit mr-3" (click)="guardarRuta()" [routerLink]="['/rutas']">Salvar ruta</button>
+
+        </div>
+
+		</form>
+
+
+
+			</div>
+			     <div class="col-lg-12 ml-3 mt-3">
+                    <a [routerLink]="['/rutas']" routerLinkActive="router-link-active"  mat-raised-button color="warn" class="btn mb-5">Volver</a>
+                </div>
+
+
+
+
+
+
+

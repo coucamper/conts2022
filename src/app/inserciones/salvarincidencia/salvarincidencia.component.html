@@ -1,0 +1,53 @@
+
+	<div class="container-fluid">
+        <app-navegacion></app-navegacion>
+
+			<div class="col-lg-12">
+				<h2 class="pl-2 pt-4">Alta de nueva incidencia</h2>
+
+		<form [formGroup]="formIncidencia" (ngSubmit)="guardar()">
+
+		<label for="tipoinci">Tipo incidencia: </label>
+		<input type="text" name="tipoinci" id="tipoinci" class="form-control" formControlName="tipoinci" [class.is-invalid]="tipoinciNoValida">
+		<br>
+		<small *ngIf="tipoinciNoValida" class="text-danger ml-3">Introducir tipo de incidencia </small>
+
+		<label for="gravedad">Gravedad: </label>
+		<select name="gravedad" id="gravedad" formControlName="gravedad" [class.is-invalid]="gravedadNoValida"   class="form-control">
+			<option *ngFor="let g of gravedad">{{ g.tipogravedad }}</option>
+		</select>
+		<br>
+		<small *ngIf="gravedadNoValida" class="text-danger ml-3">Introducir tipo de gravedad </small>
+
+		<label for="estado">Estado: </label>
+		<input type="text" name="estado" id="estado" class="form-control" formControlName="estado" [class.is-invalid]="estadoNoValida">
+		<br>
+		<small *ngIf="estadoNoValida" class="text-danger ml-3">Introducir estado de incidencia</small>
+
+		<label for="operario">Operario: </label>
+		<select name="operario" id="operario" formControlName="operario" [class.is-invalid]="operarioNoValida" class="form-control" class="form-control">
+			<option *ngFor="let op of operarios">{{ op.nomemp }}</option>
+		</select>
+
+		<br>
+		<small *ngIf="operarioNoValida" class="text-danger ml-3">Seleccionar operario que notifica </small>
+
+		<label for="fechainci">Fecha incidencia:  </label>
+		<input type="date" name="fechainci" id="fechainci" class="form-control" formControlName="fechainci" [class.is-invalid]="fechainciNoValida">
+		<br>
+		<small *ngIf="fechainciNoValida" class="text-danger ml-3">Introducir fecha de incidencia </small>
+
+		<div class="ml-3 mt-3">
+			<button type="submit" value="Salvar incidencia" mat-raised-button color="accent" class="btn submit">Salvar incidencia</button>
+		</div>
+
+		</form>
+
+
+
+			</div>
+			     <div class="col-lg-12 ml-3 pt-3 mb-5">
+                    <a [routerLink]="['/incidencias']" routerLinkActive="router-link-active"  mat-raised-button color="warn" class="btn mb-5">Volver</a>
+                </div>
+
+

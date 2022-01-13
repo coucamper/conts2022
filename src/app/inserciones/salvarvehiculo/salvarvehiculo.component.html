@@ -1,0 +1,61 @@
+<div class="container-fluid">
+  <app-navegacion></app-navegacion>
+<div class="col-lg-12">
+  <h2 class="pl-2 pt-4" *ngIf="!idExiste">Insertar nuevo Vehículo</h2>
+  <h2 class="pl-2 pt-4" *ngIf="idExiste">Actualizar datos del vehículo - {{ Vehiculo.marca }} {{ Vehiculo.modelo }} {{ Vehiculo.matricula }} </h2>
+
+<form [formGroup]="formVehiculo" (ngSubmit)="guardarVehiculo()">
+
+<label for="marca">Marca: </label>
+<input type="text" name="marca" id="marca" formControlName="marca" [class.is-invalid]="marcaNoValida" class="form-control" [(ngModel)]="Vehiculo.marca">
+  <br>
+  <small *ngIf="marcaNoValida" class="text-danger ml-3">Mínimo 5 carácteres</small>
+
+<label for="modelo">Modelo: </label>
+<input type="text" name="modelo" id="modelo" formControlName="modelo" [class.is-invalid]="modeloNoValida" class="form-control" [(ngModel)]="Vehiculo.modelo">
+  <br>
+  <small *ngIf="modeloNoValida" class="text-danger ml-3">Mínimo 5 carácteres</small>
+
+<label for="matricula">matricula: </label>
+<input type="text" name="matricula" id="matricula" formControlName="matricula" [class.is-invalid]="matriculaNoValida" class="form-control" [(ngModel)]="Vehiculo.matricula">
+  <br>
+  <small *ngIf="matriculaNoValida" class="text-danger ml-3">Mínimo 7 carácteres</small>
+
+<label for="fechacompra">Fecha compra:</label>
+<input type="date" name="fechacompra" id="fechacompra" formControlName="fechacompra" [class.is-invalid]="fechacompraNoValida" class="form-control" [(ngModel)]="Vehiculo.fechacompra">
+  <br>
+  <small *ngIf="fechacompraNoValida" class="text-danger ml-3">Insertar fecha de compra</small>
+
+
+  <label for="aseguradora">Aseguradora: </label>
+  <input type="text" name="aseguradora" id="aseguradora" formControlName="aseguradora" [class.is-invalid]="aseguradoraNoValida" class="form-control" [(ngModel)]="Vehiculo.aseguradora">
+    <br>
+    <small *ngIf="modeloNoValida" class="text-danger ml-3">Mínimo 5 carácteres</small>
+
+
+    <label for="poliza">Poliza: </label>
+  <input type="text" name="poliza" id="poliza" formControlName="poliza" [class.is-invalid]="polizaNoValida" class="form-control" [(ngModel)]="Vehiculo.poliza">
+    <br>
+    <small *ngIf="modeloNoValida" class="text-danger ml-3">Mínimo 5 carácteres</small>
+
+
+
+  <div class="ml-3 mt-3">
+      <button type="submit" value="Salvar Vehículo" mat-raised-button color="accent" class="btn submit mr-3" [routerLink]="['/vehiculos']" (click)="guardarVehiculo(); refresh()">Salvar Vehículo</button>
+  </div>
+
+</form>
+
+
+
+</div>
+     <div class="col-lg-12 ml-3 mt-3">
+              <a [routerLink]="['/vehiculos']" routerLinkActive="router-link-active"  mat-raised-button color="warn" class="btn mb-5">Volver</a>
+          </div>
+
+
+
+
+
+
+

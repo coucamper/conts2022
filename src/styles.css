@@ -1,0 +1,301 @@
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+/* You can add global styles to this file, and also import other style files */
+.nav-link.fsmall{
+    font-size: .9rem !important;
+}
+
+.nav-link.fsmall:hover{
+	color: #f44336!important;
+}
+
+a.acceso {
+
+    color: black;
+}
+
+b{
+    font-weight: 600!important;
+}
+
+h1, h2{
+	font-weight: 400!important;
+}
+
+a.acceso:hover{
+    color: #f44336;
+}
+
+.accesos {
+    float: right;
+    text-align: right;
+}
+
+a.red, a.redlink {
+    color: #f44336!important;
+}
+
+.bordtop {
+    border-top: 4px solid #f44336;
+}
+
+.bordbot {
+    border-bottom: 1px solid #f44336;
+}
+
+.active {
+    color: #f44336 !important;
+}
+
+.minimal {
+    display: inline-block;
+    width: 30%;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.minimal li{
+    display: inline-block;
+}
+
+.nav-link{
+	    font-size: 1.2rem!important;
+}
+
+.areas{
+	background-color: rgb(255, 86, 86);
+	color: white;
+	text-align: center;
+	padding: .5% 0;
+}
+
+input[type="text"], input[type="date"], input[type="tel"], input[type="email"], input[type="file"], textarea, select, .form-control {
+	margin: 1% 0 .5% 1%;
+	display: inline-block;
+	width: 40%;
+}
+
+input[type="text"].fc-big , input[type="date"].fc-big, input[type="tel"].fc-big, input[type="email"].fc-big, input[type="file"].fc-big, textarea.fc-big, select.fc-big, .form-control.fc-big {
+	margin: 1% 0 .5% 1%;
+	display: inline-block;
+	width: 85%;
+  font-size: .8rem;
+}
+
+input[type="text"].fc-login , input[type="date"].fc-login, input[type="tel"].fc-login, input[type="email"].fc-login, input[type="file"].fc-login, textarea.fc-login, select.fc-login, .form-control.fc-login {
+	margin: 1% 0 .5% 1%;
+	display: inline-block;
+	width: 98%;
+  font-size: 1rem;
+}
+
+input[type="date"].fc-mid, .form-control.fc-mid {
+	margin: 1% 0 .5% 1%;
+	display: inline-block;
+	width: 60%;
+  font-size: .8rem;
+}
+
+label {
+	margin-left: 1%;
+	font-weight: 500;
+	display: block;
+}
+
+.red{
+	color: #f44336;
+}
+
+h2{
+	padding: 1% 0;
+	border-top: 2px solid #f44336;
+	border-bottom: 1px solid #f44336;
+}
+
+h2.white{
+	padding: 1% 0;
+	border-top: 2px solid white;
+	border-bottom: 1px solid white;
+  color: white;
+}
+
+h2.clean{
+  padding: 1% 0;
+	border-bottom: 1px solid #f44336;
+
+}
+
+h2.fc-toolbar-title{
+	border: none;
+}
+
+.submit{
+	width: 40.5%;
+}
+
+select{
+	margin: 1% 0 .5% 1%;
+	width: 40%;
+}
+
+.principal{
+	background-color: #f44336;
+	min-height: 875px;
+	font-size: 14px;
+}
+
+.center{
+	text-align: center;
+}
+
+#logoadia{
+	margin: 7% 0 6% 0;
+}
+
+.acceso h2{
+	text-align: left;
+	color: white;
+}
+
+.acceso{
+	padding: 1% 2%;
+}
+
+.accesos{
+	margin: 0;
+	padding: 0;
+}
+
+.accesos li {
+	list-style-type: none;
+	text-align: left;
+}
+
+.accesos li a {
+	color: black;
+	text-decoration: none;
+	font-size: 1.1rem;
+	font-weight: 400;
+}
+
+.accesos li a:hover{
+	color: white;
+	text-decoration: underline;
+}
+
+.banner{
+	font-size: 1rem;
+	text-align: left;
+	padding: 1% 2% 0 2%;
+	color: black;
+}
+
+.banner h3{
+	color: white;
+	padding: 0;
+}
+
+.login{
+	color: white;
+	text-align: right;
+	font-weight: 400;
+}
+.login a{
+	color: white;
+	font-size: 1.1rem;
+}
+
+.avatar{
+	border-radius: 50px;
+}
+
+
+
+.usuario_img{
+    width: 75px;
+    height: 75px;
+    display: inline-block;
+}
+
+.avatar_saludo{
+	display: inline-block;
+}
+
+.entrada_recogida{
+	padding-bottom: 1%;
+}
+
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.fast {
+    -webkit-animation-duration: 0.4s;
+    animation-duration: 0.4s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.materialBox {
+	box-shadow: 0px 3px 3px 0 #b9b9b9;
+}
+
+
+.ib{
+  display: inline-block;
+}
+
+.sinfiltro{
+  font-size: .7rem;
+}
+
+/* Font sizes */
+
+.fs1rem {
+  font-size: 1rem;
+}
+
+
+.fs1_5rem {
+  font-size: 1.5rem;
+}
+
+
+.fs2rem {
+  font-size: 2rem;
+}
+
+.bgcSoft {
+  background-color: #fff4f4;
+}
+
+.select-inci{
+  width: 98%;
+}
+
+.bordered {
+  border: 1px solid rgb(196, 196, 196);
+  padding: 2%;
+  border-radius: 3px;
+  height: 5rem;
+}
+
+/* angular-cli file: src/styles.css */
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
+
+.login_form{
+  min-height: 925px;
+  height: 100%;
+  background-color: #f44336;
+}
+
+.white_text{
+  color: white;
+}

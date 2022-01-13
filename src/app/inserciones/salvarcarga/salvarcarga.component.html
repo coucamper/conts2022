@@ -1,0 +1,68 @@
+	<div class="container-fluid">
+        <app-navegacion></app-navegacion>
+			<div class="col-lg-12">
+				<h2 class="pl-2 pt-4">Alta de nueva Carga</h2>
+
+		<form [formGroup]="formExport" (ngSubmit)="guardar()">
+
+		<label for="fechatrans">Fecha: </label>
+		<input type="date" name="fechatrans" id="fechatrans" formControlName="fechatrans" [class.is-invalid]="fechatransNoValida" class="form-control">
+		<br>
+		<small *ngIf="fechatransNoValida" class="text-danger ml-3">Introducir fecha de la carga </small>
+
+		<label for="idcliente">Cliente: </label>
+		<select formControlName="idcliente" [class.is-invalid]="idclienteNoValida" class="form-control">
+			<option value="Seleccionar cliente" selected>Seleccionar cliente</option>
+			<option *ngFor="let c of clientes" name="idcliente" id="idcliente">{{ c.razonsoc }}</option> <!-- OJITO, PARA QUE TE FUNCIONE EL SELECT TIENES QUE OBTENER LOS CLIENTES EN EL
+			MISMO CONTROLADOR QUE CARGA ESTA PÁGINA: "/insertaexportacion" -->
+		</select>
+		<br>
+		<small *ngIf="idclienteNoValida" class="text-danger ml-3">Seleccionar cliente </small>
+
+		<label for="candado">Candado: </label>
+		<input type="text" name="candado" id="candado" formControlName="candado" [class.is-invalid]="candadoNoValida" class="form-control">
+		<br>
+		<small *ngIf="candadoNoValida" class="text-danger ml-3">Introducir código del candado </small>
+
+		<label for="peso_loc">Peso Local: </label>
+		<input type="text" name="peso_loc" id="peso_loc" formControlName="peso_loc" [class.is-invalid]="peso_locNoValida" class="form-control">
+		<br>
+		<small *ngIf="peso_locNoValida" class="text-danger ml-3">Introducir peso local </small>
+
+		<label for="peso_cli">Peso Cliente: </label>
+		<input type="text" name="peso_cli" id="peso_cli" formControlName="peso_cli" [class.is-invalid]="peso_cliNoValida" class="form-control">
+		<br>
+		<small *ngIf="peso_cliNoValida" class="text-danger ml-3">Introducir peso cliente </small>
+
+		<label for="clase">Clase: </label>
+			<select formControlName="clase" [class.is-invalid]="claseNoValida" class="form-control">
+				<option value="Seleccionar cliente" selected>Seleccionar clase</option>
+				<option *ngFor="let c of clases"> {{ c.clasedenom }}</option> <!-- OJITO, PARA QUE TE FUNCIONE EL SELECT TIENES QUE OBTENER LOS CLIENTES EN EL
+			MISMO CONTROLADOR QUE CARGA ESTA PÁGINA: "/insertaexportacion" -->
+			</select>
+			<br>
+            <small *ngIf="claseNoValida" class="text-danger ml-3">Introducir clase de la carga </small>
+
+		<label for="preciotm">PV/Tm: </label>
+		<input type="text" name="preciotm" id="preciotm" formControlName="preciotm" [class.is-invalid]="preciotmNoValida" class="form-control">
+		<br>
+		<small *ngIf="preciotmNoValida" class="text-danger ml-3">Introducir precio tonelada </small>
+
+		<label for="tipopago">Pago: </label>
+		<input type="text" name="tipopago" id="tipopago" formControlName="tipopago" [class.is-invalid]="tipopagoNoValida" class="form-control">
+		<br>
+		<small *ngIf="tipopagoNoValida" class="text-danger ml-3">Introducir tipo de pago (meses) </small>
+
+		<div class="ml-3 mt-3">
+			<button type="submit" mat-raised-button color="accent" class="btn submit mr-3">Salvar carga</button>
+		</div>
+
+		</form>
+
+			</div>
+			     <div class="col-lg-12 pt-3 mb-5 ml-3">
+                    <a mat-raised-button color="warn" class="btn mb-5" [routerLink]="['/exportaciones']" routerLinkActive="router-link-active" >Volver</a>
+                </div>
+		</div>
+
+

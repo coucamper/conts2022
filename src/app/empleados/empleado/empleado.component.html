@@ -1,0 +1,94 @@
+
+	<div class="container-fluid" *ngIf="emp">
+        <app-navegacion></app-navegacion>
+		<!-- cabecera -->
+
+			<div class="col-lg-12">
+
+
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light fsmall">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarNavAltMarkup"
+                            aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                            <div class="navbar-nav">
+                                <a class="nav-link fsmall" th:href="@{/clases}">> Clases </a>
+                                <a class="nav-link fsmall" TH:href="@{/clientes}">> Clientes </a>
+                                <a class="nav-link fsmall" href="#">> Agencias </a>
+                                <a class="nav-link fsmall" href="#">> Incidencias </a>
+                                <a class="nav-link fsmall" href="#" title="Avisos Importantes">> Avisos <i class="fas fa-envelope red"></i></a>
+
+                            </div>
+                        </div>
+                    </nav>
+
+			</div>
+				<div class="col-l-12">
+
+				</div>
+
+			<div class="col">
+				<h2 class="pl-2 pt-4">Ficha de Empleado</h2>
+
+				<table class="table bordbot">
+          <thead class="thead-dark">
+            <tr>
+              <th>ID</th>
+              <th>NOMBRE</th>
+              <th>APELLIDO 1</th>
+              <th>APELLIDO 2</th>
+              <th>TELÉFONO</th>
+              <th>EMAIL</th>
+              <th>ANTIGÜEDAD</th>
+              <th>CONTRATO</th>
+              <th>NIF</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ emp.idempleado }}</td>
+              <td>{{ emp.nomemp }}</td>
+              <td>{{ emp.ape1emp }}</td>
+              <td>{{ emp.ape2emp }}</td>
+              <td>{{ emp.telecontacto }}</td>
+              <td>{{ emp.emailemp }}</td>
+              <td>{{ emp.antiguedad }}</td>
+              <td>{{ emp.tipocontrato }}</td>
+              <td>{{ emp.nif }}</td>
+            </tr>
+          </tbody>
+          <thead class="thead">
+            <tr>
+              <th>NSS</th>
+              <th>DIRECCIÓN</th>
+              <th>IBAN</th>
+              <th>HIJOS</th>
+              <th>ESTUDIOS</th>
+              <th>EDITAR</th>
+              <th>ELIMINAR</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ emp.nss }}</td>
+              <td>{{ emp.domicilio }}</td>
+              <td>{{ emp.iban }}</td>
+              <td>{{ emp.numhijos }}</td>
+              <td>{{ emp.estudios }}</td>
+              <td><a mat-raised-button color="accent" class="btn" [routerLink]="['/salvarempleado/', emp.idempleado ]">Modificar</a></td>
+              <td><a mat-raised-button color="warn" class="btn">Eliminar</a></td>
+            </tr>
+          </tbody>
+				</table>
+
+
+
+			</div>
+			     <div class="col-lg-12">
+                    <a mat-raised-button color="warn" class="btn" [routerLink]="['/empleados']" >Volver</a>
+                </div>
+		</div>
+

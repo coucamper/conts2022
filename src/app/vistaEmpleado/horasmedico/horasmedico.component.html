@@ -1,0 +1,41 @@
+
+	<div class="container-fluid">
+		<app-navegacionconductor></app-navegacionconductor>
+
+    <div class="col-lg-12">
+      <h2>Solicitud de horas médico</h2>
+    </div>
+
+    <div class="col-lg-8 offset-lg-2">
+      <h2>El trabajador/a, previo aviso y justificación, podrá ausentarse del trabajo con derecho
+        a remuneración hasta un máximo de 20 horas anuales.</h2>
+
+      <h3>&nbsp;{{ empleado.nomemp }}, actualmente tienes un saldo de <strong>20 horas</strong>.</h3>
+        <form>
+
+          <label for="fechamedico">Fecha del permiso</label>
+          <input type="date" id="fechamedico" name="fechamedico" class="form-control">
+
+          <label for="horainicio">Hora de inicio permiso: </label>
+          <input type="time" class="form-control">
+
+          <label for="horafin">Hora de finalización del permiso: </label>
+          <input type="time" class="form-control">
+
+          <div class="col-lg-12">
+            <p class="mt-3"><strong><i class="fas fa-info mr-3"></i>Tu Responsable te notificará el estado de tu solicitud mediante mensaje privado, podrás ver la notificación en tu panel.</strong></p>
+            <button type="button" mat-raised-button color="warn" class="mt-4">Solicitar permiso retribuido</button>
+
+          </div>
+
+
+
+        </form>
+
+    </div>
+
+    <div class="col-lg-8 offset-lg-2 mt-4">
+      <a href="#" class="btn ml-3" mat-raised-button color="accent" [routerLink]="['/peticiones']">Volver</a>
+    </div>
+
+  </div>

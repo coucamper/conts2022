@@ -1,0 +1,190 @@
+.nav-link.fsmall{
+    font-size: .9rem !important;
+}
+
+.nav-link.fsmall:hover{
+	color: red!important;
+}
+
+a.acceso {
+
+    color: black;
+}
+
+b{
+    font-weight: 600!important;
+}
+
+h1, h2{
+	font-weight: 400!important;
+}
+
+a.acceso:hover{
+    color: red;
+}
+
+.accesos {
+    float: right;
+    text-align: right;
+}
+
+a.red, a.redlink {
+    color: red!important;
+}
+
+.bordtop {
+    border-top: 4px solid red;
+}
+
+.bordbot {
+    border-bottom: 1px solid red;
+}
+
+.active {
+    color: red !important;
+}
+
+.minimal {
+    display: inline-block;
+    width: 30%;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.minimal li{
+    display: inline-block;
+}
+
+.nav-link{
+	    font-size: 1.2rem!important;
+}
+
+.areas{
+	background-color: rgb(255, 86, 86);
+	color: white;
+	text-align: center;
+	padding: .5% 0;
+}
+
+input[type="text"], input[type="date"], input[type="tel"], input[type="email"], input[type="file"], textarea {
+	margin: 1% 0 .5% 1%;
+	display: inline-block;
+	width: 40%;
+}
+
+label {
+	margin-left: 1%;
+	font-weight: 500;
+	display: block;
+}
+
+.red{
+	color: red;
+}
+
+h2{
+	padding: 1% 0;
+	border-top: 2px solid red;
+	border-bottom: 1px solid red;
+}
+
+h2.fc-toolbar-title{
+	border: none;
+}
+
+.submit{
+	width: 25%;
+}
+
+select{
+	margin: 1% 0 .5% 1%;
+	width: 40%;
+}
+
+.principal{
+	background-color: red;
+	min-height: 850px;
+	font-size: 14px;
+}
+
+.center{
+	text-align: center;
+}
+
+#logoadia{
+	margin: 7% 0 6% 0;
+}
+
+.acceso h2{
+	text-align: left;
+	color: white;
+}
+
+.acceso{
+	padding: 1% 2%;
+}
+
+.accesos{
+	margin: 0;
+	padding: 0;
+}
+
+.accesos li {
+	list-style-type: none;
+	text-align: left;
+}
+
+.accesos li a {
+	color: black;
+	text-decoration: none;
+	font-size: 1.1rem;
+	font-weight: 400;
+}
+
+.accesos li a:hover{
+	color: white;
+	text-decoration: underline;
+}
+
+.banner{
+	font-size: 1rem;
+	text-align: left;
+	padding: 1% 2% 0 2%;
+	color: black;
+}
+
+.banner h3{
+	color: white;
+	padding: 0;
+}
+
+.login{
+	color: white;
+	text-align: right;
+	font-weight: 400;
+}
+.login a{
+	color: white;
+	font-size: 1.1rem;
+}
+
+.avatar{
+	border-radius: 50px;
+}
+
+
+
+.usuario_img{
+    width: 75px;
+    height: 75px;
+    display: inline-block;
+}
+
+.avatar_saludo{
+	display: inline-block;
+}
+
+.entrada_recogida{
+	padding-bottom: 1%;
+}

@@ -1,0 +1,86 @@
+
+	<div class="container-fluid">
+
+    <app-navegacion></app-navegacion>
+
+  <div class="col-lg-12 col-md-12 col-sm-12">
+
+
+                <nav class="navbar navbar-expand-lg navbar-light bg-light fsmall">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarNavAltMarkup"
+                        aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <a class="nav-link fsmall" [routerLink]="['/revisiones']">> Revisiones </a>
+                            <a class="nav-link fsmall" [routerLink]="['/averias']">> Averias </a>
+                            <a class="nav-link fsmall" href="#">> Incidencias <i class="fas fa-envelope red"></i></a>
+
+                        </div>
+                    </div>
+                </nav>
+
+  </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+
+    </div>
+
+  <div class="col-lg-12 col-md-12 col-sm-12">
+    <h2 class="pl-2 pt-4">Listado de Revisiones de vehiculos</h2>
+    <app-barra-herramientas-vehiculos></app-barra-herramientas-vehiculos>
+    <table class="table bordbot table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nº FACTURA</th>
+                        <th>MARCA</th>
+                        <th>MODELO</th>
+                        <th>MATRICULA</th>
+                        <th>TIPO REVISIÓN</th>
+                        <th>FECHA REVISIÓN</th>
+                        <th>DETALLES</th>
+                        <th>PROVEEDOR</th>
+                        <th>COSTE</th>
+                        <th>FACTURA DETALLE</th>
+                        <th>EDITAR</th>
+                        <th>ELIMINAR</th>
+                    </tr>
+                </thead>
+                <tbody class="table-striped">
+                    <tr *ngFor="let r of revisiones">
+                        <td>{{ r.idrevivehiculo }}</td>
+                        <td>{{ r.numfactura }}</td>
+                        <td>{{ r.vehiculo.marca }}</td>
+                        <td>{{ r.vehiculo.modelo }}</td>
+                        <td>{{ r.vehiculo.matricula }}</td>
+                        <td>{{ r.tiporevision }}</td>
+                        <td>{{ r.fecharevision }}</td>
+                        <td>{{ r.detalles }}</td>
+                        <td>{{ r.proveedor }}</td>
+                        <td>{{ r.coste }} € </td>
+                        <td><a mat-raised-button class="btn" (click)="verRevision( r.idrevivehiculo )" [routerLink]="['/salvarvehiculo', r.idrevivehiculo ]">Detalle Factura</a></td>
+                        <td><a mat-raised-button color="accent" class="btn" (click)="verRevision( r.idrevivehiculo )" [routerLink]="['/salvarvehiculo', r.idrevivehiculo ]">Editar</a></td>
+                        <td><a mat-raised-button color="warn" class="btn">Eliminar</a></td>
+                        <!-- <td><a th:href="@{/empleado(idempleado=${r.idempleado})}" class="btn btn-warning">Ficha empleado</a></td> -->
+
+
+                    </tr>
+                </tbody>
+    </table>
+            <div class="row">
+                <div class="col">
+                    <a [routerLink]="['/salvarvehiculo']" routerLinkActive="router-link-active" mat-raised-button color="warn" class="btn mr-3 mb-5">Añadir Vehiculo</a>
+                    <a href="#" mat-raised-button color="warn" class="btn mr-3 mb-5">Informes</a>
+                </div>
+                <div class="col">
+                    <mat-paginator [length]="200" [pageSizeOptions]="[5, 10]" aria-label="Select page">
+                    </mat-paginator>
+                </div>
+            </div>
+  </div>
+</div>
+
+

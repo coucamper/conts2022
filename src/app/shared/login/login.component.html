@@ -1,0 +1,30 @@
+<div class="container-fluid login_form h-100">
+
+  <div class="col-lg-6 offset-lg-3">
+    <div class="col-lg-10 offset-lg-1 pt-5" id="login">
+      <div class="col-lg-4 offset-lg-4">
+        <img src="assets/img/logoadia.png" alt="" class="img-fluid mt-5 mb-5">
+      </div>
+      <h2 class="white">ACCESO PRIVADO: </h2>
+
+
+      <form>
+        <label for="user_name">Nombre de usuario:</label>
+        <input type="text" placeholder="Introducir nombre de usuario" id="user_name" class="form-control fc-login">
+
+        <label for="user_pass">Password de usuario:</label>
+        <input type="password" placeholder="Introducir password de usuario" id="user_name" class="form-control fc-login">
+
+        <div class="ml-2 mt-5">
+          <button type="submit" class="btn" mat-raised-button [routerLink]="['/panel']">
+            Validar Acceso
+          </button>
+        </div>
+
+      </form>
+
+      <p class="mt-5"><small><strong>Adia Soft Solutions 2021</strong> - Un Proyecto Open Source conceptualizado y
+        desarrollado por <strong>Héctor del Campo@HDCMedia</strong> con la colaboración de: <br></small><strong class="white_text">Cáritas Koopera Astur S.Coop.Astur</strong></p>
+    </div>
+  </div>
+</div>

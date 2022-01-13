@@ -1,0 +1,88 @@
+<div class="container-fluid">
+
+  <app-navegacion></app-navegacion>
+
+  <div class="col-lg-12">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fsmall">
+      <button class="navbar-toggler" type="button" data-toggle="collapse"
+        data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link fsmall" [routerLink]="['/clases']" >> Clases </a>
+          <a class="nav-link fsmall" [routerLink]="['/clientes']">> Clientes </a>
+          <a class="nav-link fsmall" href="#">> Agencias </a>
+          <a class="nav-link fsmall" href="#">> Incidencias </a>
+          <a class="nav-link fsmall" href="#" title="Avisos Importantes">> Avisos <i class="fas fa-envelope red"></i></a>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+
+
+  <div class="col-l-12">
+
+  </div>
+      <div class="col-lg-12">
+        <h2 class="pl-2 pt-4">Listado de Clases de exportación</h2>
+
+        <table class="table bordbot table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th>ID</th>
+              <th>DENOMINACION</th>
+              <th>DESCRIPCIÓN</th>
+              <th>EDITAR</th>
+              <th>ELIMINAR</th>
+            </tr>
+          </thead>
+          <tbody class="table-striped">
+            <tr *ngFor="let c of clases">
+              <td>{{ c.idclase }}</td>
+              <td>{{ c.clasedenom }}</td>
+              <td>{{ c.descripcion }}</td>
+              <td><a mat-raised-button color="accent" class="btn" th:href="@{/modificarcontenedor(idcontenedor=${c.idcontenedor})}"
+                  class="btn" color="accent">Modificar</a></td>
+              <td><a mat-raised-button color="warn" class="btn" th:href="@{/eliminarcontenedor(idcontenedor=${c.idcontenedor})}" >Eliminar</a>
+              </td>
+
+
+              <!--
+              <td><a th:href="@{/eliminarlinea(idlinea=${linea.idlinea})}" class="links">Eliminar</a></td>
+              <td><a th:href="@{/modificarlinea(idlinea=${linea.idlinea})}" class="links">Modificar</a></td>
+              <td><a th:href="@{/recuperaparadas(idlinea=${linea.idlinea})}" class="links">Paradas</a></td>
+
+             -->
+
+            </tr>
+
+          </tbody>
+
+        </table>
+        <div class="row">
+          <div class="col">
+            <a mat-raised-button color="warn" class="btn mr-3 mb-5" [routerLink]="['/exportaciones']" routerLinkActive="router-link-active">Volver</a>
+            <a mat-raised-button color="warn" class="btn mr-3 mb-5" [routerLink]="['/insertarcontenedor']" routerLinkActive="router-link-active">Añadir nueva clase</a>
+            <a mat-raised-button color="warn" class="btn">Informes</a>
+          </div>
+          <div class="col">
+            <mat-paginator [length]="200" [pageSizeOptions]="[5, 10]" aria-label="Select page">
+            </mat-paginator>
+          </div>
+        </div>
+
+
+      </div>
+
+
+
+    </div>
+
+
+
+
+

@@ -1,0 +1,70 @@
+
+	<div class="container-fluid" *ngIf="usuario">
+		<app-navegacionconductor></app-navegacionconductor>
+
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light fsmall">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarNavAltMarkup"
+                            aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </nav>
+
+			</div>
+
+		<!-- end cabecera -->
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1 entrada_recogida mt-3 bordbot">
+            	<div class="usuario_img avatar">
+            		<img src="assets/img/miyop.jpg" alt="Avatar de usuario" class="avatar">
+            	</div>
+                <h3 class="avatar_saludo ml-3">¡Buenos días, <span id="nombre_usuario">{{ usuario.nomemp }}</span>!</h3>
+
+            </div>
+            <div class="col-lg-10 offset-lg-1">
+
+
+            </div>
+        </div> <!--  End de contenido del saludo al usuario -->
+        <div class="row">
+        	<div class="col-lg-10 offset-lg-1 mt-5">
+        		<h3>Últimos mensajes &nbsp;&nbsp; <small class="red"><i class="fas fa-exclamation red"></i>&nbsp; Recuerda, los mensajes son visibles solo para ti</small></h3>
+        	</div>
+        	<div class="col-lg-10 offset-lg-1">
+				<table class="table">
+					<tr>
+						<th>FECHA</th>
+						<th>REMITENTE</th>
+						<th>ASUNTO</th>
+						<th>CONTENIDO</th>
+						<th>IMPORTANCIA</th>
+						<th>RESPONDER</th>
+						<th>ELIMINAR</th>
+					</tr>
+
+				    <tr *ngFor="let m of mensajes">
+
+				    	<td><i class="fas fa-envelope red"></i> {{ m.hora | date:'medium' }}</td>
+				    	<td>{{ m.remitente.nomemp }}</td>
+				    	<td>{{ m.asunto }}</td>
+				    	<td>{{ m.contenido }}</td>
+				    	<td>{{ m.importancia }}</td>
+				    	<td><a mat-raised-button class="btn">Responder</a></td>
+						<td><a mat-raised-button color="warn" class="btn">Eliminar</a></td>
+				    </tr>
+
+
+				</table>
+			</div>
+
+        </div>
+
+
+
+
+			 <div>
+
+			 </div>
+
+

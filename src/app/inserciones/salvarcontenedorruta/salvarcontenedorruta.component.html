@@ -1,0 +1,37 @@
+
+	<div class="container-fluid">
+    <app-navegacion></app-navegacion>
+
+  <div class="col-lg-12">
+    <h2 class="pl-2 pt-4">inserción de nuevo contenedor en la ruta - {{ ruta.denom }}</h2>
+
+
+
+    <!-- Formulario para insertar nuevo contenedor -->
+
+<form autocomplete="off" [formGroup]="form" (ngSubmit)="guardar()">
+
+        <label for="denom">Seleccionar contenedor existente: </label>
+        <select name="denom" id="denom" formControlName="denom" class="form-select form-control">
+
+
+          <!--
+		<select name="gravedad" id="gravedad" formControlName="gravedad" [class.is-invalid]="gravedadNoValida"   class="form-control">
+			<option *ngFor="let g of gravedad">{{ g.tipogravedad }}</option>
+		</select>
+
+  -->
+            <option #contenedor value="{{ cont.idconten }}"  *ngFor="let cont of Contenedores" class="esp">{{cont.denom}} ({{ cont.ubicacion }})</option>
+
+        </select>
+        <br>
+        <small *ngIf="denomNoValida" class="text-danger ml-3">Denominacion descriptiva (Mínimo 10 caracteres) </small>
+
+</form>
+
+
+
+<div class="col-lg-12 pt-3 mb-5 mb-5">
+  <a [routerLink]="['/ruta']" routerLinkActive="router-link-active" mat-raised-button color="warn" class="btn mr-3" (click)="salvarContenedor( idRuta, contenedor )">Añadir a ruta</a>
+  <a [routerLink]="['/rutas']" routerLinkActive="router-link-active" mat-raised-button color="warn" class="btn mr-3">Volver</a>
+</div>

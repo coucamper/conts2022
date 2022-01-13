@@ -1,0 +1,62 @@
+  <div class="container-fluid  animated fast">
+  <!-- cabecera -->
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="menu_sup bordtop bordbot">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand red" href="#">CÁRITAS KOOPERA SOC.
+            COOP. ASTUR</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link" [routerLink]="['/inicio']">Inicio <span class="sr-only">(current)</span></a>
+              <a class="nav-link active" href="#">Recogida</a>
+              <a class="nav-link" href="#">Información</a>
+
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!-- end cabecera -->
+  <div class="subheader col-lg-12 bordbot">
+    <ul class="minimal">
+      <li><b>Usuario:</b> Irene belloso</li>
+      <li>&nbsp;<b>Sesión: </b> </li>
+      <li>&nbsp;{{ fecha | date:'medium' }} </li>
+
+    </ul>
+
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="areas">Área de Recogida</h1>
+    </div>
+  </div>
+  <div class="row">
+  </div>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light bordbot">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link" [routerLink]="['/panel']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fas fa-desktop"></i> &nbsp; Panel</a>
+        <a class="nav-link" [routerLink]="['/empleados']" routerLinkActive="active" ><i class="fas fa-users"></i> &nbsp; Equipo</a>
+        <a class="nav-link" [routerLink]="['/rutas']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fas fa-map-marked-alt"></i>&nbsp; Rutas <span
+            class="sr-only">(current)</span></a>
+        <a class="nav-link" [routerLink]="['/vehiculos']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fas fa-truck-moving"></i>&nbsp; Vehiculos <span
+            class="sr-only">(current)</span></a>
+        <a class="nav-link" [routerLink]="['/pesajes']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fas fa-weight"></i> &nbsp;Pesajes</a>
+        <a class="nav-link" [routerLink]="['/contenedores']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fas fa-dumpster"></i>&nbsp; Contenedores</a>
+        <a class="nav-link" [routerLink]="['/incidencias']" routerLinkActive="active" ><i class="fas fa-exclamation-triangle"></i>&nbsp;
+          Incidencias</a>
+      </div>
+    </div>
+  </nav>

@@ -1,0 +1,47 @@
+
+	<div class="container-fluid">
+		<app-navegacionconductor></app-navegacionconductor>
+
+    <div class="col-lg-12">
+      <h2>Solicitud de permiso retribuido</h2>
+    </div>
+
+
+    <div class="col-lg-8 offset-lg-2">
+      <h2>El trabajador/a, previo aviso y justificación, podrá ausentarse del trabajo con derecho
+        a remuneración, por alguno de los motivos y por el tiempo siguiente:</h2>
+      <form>
+        <label for="tipopermiso">Tipo de permiso retribuido: </label>
+        <select name="tipopermiso" id="tipopermiso" class="form-control fc-big">
+          <option *ngFor="let p of permisosRetribuidos" class="form-control fc-big borbot"> {{ p.tipopermiso }}  ({{ p.detallepermiso }})</option>
+        </select>
+
+        <label for="fechainicio">Fecha de inicio del permiso: </label>
+        <input type="date" class="form-control">
+
+        <label for="fechafin">Fecha de finalización del permiso: (Incorporación) </label>
+        <input type="date" class="form-control">
+
+        <label for="horainicio">Hora de inicio del permiso:</label>
+        <input type="time" id="appt" name="appt"
+        min="09:00" max="18:00" required class="form-control">
+
+        <label for="horafin">Hora de finalización del permiso: </label>
+        <input type="time" id="appt" name="appt"
+        min="09:00" max="18:00" required class="form-control">
+
+
+        <div class="col-lg-12">
+          <p class="mt-3"><strong><i class="fas fa-info mr-3"></i>Tu Responsable te notificará el estado de tu solicitud mediante mensaje privado, podrás ver la notificación en tu panel.</strong></p>
+          <button type="button" mat-raised-button color="warn" class="mt-4">Solicitar permiso retribuido</button>
+
+        </div>
+
+      </form>
+    </div>
+    <div class="col-lg-8 offset-lg-2 mt-4">
+      <a href="#" class="btn ml-3 mb-5" mat-raised-button color="accent" [routerLink]="['/peticiones']">Volver</a>
+    </div>
+
+
+  </div>
