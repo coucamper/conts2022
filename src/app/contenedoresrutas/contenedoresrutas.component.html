@@ -62,6 +62,23 @@
 
 					 -->
 
+           <!-- <tr *ngFor="let rut of rutas">
+            <td>{{ rut.idruta }}</td>
+            <td>{{ rut.zona_idzona }}</td>
+            <td>{{ rut.localidad }}</td>
+            <td>{{ rut.denom }}</td>
+            <td>{{ rut.fechaini}}</td>
+            <td>{{ rut.periodo }}</td>
+            <td><a mat-raised-button class="btn">Ruta</a></td>
+            <td><a mat-raised-button class="btn" [routerLink]="['/ruta', rut.idruta ]">Ver contenedores</a></td>
+            <td><a mat-raised-button color="accent" class="btn" (click)="verRuta( rut.idruta )" [routerLink]="['/salvarruta', rut.idruta ]">Editar</a></td>
+            <td><a mat-raised-button color="warn" class="btn" (click)="borrarRuta()">Eliminar</a></td>
+
+
+        </tr> -->
+
+
+
 					</tr>
 				</table>
 

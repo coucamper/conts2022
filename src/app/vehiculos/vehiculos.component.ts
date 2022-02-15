@@ -49,6 +49,8 @@ export class VehiculosComponent implements OnInit {
                 this.onSelect();
                 this.verVehiculo( this.idx );
                 this.removeFilter();
+
+
                }
 
 
@@ -58,9 +60,12 @@ export class VehiculosComponent implements OnInit {
   }
 
   div1Function(){
-
     this.div1 = !this.div1;
+  }
 
+
+  refresh(): void {
+    window.location.reload();
   }
 
 
@@ -94,6 +99,7 @@ export class VehiculosComponent implements OnInit {
 
   ngOnInit(): void {
    // this.vehiculosF = [...this.vehiculos];
+
   }
 
 }

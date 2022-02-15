@@ -1,4 +1,4 @@
-<div class="container-fluid" *ngIf="rutas">
+<div class="container-fluid" *ngIf="localidades">
 
   <app-navegacion></app-navegacion>
 
@@ -13,7 +13,7 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-link fsmall" [routerLink]="['/zonas']">> Zonas</a>
-          <a class="nav-link fsmall" [routerLink]="['/localidades']">> Localidades</a>
+          <a class="nav-link fsmall" [routerLink]="['/contenedores']">> Localidades</a>
           <a class="nav-link fsmall" href="#">> Incidencias en ruta</a>
           <a class="nav-link fsmall" href="#">> Avisos <i class="fas fa-envelope red"></i></a>
 
@@ -27,7 +27,7 @@
   </div>
 
   <div class="col-lg-12 col-md-12 col-sm-12">
-    <h2 class="pl-2 pt-4">Listado de Rutas</h2>
+    <h2 class="pl-2 pt-4">Listado de localidades</h2>
 
     <!-- BARRA DE FILTROS RUTAS -->
     <!-- FIN BARRA DE FILTROS RUTAS -->
@@ -38,30 +38,21 @@
       <thead class="thead-dark">
         <tr>
           <th>ID</th>
-          <th>ZONA</th>
           <th>LOCALIDAD</th>
-          <th>DENOMINACION</th>
-          <th>FECHA IMPLANTACION</th>
-          <th>PERIODICIDAD</th>
-          <th>CONTENEDORES</th>
+          <th>CONCEJOS</th>
           <th>EDITAR</th>
           <th>ELIMINAR</th>
         </tr>
       </thead>
       <tbody class="table-striped">
         <!-- <tr *ngFor="let rut of rutas; let zn of zona"> -->
-        <tr *ngFor="let cr of zonas">
-          <td>{{ cr.ruta.idruta }}</td>
-          <td>{{ cr.comarca.denom}}</td>
-          <td>{{ cr.ruta.localidad }}</td>
-          <td>{{ cr.ruta.denom }}</td>
-          <td>{{ cr.ruta.fechaini}}</td>
-          <td>{{ cr.ruta.periodo }}</td>
-          <td><a mat-raised-button class="btn" [routerLink]="['/ruta', cr.ruta.idruta ]">Ver contenedores</a></td>
-          <td><a mat-raised-button color="accent" class="btn" (click)="verRuta(cr.ruta.idruta )"
-              [routerLink]="['/salvarruta', cr.ruta.idruta ]">Editar</a></td>
-          <td><a mat-raised-button color="warn" class="btn" (click)="borrarRuta()">Eliminar</a></td>
-          <!-- <td><a th:href="@{/empleado(idempleado=${r.idempleado})}" class="btn btn-warning">Ficha empleado</a></td> -->
+        <tr *ngFor="let l of localidades">
+          <td>{{ l.idconcejo }}</td>
+          <td>{{ l.denom}}</td>
+          <td><a mat-raised-button class="btn" [routerLink]="['/ruta', l.idconcejo ]">Ver zona</a></td>
+          <td><a mat-raised-button color="accent" class="btn" (click)="(l.idconcejo)"
+              [routerLink]="['/salvarruta', l.idconcejo ]">Editar</a></td>
+          <td><a mat-raised-button color="warn" class="btn" >Eliminar</a></td>
 
 
         </tr>
@@ -70,7 +61,7 @@
     <div class="row">
       <div class="col">
         <a [routerLink]="['/salvarruta']" routerLinkActive="router-link-active" mat-raised-button color="warn"
-          class="btn mr-3 mb-5">Añadir Ruta</a>
+          class="btn mr-3 mb-5">Añadir localidad</a>
         <a href="#" mat-raised-button color="warn" class="btn mr-3 mb-5">Informes</a>
       </div>
       <div class="col">

@@ -19,8 +19,6 @@ export class VehiculoModel {
 	 marca: string;
 	 modelo: string;
 	 fechacompra: string;
-   aseguradora: string;
-   poliza: string;
 
     constructor(){}
 

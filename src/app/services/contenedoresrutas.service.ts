@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { ContenedorVOModule } from '../models/contenedor-vo/contenedorModel';
+import { ContModule } from '../models/contModel';
+import { ContenedoresRutasModel } from '../models/contenedoresRutaModel';
 
 
 
@@ -12,6 +14,10 @@ import { ContenedorVOModule } from '../models/contenedor-vo/contenedorModel';
 export class ContenedoresRutasService {
 
   url = "http://localhost:8093/";
+
+  urlanadir = "http://localhost:8093/addcontenedorruta?idcontenedor=";
+  urlAnadir2 = "&idruta=";
+  contenedor:ContenedorVOModule;
 
   constructor( private http: HttpClient,
                private activatedRoute:ActivatedRoute
@@ -35,6 +41,14 @@ export class ContenedoresRutasService {
   saveContenedorRuta( idx:number,  contenedor: ContenedorVOModule){
     return this.http.post(`${this.url}contenedorruta/${idx}`, contenedor );
   }
+
+
+
+  addContenedorRuta( idx : number, contenedor : ContenedoresRutasModel){
+    return this.http.post(`http://localhost:8093/addcontenedorruta/${idx}`, contenedor );
+  }
+
+
 
 
 }

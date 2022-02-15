@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { EmpleadoModel } from 'src/app/models/empleado';
 import { rutaModel } from 'src/app/models/rutaModel';
+import { UserModel } from 'src/app/models/userModel';
 import { EmpleadosService } from 'src/app/services/empleados.service';
 import { MensajesService } from 'src/app/services/mensajes.service';
 
@@ -19,7 +20,7 @@ export class PanelempleadoComponent implements OnInit {
   mensajes:any[] = [];
 
   usuarios:any[] = [];
-  usuario:EmpleadoModel;
+  usuario:UserModel;
   idx:number = 1;
 
   @Input() ruta:rutaModel;

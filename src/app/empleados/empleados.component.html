@@ -30,66 +30,7 @@
 
 			<div class="col-lg-12">
 				<h2 class="pl-2 pt-4">Personas de tu equipo</h2>
-      <!-- menu de filtros local -->
 
-      <div class="row">
-        <div class="col-lg-12 mb-5" *ngIf="!div1">
-
-          <form action="">
-
-            <div class="col-lg-2 ib">
-
-              <label for="localidad">Filtrar por nombre de empleado: </label>
-              <select [(ngModel)]="seleccionado" name="nomemp" id="nomemp" class="form-control fc-big" (ngModelChange)="onSelect()">
-                <option value="">Seleccionar empleado</option>
-                <option *ngFor="let e of empleadosF" [value]="e.nomemp">{{ e.nomemp }}</option>
-              </select>
-
-            </div>
-
-            <div class="col-lg-2 ib">
-              <label for="categoria">Filtrar Categoría: </label>
-
-              <select [(ngModel)]="selected" name="categoria" id="categoria" class="form-control fc-big" (ngModelChange)="onSelect()">
-                <option value="" [disabled]>Categoria no seleccionada</option>
-                <option *ngFor="let c of empleadosF" [value]="c.categoria">{{ c.categoria }}</option>
-              </select>
-
-            </div>
-
-            <div class="col-lg-2 ib">
-              <label for="localidad">Filtrar por fecha de antigüedad: </label>
-              <input type="date" class="form-control fc-mid">
-              <small> &nbsp;Fecha inicial</small>
-
-            </div>
-            <div class="col-lg-2 ib">
-
-              <label for="fecha"></label>
-              <input type="date" class="form-control fc-mid">
-              <small> &nbsp;Fecha final</small>
-
-            </div>
-
-            <div class="col-lg-2 ib">
-
-              <button type="submit" class="form-control fc-mid btn" mat-raised-button color="accent"><i
-                  class="sinfiltro fas fa-filter"></i>Aplicar filtros</button>
-                  <a class="sinfiltro mt-2 ml-4" mat-raised-button color="warn" (click)="removeFilter()">sin filtros</a>
-
-            </div>
-
-
-          </form>
-
-        </div>
-
-
-      </div>
-
-
-
-      <!-- Fín menu de filtros local -->
 				<table class="table bordbot table-striped">
           <thead class="thead-dark">
             <tr>
@@ -98,31 +39,39 @@
               <th>APELLIDO 1</th>
               <th>APELLIDO 2</th>
               <th>TELEFONO</th>
-              <th>CATEGORIA</th>
               <th>ANTIGÜEDAD</th>
               <th>VACACIONES</th>
+              <th>CATEGORIA</th>
               <th>FICHA EMPLEADO</th>
               <th>ELIMINAR</th>
             </tr>
           </thead>
           <tbody class="table-striped">
-            <tr *ngFor="let em of empleadosF">
-              <td>{{ em.idempleado }}</td>
+            <tr *ngFor="let ec of empleadoscategorias">
+              <!-- <td>{{ em.idempleado }}</td>
               <td>{{ em.nomemp }}</td>
               <td>{{ em.ape1emp }}</td>
               <td>{{ em.ape2emp }}</td>
               <td>{{ em.telecontacto}}</td>
-              <td>{{ em.categoria }}</td>
               <td>{{ em.antiguedad }}</td>
               <td><a mat-raised-button class="btn">Vacaciones</a></td>
+              <td>{{ ec.categoria.denom }}</td> -->
+              <td>{{ ec.empleado.idempleado }}</td>
+              <td>{{ ec.empleado.nomemp }}</td>
+              <td>{{ ec.empleado.ape1emp }}</td>
+              <td>{{ ec.empleado.ape2emp }}</td>
+              <td>{{ ec.empleado.telecontacto}}</td>
+              <td>{{ ec.empleado.antiguedad }}</td>
+              <td><a mat-raised-button class="btn">Vacaciones</a></td>
+              <td>{{ ec.categoria.denom }}</td>
 
               <!-- <td><a mat-raised-button color="accent" class="btn" [routerLink]="['/empleado', em.idempleado]" routerLinkActive="active" (click)="getEmpleado( em.idempleado )">Ficha empleado</a></td> -->
 
               <td><a mat-raised-button color="accent" class="btn"
-                [routerLink]="['/empleado', em.idempleado]"
-                routerLinkActive="active" (click)="verEmpleado( em.idempleado )">Ficha empleado</a></td>
+                [routerLink]="['/empleado', ec.empleado.idempleado]"
+                routerLinkActive="active" (click)="verEmpleado( ec.empleado.idempleado )">Ficha empleado</a></td>
 
-              <td><a mat-raised-button color="warn" class="btn" [routerLink]="['/empleados']" (click)="borrarEmpleado( em.idempleado )">Eliminar</a></td>
+              <td><a mat-raised-button color="warn" class="btn" [routerLink]="['/empleados']" (click)="borrarEmpleado( ec.empleado.idempleado )">Eliminar</a></td>
             </tr>
           </tbody>
 

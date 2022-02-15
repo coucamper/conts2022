@@ -1,43 +1,41 @@
 
-
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { PesajeModel } from '../models/pesajeModel';
+import { ComarcasRutaModel } from '../models/comarcasrutaModel';
+
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class ZonasService {
+export class ComarcasRutaService {
 
-  url = 'http://localhost:8093/comarca';
+  url = 'http://localhost:8093/comarcasruta';
 
   constructor( private http: HttpClient, private activatedRoute:ActivatedRoute ) {
-    console.log("servicio de zonas funcionando!");
+    console.log("servicio de comarcas de ruta funcionando!");
   }
 
-  getZonas(){
+  getComarcasRuta(){
     return this.http.get(`${ this.url }`)
     .pipe( map( (data:any) => {
+      for(let x in data){
+        console.log(data[x])
+      }
       return data;
     }));
   }
 
-  getComarcas(){
-    return this.http.get(`${ this.url }`);
-  }
 
-
-  getZona( idx:number ){
+  getComarcaRuta( idx:number ){
+    console.log("Comarca"+this.http.get(`${ this.url }/${ idx }`));
     return this.http.get(`${ this.url }/${ idx }`);
   }
 
 
-  deletePesaje( idx:number ){
-    return this.http.delete(`${ this.url }/${ idx }`);
-  }
 
 }

@@ -4,40 +4,31 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-import { PesajeModel } from '../models/pesajeModel';
+
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class ZonasService {
+export class LocalidadesService {
 
-  url = 'http://localhost:8093/comarca';
+  url = 'http://localhost:8093/concejo';
 
   constructor( private http: HttpClient, private activatedRoute:ActivatedRoute ) {
-    console.log("servicio de zonas funcionando!");
+    console.log("servicio de localidades funcionando!");
   }
 
-  getZonas(){
-    return this.http.get(`${ this.url }`)
-    .pipe( map( (data:any) => {
-      return data;
-    }));
-  }
 
-  getComarcas(){
+  getLocalidades(){
     return this.http.get(`${ this.url }`);
   }
 
 
-  getZona( idx:number ){
+  getLocalidad( idx:number ){
     return this.http.get(`${ this.url }/${ idx }`);
   }
 
 
-  deletePesaje( idx:number ){
-    return this.http.delete(`${ this.url }/${ idx }`);
-  }
 
 }

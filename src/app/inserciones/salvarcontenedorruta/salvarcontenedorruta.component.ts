@@ -76,7 +76,6 @@ export class SalvarcontenedorrutaComponent implements OnInit {
 
 
   crearFormulario(){
-
     this.form = this.fB.group({
       denom: ['', [Validators.required, Validators.minLength(10)] ]
     });
@@ -102,6 +101,7 @@ export class SalvarcontenedorrutaComponent implements OnInit {
        nombre:"Sin nombre"
      })
      console.log( this.form );
+
 
 
 

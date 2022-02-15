@@ -45,7 +45,7 @@
 
 				    <tr *ngFor="let m of mensajes">
 
-				    	<td><i class="fas fa-envelope red"></i> {{ m.hora | date:'medium' }}</td>
+				    	<td><i class="fas fa-envelope red"></i> {{ m.fechahora | date:'medium' }}</td>
 				    	<td>{{ m.remitente.nomemp }}</td>
 				    	<td>{{ m.receptor.nomemp }}</td>
 				    	<td>{{ m.asunto }}</td>
@@ -78,12 +78,12 @@
                   <div class="col-lg-3 ib" *ngFor="let av of avisos">
                     <div class="card" >
                       <div class="card materialBox">
-                        <h5 class="card-header bg-primary text-white">{{ av.tipoaviso }}</h5>
+                        <h5 class="card-header bg-primary text-white">{{ av.asunto }}</h5>
                         <div class="card-body">
-                          <p>Fecha: <strong>{{ av.fechaaviso | date:'short' }}</strong></p>
+                          <p>Fecha: <strong>{{ av.fechahora | date:'short' }}</strong></p>
                           <h4 class="card-title">Asunto: <strong>{{ av.asunto }}</strong></h4>
-                          <p>Notifica: <strong>{{ av.empleado.nomemp }}</strong></p>
-                          <p class="card-text bordered">{{ av.detalles }}</p>
+                          <p>Notifica: <strong>{{ av.remitente.nomemp }}</strong></p>
+                          <p class="card-text bordered">{{ av.contenido }}</p>
 
                           <a href="#" mat-raised-button class="btn mr-3"><i class="far fa-eye"></i> Ver detalles</a>
                           <a href="#" mat-raised-button class="btn red"><i class="fas fa-times"></i> Cerrar</a>

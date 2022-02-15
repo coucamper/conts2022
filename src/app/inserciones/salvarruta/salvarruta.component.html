@@ -6,11 +6,13 @@
 
 		<form [formGroup]="formRuta" #f="ngForm" (ngSubmit)="guardarRuta()">
 
+      <div *ngIf="idExiste">
       <label for="idruta">ID ruta: </label>
       <input type="text"  value="{{ ruta.idruta }}" name="idruta" id="idruta" formControlName="idruta"
         class="form-control" [(ngModel)]="ruta.idruta">
       <br>
       <small *ngIf="idrutaNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small>
+      </div>
 
       <label for="denom">Denominación: </label>
       <input type="text" value="{{ ruta.denom }}" name="denom" id="denom" formControlName="denom" [class.is-invalid]="denomNoValida"
@@ -20,7 +22,7 @@
 
       <label for="zona">Zona: </label>
       <select name="zona" class="form-control" formControlName="zona" [(ngModel)]="ruta.zona">
-        <option *ngFor="let z of zonas" [value]="z.denom">{{ z.denom }}</option>
+        <option *ngFor="let cm of comarcas" [value]="">{{ cm.denom }}</option>
       </select>
       <br>
       <small *ngIf="zonaNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small>
@@ -28,7 +30,7 @@
 
       <label for="localidad">Localidad: </label>
       <select name="localidad" class="form-control" formControlName="localidad" [(ngModel)]="ruta.localidad">
-        <option *ngFor="let l of localidades" [value]="l.localidad">{{ l.localidad }}</option>
+        <option *ngFor="let cj of concejos" [value]="">{{ cj.concejo.denom }}</option>
       </select>
       <br>
       <small *ngIf="zonaNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small>
@@ -45,10 +47,7 @@
         <br>
         <small *ngIf="periodoNoValida" class="text-danger ml-3">Mínimo 6 carácteres</small>
 
-		<label for="ruta">Ruta: (KML)</label>
-		<input type="file" name="ruta" id="ruta" formControlName="ruta" [class.is-invalid]="rutaNoValida" [(ngModel)]="ruta.ruta">
-        <br>
-        <small *ngIf="rutaNoValida" class="text-danger ml-3">Insertar fichero KML</small>
+
 
         <div class="ml-3 mt-3">
             <button type="submit" value="Salvar Ruta" mat-raised-button color="accent" class="btn submit mr-3" (click)="guardarRuta()" [routerLink]="['/rutas']">Salvar ruta</button>

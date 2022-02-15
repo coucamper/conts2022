@@ -1,10 +1,13 @@
 import { getAttrsForDirectiveMatching } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ComarcasRutaService } from '../services/comarcasruta.service';
 import { ContenedoresService } from '../services/contenedores.service';
 import { ContenedoresRutasService } from '../services/contenedoresrutas.service';
 import { RutasService } from '../services/rutas.service';
 import { ZonasService } from '../services/zonas.service';
+
+
 
 
 
@@ -21,6 +24,7 @@ export class RutasComponent implements OnInit {
   rutas:any[] = [];
   rutasF:any[] = [];
   zonas:any[] = [];
+  zona:any[] = [];
   ruta:any[] = [];
   idx:number;
 
@@ -36,7 +40,7 @@ export class RutasComponent implements OnInit {
   constructor( private router:Router,
                private activatedRoute: ActivatedRoute,
                private _rutas: RutasService,
-               private _zonas: ZonasService,
+               private _comarcasRuta: ComarcasRutaService,
                private _contenRutas: ContenedoresRutasService) {
 
       this.idx = this.activatedRoute.snapshot.params['id'];
@@ -61,9 +65,22 @@ export class RutasComponent implements OnInit {
     })
   }
 
+  getZona(){
+    this._comarcasRuta.getComarcaRuta( this.idx ).subscribe( (comarcaRuta:any) =>{
+      this.zona=comarcaRuta;
+      console.log("Zona: "+this.zona);
+    });
+  }
+
+
   getZonas(){
-    return this._zonas.getZonas().subscribe( (zs:any) => {
+    return this._comarcasRuta.getComarcasRuta().subscribe( (zs:any) => {
       this.zonas = zs;
+
+      for(let x in this.zonas){
+        console.log(this.zonas[x])
+      }
+
     });
   }
 

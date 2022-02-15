@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { ContenedorVOModule } from '../models/contenedor-vo/contenedorModel';
 import { ContenedoresService } from '../services/contenedores.service';
-import { BarraHerramientasComponent } from '../shared/barra-herramientas/barra-herramientas.component';
 
 
 

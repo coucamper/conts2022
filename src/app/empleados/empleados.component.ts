@@ -12,6 +12,8 @@ import { map } from 'rxjs/operators';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { JsonPipe } from '@angular/common';
 import { MatTable } from '@angular/material/table';
+import { CategoriasService } from '../services/categorias.service';
+import { EmpleadocategoriaService } from '../services/empleadocategoria.service';
 
 
 
@@ -48,32 +50,60 @@ export class EmpleadosComponent implements OnInit {
 
   pgIndex = 2;
 
-  categorias = [
-    { categoria: 'Gerente'},
-    { categoria: 'Titulado superior'},
-    { categoria: 'Técnico superior'},
-    { categoria: 'Encargado general'},
-    { categoria: 'Encargado'},
-    { categoria: 'Técnico'},
-    { categoria: 'Ayudante'},
-    { categoria: 'Conductor'},
-    { categoria: 'Ayudante de conductor'}
-  ];
-
+  catE:any[] = [];
+  categorias:any[] = [];
   categoriasF:any[] = [];
+
+  empleadocategoria:any[] = [];
+  empleadoscategorias:any;
+
 
   div1:boolean=false;
 
   constructor( private router: Router,
                private _empleados: EmpleadosService,
+               private _categorias: CategoriasService,
+               private _empleadocategoria: EmpleadocategoriaService,
                private activatedRoute: ActivatedRoute  ) {
 
-                this._empleados.getEmpleados().subscribe( data => {
-                  console.log(data);
-                  this.empleados = data;
-                  this.empleadosF = this.empleados;
-                  this.categoriasF = this.empleados;
+                this._categorias.getCategorias().subscribe( datos => {
+                  console.log(datos);
+                  this.cat=datos;
+                  this.empleadoscategorias=this.cat;
+                  console.log("Categorias traidas: "+this.cat);
                 });
+
+                this._empleadocategoria.getEmpleadosCategorias().subscribe(respuesta =>{
+                  this.empleadoscategorias=respuesta;
+                });
+
+                // this._empleadocategoria.getEmpleadosCategorias().subscribe(e=>{
+
+                // });
+
+                this._empleadocategoria.getCategoriaEmpleado(2).subscribe(cat=>{
+                  this.empleadocategoria=[cat];
+                  for(let e in this.empleadocategoria){
+                    console.log("Hola perri "+this.empleadocategoria[e].categoria.denom);
+                  }
+                  //console.log("hola"+this.empleadocategoria);
+                })
+
+                this._empleados.getEmpleados().subscribe(empleados =>{
+
+                  this.empleados = empleados;
+                  console.log("Empleados "+this.empleados)
+                  this.empleadosF = this.empleados;
+                });
+
+                // this._empleados.getEmpleados().subscribe( data => {
+                //   console.log(data);
+                //   this.empleados = data;
+                //   this.empleadosF = this.empleados;
+                //   this.categoriasF = this.empleados;
+                //   console.log("Empleados traidos:"+this.empleadosF);
+                //   console.log("Categorias traidas: "+this.categoriasF);
+                // });
 
                 //this.empleadosF = [...this.empleados];
                 //this.categoriasF = [...this.empleados];

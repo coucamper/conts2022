@@ -1,4 +1,4 @@
-<div class="container-fluid" *ngIf="rutas">
+<div class="container-fluid" *ngIf="zonas">
 
   <app-navegacion></app-navegacion>
 
@@ -27,7 +27,7 @@
   </div>
 
   <div class="col-lg-12 col-md-12 col-sm-12">
-    <h2 class="pl-2 pt-4">Listado de Rutas</h2>
+    <h2 class="pl-2 pt-4">Listado de zonas</h2>
 
     <!-- BARRA DE FILTROS RUTAS -->
     <!-- FIN BARRA DE FILTROS RUTAS -->
@@ -39,29 +39,20 @@
         <tr>
           <th>ID</th>
           <th>ZONA</th>
-          <th>LOCALIDAD</th>
-          <th>DENOMINACION</th>
-          <th>FECHA IMPLANTACION</th>
-          <th>PERIODICIDAD</th>
-          <th>CONTENEDORES</th>
+          <th>CONCEJOS</th>
           <th>EDITAR</th>
           <th>ELIMINAR</th>
         </tr>
       </thead>
       <tbody class="table-striped">
         <!-- <tr *ngFor="let rut of rutas; let zn of zona"> -->
-        <tr *ngFor="let cr of zonas">
-          <td>{{ cr.ruta.idruta }}</td>
-          <td>{{ cr.comarca.denom}}</td>
-          <td>{{ cr.ruta.localidad }}</td>
-          <td>{{ cr.ruta.denom }}</td>
-          <td>{{ cr.ruta.fechaini}}</td>
-          <td>{{ cr.ruta.periodo }}</td>
-          <td><a mat-raised-button class="btn" [routerLink]="['/ruta', cr.ruta.idruta ]">Ver contenedores</a></td>
-          <td><a mat-raised-button color="accent" class="btn" (click)="verRuta(cr.ruta.idruta )"
-              [routerLink]="['/salvarruta', cr.ruta.idruta ]">Editar</a></td>
-          <td><a mat-raised-button color="warn" class="btn" (click)="borrarRuta()">Eliminar</a></td>
-          <!-- <td><a th:href="@{/empleado(idempleado=${r.idempleado})}" class="btn btn-warning">Ficha empleado</a></td> -->
+        <tr *ngFor="let z of zonas">
+          <td>{{ z.idcomarca }}</td>
+          <td>{{ z.denom}}</td>
+          <td><a mat-raised-button class="btn" [routerLink]="['/ruta', z.idcomarca ]">Ver localidades</a></td>
+          <td><a mat-raised-button color="accent" class="btn" (click)="(z.idcomarca )"
+              [routerLink]="['/salvarruta', z.idcomarca ]">Editar</a></td>
+          <td><a mat-raised-button color="warn" class="btn" >Eliminar</a></td>
 
 
         </tr>
@@ -70,7 +61,7 @@
     <div class="row">
       <div class="col">
         <a [routerLink]="['/salvarruta']" routerLinkActive="router-link-active" mat-raised-button color="warn"
-          class="btn mr-3 mb-5">Añadir Ruta</a>
+          class="btn mr-3 mb-5">Añadir zona</a>
         <a href="#" mat-raised-button color="warn" class="btn mr-3 mb-5">Informes</a>
       </div>
       <div class="col">

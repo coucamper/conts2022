@@ -6,7 +6,6 @@ import { AvisoModel } from '../models/avisoModel';
 import { EmpleadoModel } from '../models/empleado';
 import { AvisosService } from '../services/avisos.service';
 import { EmpleadosService } from '../services/empleados.service';
-import { ExportacionesService } from '../services/exportaciones.service';
 import { MensajesService } from '../services/mensajes.service';
 
 
@@ -24,13 +23,16 @@ export class PanelComponent implements OnInit {
   avisos:any[] = [];
   usuarios:any[] = [];
   usuario:EmpleadoModel;
-  idx:number = 3;
+  idx:number = 2;
+
 
 
   constructor( private router:Router, private _mensajes: MensajesService, private http: HttpClient, private _clientes:HttpClient, private _empleados: EmpleadosService, private _avisos: AvisosService ) {
     this._mensajes.getMensajes().subscribe( data => {
       console.log(data);
       this.mensajes = data;
+
+      console.log(this.mensajes);
   });
 
     this._empleados.getEmpleados().subscribe( (emp:any) =>{

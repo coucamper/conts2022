@@ -15,7 +15,6 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav">
-                            <a class="nav-link fsmall" [routerLink]="['/mantenimientos']">> Mantenimientos </a>
                             <a class="nav-link fsmall" href="#">> Incidencias <i class="fas fa-envelope red"></i></a>
 
                         </div>
@@ -28,7 +27,7 @@
     </div>
 
   <div class="col-lg-12 col-md-12 col-sm-12">
-    <h2 class="pl-2 pt-4">Listado de Vehículos</h2>
+    <h2 class="pl-2 pt-4">Listado de mantenimientos</h2>
 
 
 
@@ -37,28 +36,33 @@
                 <thead class="thead-dark">
                     <tr>
                         <th>ID</th>
-                        <th>MARCA</th>
-                        <th>MODELO</th>
+                        <th>FECHA</th>
+                        <th>VEHICULO</th>
                         <th>MATRICULA</th>
-                        <th>FECHA COMPRA</th>
-                        <th>POLIZA</th>
-                        <th>MULTAS</th>
-                        <th>MANTENIMIENTOS</th>
+                        <th>MODELO</th>
+                        <th>DESCRIPCIÓN</th>
+                        <th>COSTE</th>
+                        <th>PROVEEDOR</th>
+                        <th>Nº FACTURA</th>
+                        <th>TIPO</th>
                         <th>EDITAR</th>
                         <th>ELIMINAR</th>
                     </tr>
                 </thead>
                 <tbody class="table-striped">
-                    <tr *ngFor="let v of vehiculosF">
-                        <td>{{ v.idvehiculo }}</td>
-                        <td>{{ v.marca }}</td>
-                        <td>{{ v.modelo }}</td>
-                        <td>{{ v.matricula  }}</td>
-                        <td>{{ v.fechacompra  }}</td>
-                        <td><a mat-raised-button class="btn">Poliza</a></td>
-                        <td><a mat-raised-button class="btn">Multas</a></td>
-                        <td><a mat-raised-button class="btn">Mantenimientos</a></td>
-                        <td><a mat-raised-button color="accent" class="btn" (click)="verVehiculo( v.idvehiculo )" [routerLink]="['/salvarvehiculo', v.idvehiculo ]">Editar</a></td>
+                    <tr *ngFor="let m of mantenimientos">
+                        <td>{{ m.idmantenimiento }}</td>
+                        <td>{{ m.fechamantenimiento }}</td>
+                        <td>{{ m.idvehiculo.modelo}}</td>
+                        <td>{{ m.idvehiculo.matricula}}</td>
+                        <td>{{ m.mantenimiento }}</td>
+                        <td>{{ m.coste }} €</td>
+                        <td>{{ m.proveedor }}</td>
+                        <td>{{ m.numfactura }}</td>
+                        <td>{{ m.tipomante }}</td>
+                        <td>{{ m.tipomante }}</td>
+                        <td><a mat-raised-button color="accent" class="btn">Editar</a></td>
+                        <!-- <td><a mat-raised-button color="accent" class="btn" (click)="verVehiculo( v.idvehiculo )" [routerLink]="['/salvarvehiculo', v.idvehiculo ]">Editar</a></td> -->
                         <td><a mat-raised-button color="warn" class="btn">Eliminar</a></td>
                         <!-- <td><a th:href="@{/empleado(idempleado=${r.idempleado})}" class="btn btn-warning">Ficha empleado</a></td> -->
 
@@ -68,7 +72,7 @@
     </table>
             <div class="row">
                 <div class="col">
-                    <a [routerLink]="['/salvarvehiculo']" routerLinkActive="router-link-active" mat-raised-button color="warn" class="btn mr-3 mb-5">Añadir Vehiculo</a>
+                    <a [routerLink]="['/salvarvehiculo']" routerLinkActive="router-link-active" mat-raised-button color="warn" class="btn mr-3 mb-5">Añadir Mantenimiento</a>
                     <a href="#" mat-raised-button color="warn" class="btn mr-3 mb-5">Informes</a>
                 </div>
                 <div class="col">

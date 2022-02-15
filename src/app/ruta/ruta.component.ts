@@ -28,11 +28,12 @@ export class RutaComponent implements OnInit {
 
   @Output() ContenedoresRuta:any[] = [];
   contenedoresRuta:any[] = [];
+  contenedorRuta:any[] = [];
 
   rt:string;
 
 
-  constructor( private router: Router, private _rutas: RutasService, private activatedRoute: ActivatedRoute, private _contenRutas: ContenedoresRutasService) {
+  constructor( private router: Router, private activatedRoute: ActivatedRoute, private _rutas: RutasService,  private _contenRutas: ContenedoresRutasService) {
     this.idx = this.activatedRoute.snapshot.params['id'];
     this._rutas.getRutas().subscribe( (data:any) => {
       //console.log(data);
@@ -50,7 +51,7 @@ export class RutaComponent implements OnInit {
 
         if(contenedor.rutas.idruta == this.idx ){
           this.contenedoresRuta.push(contenedor);
-          console.log(this.contenedoresRuta);
+          console.log("cONTENEDORES"+this.contenedoresRuta);
 
         }
       });
@@ -82,11 +83,9 @@ export class RutaComponent implements OnInit {
   }
 
   filtrarContenedores( idx:number ){
-   this._contenRutas.getContenedoresRuta().subscribe( (cr:any) => {
-    //console.log(cr);
-
-
-
+   this._contenRutas.getContenedorRuta( this.idx ).subscribe( (cr:any) => {
+     this.contenedorRuta=cr;
+    console.log(cr);
    });
   }
 

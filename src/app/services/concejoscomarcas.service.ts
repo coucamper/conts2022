@@ -11,33 +11,29 @@ import { PesajeModel } from '../models/pesajeModel';
 @Injectable({
   providedIn: 'root'
 })
-export class ZonasService {
+export class ConcejosComarcasService {
 
-  url = 'http://localhost:8093/comarca';
+  url = 'http://localhost:8093/concejoscomarca';
 
   constructor( private http: HttpClient, private activatedRoute:ActivatedRoute ) {
     console.log("servicio de zonas funcionando!");
   }
 
-  getZonas(){
+  getConcejosComarcas(){
     return this.http.get(`${ this.url }`)
     .pipe( map( (data:any) => {
+      console.log("Comarca? "+data)
       return data;
     }));
   }
 
-  getComarcas(){
-    return this.http.get(`${ this.url }`);
-  }
 
-
-  getZona( idx:number ){
+  getConcejoComarca( idx:number ){
+    console.log("ConcejosComarca"+this.http.get(`${ this.url }/${ idx }`));
     return this.http.get(`${ this.url }/${ idx }`);
   }
 
 
-  deletePesaje( idx:number ){
-    return this.http.delete(`${ this.url }/${ idx }`);
-  }
+
 
 }

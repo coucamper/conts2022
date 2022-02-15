@@ -35,7 +35,7 @@
                         <th>DENOMINACION</th>
                         <th>FECHA IMPLANTACION</th>
                         <th>PERIODICIDAD</th>
-                        <th>RUTA</th>
+                        <!-- <th>RUTA</th> -->
                         <th>EDITAR</th>
                         <th>ELIMINAR</th>
                     </tr>
@@ -46,7 +46,7 @@
                         <td>{{ ruta.denom }}</td>
                         <td>{{ ruta.fechaini}}</td>
                         <td>{{ ruta.periodo }}</td>
-                        <td><a mat-raised-button class="btn">Ruta</a></td>
+                        <!-- <td><a mat-raised-button class="btn">Ruta</a></td> -->
                         <td><a mat-raised-button color="accent" class="btn" [routerLink]="['/salvarruta', ruta.idruta ]">Editar</a></td>
                         <td><a mat-raised-button color="warn" class="btn">Eliminar</a></td>
                         <!-- <td><a th:href="@{/empleado(idempleado=${r.idempleado})}" class="btn btn-warning">Ficha empleado</a></td> -->
@@ -55,11 +55,11 @@
     </table>
 
 
-    <div *ngIf="contenedoresRuta.length < 1">
+    <div *ngIf="contenedorRuta.length < 1">
 
       <h2>No existen contenedores asociados a esta ruta </h2>
     </div>
-    <div *ngIf="contenedoresRuta.length > 0">
+    <div *ngIf="contenedorRuta.length > 0">
       <h3 class="clean pl-2 pt-4" >Contenedores incluidos en la ruta </h3>
       <table class="table bordbot table-striped">
         <thead class="thead-dark">
@@ -74,12 +74,12 @@
             </tr>
         </thead>
         <tbody class="table-striped mb-5">
-            <tr *ngFor="let cr of contenedoresRuta">
-                <td>{{ cr.rutas.idruta }}</td>
-                <td>{{ cr.contenedores.denom }}</td>
-                <td>{{ cr.contenedores.ubicacion }}</td>
-                <td>{{ cr.contenedores.fechaimplantacion }}</td>
-                <td>{{ cr.contenedores.coordenadas }}</td>
+            <tr *ngFor="let cr of contenedorRuta">
+                <td>{{ cr.contenedor.idcontenedor}}</td>
+                <td>{{ cr.contenedor.ubicacion }}</td>
+                <td>{{ cr.contenedor.ubicacion }}</td>
+                <td>{{ cr.contenedor.fechaimplantacion }}</td>
+                <td>{{ cr.contenedor.coordenadas }}</td>
                 <td><a mat-raised-button color="accent" class="btn" [routerLink]="['/salvarruta', ruta.idruta ]">Editar</a></td>
                 <td><a mat-raised-button color="warn" class="btn">Eliminar</a></td>
                 <!-- <td><a th:href="@{/empleado(idempleado=${r.idempleado})}" class="btn btn-warning">Ficha empleado</a></td> -->
@@ -92,7 +92,8 @@
 <div class="row">
   <div class="col">
       <a routerLinkActive="router-link-active" mat-raised-button color="warn" class="btn mr-3 mb-5" [routerLink]="['/rutas']">Volver</a>
-      <a href="#" mat-raised-button color="warn" class="btn mr-3 mb-5" [routerLink]="['/insertarcontenedor', idx]">Insertar contenedor</a>
+      <a href="#" mat-raised-button color="warn" class="btn mr-3 mb-5" [routerLink]="['/asociarcontenedor', idx]">Insertar contenedor</a>
+      <!-- <a href="#" mat-raised-button color="warn" class="btn mr-3 mb-5" [routerLink]="['/asociarcontenedor', idx]">Insertar contenedor</a> -->
       <a href="#" mat-raised-button color="warn" class="btn mr-3 mb-5">Informes</a>
   </div>
   <div class="col">

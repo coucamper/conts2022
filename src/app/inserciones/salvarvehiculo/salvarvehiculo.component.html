@@ -26,22 +26,8 @@
   <br>
   <small *ngIf="fechacompraNoValida" class="text-danger ml-3">Insertar fecha de compra</small>
 
-
-  <label for="aseguradora">Aseguradora: </label>
-  <input type="text" name="aseguradora" id="aseguradora" formControlName="aseguradora" [class.is-invalid]="aseguradoraNoValida" class="form-control" [(ngModel)]="Vehiculo.aseguradora">
-    <br>
-    <small *ngIf="modeloNoValida" class="text-danger ml-3">Mínimo 5 carácteres</small>
-
-
-    <label for="poliza">Poliza: </label>
-  <input type="text" name="poliza" id="poliza" formControlName="poliza" [class.is-invalid]="polizaNoValida" class="form-control" [(ngModel)]="Vehiculo.poliza">
-    <br>
-    <small *ngIf="modeloNoValida" class="text-danger ml-3">Mínimo 5 carácteres</small>
-
-
-
   <div class="ml-3 mt-3">
-      <button type="submit" value="Salvar Vehículo" mat-raised-button color="accent" class="btn submit mr-3" [routerLink]="['/vehiculos']" (click)="guardarVehiculo(); refresh()">Salvar Vehículo</button>
+      <button type="submit" value="Salvar Vehículo" mat-raised-button color="accent" class="btn submit mr-3" [routerLink]="['/vehiculos']" (click)="guardarVehiculo()">Salvar Vehículo</button>
   </div>
 
 </form>

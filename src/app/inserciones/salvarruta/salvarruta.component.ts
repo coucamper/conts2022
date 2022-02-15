@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ComarcaModel } from 'src/app/models/comarcaModel';
 import { rutaModel } from 'src/app/models/rutaModel';
+import { ComarcaService } from 'src/app/services/comarca.service';
+import { ComarcasRutaService } from 'src/app/services/comarcasruta.service';
+import { ConcejosComarcasService } from 'src/app/services/concejoscomarcas.service';
 import { RutasService } from 'src/app/services/rutas.service';
 import { ZonasService } from 'src/app/services/zonas.service';
+
 
 
 @Component({
@@ -25,10 +30,12 @@ export class SalvarrutaComponent implements OnInit {
   //modelo para recuperar datos de empleado de la DB
   r:rutaModel;
 
+
+
   //Booleano para comprobar si el id de empleado existe en la DB
   idExiste:boolean = false;
 
-
+  idcom:number;
 
   // Mock para cargar nombres de zonas en un select (deberá cambiarse cuando se cree la tabla real en el backend)
 
@@ -50,30 +57,40 @@ export class SalvarrutaComponent implements OnInit {
 
   zonas:any[] = [];
   localidades:any[] = [];
+  comarcas:any[] = [];
+  concejos:any[] = [];
+  concejosComarca:any[] = [];
+
+
 
   constructor(private router: Router,
               private fB: FormBuilder,
               private activatedRoute: ActivatedRoute,
-              private _rutas: RutasService, private _zonas:ZonasService ) {
+              private _rutas: RutasService,
+              private _zonas:ZonasService,
+              private _concejos: ConcejosComarcasService,
+              private _comarcas:ComarcaService,
+              private  _comarca: ComarcaModel ) {
               this.idx = this.activatedRoute.snapshot.params['id'];
 
-      this.cargarZonas();
+
+      //this.cargarZonas();
       this.crearFormulario();
       this.cambiaTitulo();
       this.obtenerRuta( this.idx );
       this.cargarDatos( this.ruta );
+      this.cargarComarcas();
+      this.cargarConcejos();
+      this.cargarConcejosComarca();
+
      // this.guardarRuta( this.formRuta );
 
-      this._rutas.getRuta( this.idx ).subscribe( (dato:any) => {
-        this.ruta = dato;
-        return this.ruta;
-      });
+      // this._rutas.getRuta( this.idx ).subscribe( (dato:any) => {
+      //   this.ruta = dato;
+      //   return this.ruta;
+      // });
 
 
-      this._zonas.getZona(this.idx).subscribe((data:any) => {
-        this.zonas = data;
-        return this.zonas;
-      });
 
     }
 
@@ -81,12 +98,43 @@ export class SalvarrutaComponent implements OnInit {
     this.idx = this.activatedRoute.snapshot.params['id'];
   }
 
-  cargarZonas(){
-    return this._zonas.getZonas().subscribe( (zons:any) => {
-      this.zonas = zons;
-      //this.localidades = ruts;
+/**
+ * cargarComarcas
+ * Devuelve un listado de todas las comarcas
+ */
+  cargarComarcas(){
+    this._comarcas.getComarcas().subscribe((comarcas:any) =>{
+      this.comarcas=comarcas;
+      console.log(this.comarcas);
+      return this.comarcas;
     });
   }
+
+
+
+
+
+  cargarConcejos(){
+    this._concejos.getConcejosComarcas().subscribe((concejos:any) => {
+      this.concejos=concejos;
+      console.log(this.concejos);
+    });
+  }
+
+
+  cargarConcejosComarca(){
+
+    var x = Number(this.formRuta.get('zona'));
+    console.log("Putiña! "+x.valueOf())
+    this._concejos.getConcejoComarca(x).subscribe( (c:any) => {
+      console.log("El id de la comarca es: "+this._comarca.idcomarca);
+      this.idcom=c;
+      console.log(this.idcom.valueOf)
+    });
+  }
+
+
+
 
   get idrutaNoValida(){
     return this.formRuta.get('idruta')?.invalid && this.formRuta.get('idruta')?.touched;
@@ -143,10 +191,10 @@ export class SalvarrutaComponent implements OnInit {
       localidad: `${ this.ruta.localidad }`,
       fechaini: `${ this.ruta.fechaini }`,
       periodo: `${ this.ruta.periodo }`,
-     // ruta: `${ this.ruta.ruta }`
     });
 
   }
+
 
 
   borrarRuta( id:number ){
@@ -198,6 +246,15 @@ export class SalvarrutaComponent implements OnInit {
 
     return this.ruta;
   }
+
+
+
+
+
+
+
+
+
 
 
 }

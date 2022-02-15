@@ -26,6 +26,7 @@ export class rutaModel {
   fechaini: string;
   periodo: string;
   ruta: string;
+  ruta_idzona: string;
 
 
 }
