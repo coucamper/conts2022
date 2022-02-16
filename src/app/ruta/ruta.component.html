@@ -1,9 +1,9 @@
 
-	<div class="container-fluid">
+	<div class="container-fluid" *ngIf="ruta.idruta">
 
     <app-navegacion></app-navegacion>
 
-  <div class="col-lg-12 col-md-12 col-sm-12 mb-5">
+  <div class="col-lg-12 col-md-12 col-sm-12 mb-5" *ngIf="contenedoresRuta">
 
 
                 <nav class="navbar navbar-expand-lg navbar-light bg-light fsmall">
@@ -16,7 +16,7 @@
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav">
                             <a class="nav-link fsmall" th:href="@{/contenedores}">> Contenedores incluidos</a>
-                            <a class="nav-link fsmall" href="#">> Incidencias en ruta</a>
+                            <a class="nav-link fsmall" href="#">> Incidencias en ruta.idruta</a>
                             <a class="nav-link fsmall" href="#">> Avisos <i class="fas fa-envelope red"></i></a>
 
                         </div>
@@ -35,7 +35,6 @@
                         <th>DENOMINACION</th>
                         <th>FECHA IMPLANTACION</th>
                         <th>PERIODICIDAD</th>
-                        <!-- <th>RUTA</th> -->
                         <th>EDITAR</th>
                         <th>ELIMINAR</th>
                     </tr>
@@ -49,17 +48,16 @@
                         <!-- <td><a mat-raised-button class="btn">Ruta</a></td> -->
                         <td><a mat-raised-button color="accent" class="btn" [routerLink]="['/salvarruta', ruta.idruta ]">Editar</a></td>
                         <td><a mat-raised-button color="warn" class="btn">Eliminar</a></td>
-                        <!-- <td><a th:href="@{/empleado(idempleado=${r.idempleado})}" class="btn btn-warning">Ficha empleado</a></td> -->
                     </tr>
                 </tbody>
     </table>
 
 
-    <div *ngIf="contenedorRuta.length < 1">
+    <div *ngIf="contenedoresRuta.length < 1">
 
       <h2>No existen contenedores asociados a esta ruta </h2>
     </div>
-    <div *ngIf="contenedorRuta.length > 0">
+    <div *ngIf="contenedoresRuta.length > 0">
       <h3 class="clean pl-2 pt-4" >Contenedores incluidos en la ruta </h3>
       <table class="table bordbot table-striped">
         <thead class="thead-dark">
@@ -74,7 +72,7 @@
             </tr>
         </thead>
         <tbody class="table-striped mb-5">
-            <tr *ngFor="let cr of contenedorRuta">
+            <tr *ngFor="let cr of contenedoresRuta">
                 <td>{{ cr.contenedor.idcontenedor}}</td>
                 <td>{{ cr.contenedor.ubicacion }}</td>
                 <td>{{ cr.contenedor.ubicacion }}</td>

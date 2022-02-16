@@ -17,6 +17,7 @@ import { SalvarrutaComponent } from "./inserciones/salvarruta/salvarruta.compone
 import { SalvarvehiculoComponent } from "./inserciones/salvarvehiculo/salvarvehiculo.component";
 import { LlenadosComponent } from "./llenados/llenados.component";
 import { LocalidadesComponent } from "./localidades/localidades.component";
+import { MantenimientoComponent } from "./mantenimiento/mantenimiento.component";
 import { MantenimientosComponent } from "./mantenimientos/mantenimientos.component";
 import { PanelComponent } from "./panel/panel.component";
 import { PesajeComponent } from "./pesaje/pesaje.component";
@@ -36,6 +37,7 @@ import { PeticionesComponent } from "./vistaEmpleado/peticiones/peticiones.compo
 import { RutasjornadaComponent } from "./vistaEmpleado/rutasjornada/rutasjornada.component";
 import { VacacionesComponent } from "./vistaEmpleado/vacaciones/vacaciones.component";
 import { ZonasComponent } from "./zonas/zonas.component";
+
 
 
 
@@ -67,6 +69,8 @@ export const APP_ROUTES: Routes = [
     { path: 'localidades', component: LocalidadesComponent },
     { path: 'vehiculos', component: VehiculosComponent},
     { path: 'mantenimientos', component: MantenimientosComponent},
+    { path: 'mantenimiento', component: MantenimientoComponent},
+    { path: 'mantenimiento/:id', component: MantenimientoComponent},
     { path: 'salvarvehiculo', component: SalvarvehiculoComponent},
     { path: 'salvarvehiculo/:id', component: SalvarvehiculoComponent},
     { path: 'contenedores', component: ContenedoresComponent },

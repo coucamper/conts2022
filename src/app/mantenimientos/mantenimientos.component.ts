@@ -12,19 +12,38 @@ export class MantenimientosComponent implements OnInit {
 
   idx:number;
   mantenimientos:any[] = [];
+  mantenVehiculo:any [] = [];
 
   constructor(private route: Router,
               private activatedRoute: ActivatedRoute,
               private _mantenimientos: MantenimientosService) {
-
-                this._mantenimientos.getMantenimientos().subscribe((mantenimientos:any) => {
-                  this.mantenimientos=mantenimientos;
-                  console.log(this.mantenimientos)
-                });
-
+              this.idx = this.activatedRoute.snapshot.params['id'];
+              this.verMantenimientos();
   }
 
 
+
+
+
+  verMantenimientos(){
+    this._mantenimientos.getMantenimientos().subscribe((mantenimientos:any) => {
+      this.mantenimientos=mantenimientos;
+      console.log(this.idx)
+      for(let m in this.mantenimientos){
+        console.log(this.mantenimientos[m]);
+      }
+    });
+  }
+
+
+  verMantenVehiculo(){
+    this._mantenimientos.getMantenimiento( this.idx ).subscribe((mantenimiento:any) => {
+      this.mantenVehiculo=mantenimiento;
+      console.log(this.idx)
+      console.log(this.mantenVehiculo)
+    });
+
+  }
 
   ngOnInit(): void {
   }

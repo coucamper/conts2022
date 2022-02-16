@@ -86,6 +86,7 @@ import { ContenedoresConductorComponent } from './vistaEmpleado/contenedores/con
 import { VacacionesequipoComponent } from './vacacionesequipo/vacacionesequipo.component';
 import { AsociarcontenedorComponent } from './inserciones/asociarcontenedor/asociarcontenedor.component';
 import { MantenimientosComponent } from './mantenimientos/mantenimientos.component';
+import { MantenimientoComponent } from './mantenimiento/mantenimiento.component';
 import { ZonasComponent } from './zonas/zonas.component';
 import { SalvarempleadoComponent } from './inserciones/salvarempleado/salvarempleado.component';
 import { VacacionesComponent } from './vistaEmpleado/vacaciones/vacaciones.component';
@@ -199,7 +200,8 @@ import { SharedComponent } from './shared/shared/shared.component';
     MantenimientosComponent,
     ZonasComponent,
     LocalidadesComponent,
-    SharedComponent
+    SharedComponent,
+    MantenimientoComponent
   ],
   imports: [
     BrowserModule,

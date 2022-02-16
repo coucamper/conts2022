@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VehiculoModel } from '../models/vehiculoModel';
+import { MantenimientosService } from '../services/mantenimientos.service';
 import { VehiculosService } from '../services/vehiculos.service';
 
 
@@ -23,14 +24,15 @@ export class VehiculosComponent implements OnInit {
   result:any[]=[];
   seleccionado:string;
   selected:string;
-
+  mantenVehiculo:any [] = [];
 
 
   div1:boolean=false;
 
   constructor( private route: Router,
                private activatedRoute: ActivatedRoute,
-               private _vehiculos: VehiculosService ) {
+               private _vehiculos: VehiculosService,
+               private _mantenimientos: MantenimientosService ) {
                 this._vehiculos.getVehiculos().subscribe( (datos:any) => {
 
                   this.vehiculos = datos;
@@ -81,6 +83,15 @@ export class VehiculosComponent implements OnInit {
 
   onSelect(){
     this.vehiculosF = this.vehiculos.filter( v => v.matricula == this.seleccionado || v.aseguradora == this.selected );
+  }
+
+  verMantenVehiculo( idx:number ){
+    this._mantenimientos.getMantenimiento( this.idx ).subscribe((mantenimiento:any) => {
+      this.mantenVehiculo=mantenimiento;
+      console.log(this.idx)
+      console.log(this.mantenVehiculo)
+    });
+
   }
 
 

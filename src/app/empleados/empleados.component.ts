@@ -110,8 +110,6 @@ export class EmpleadosComponent implements OnInit {
 
                 this.crearForm();
                 this.div1Function();
-                this.onSelect();
-                this.onSelectCat();
                 this.removeFilter();
 
   }
@@ -139,14 +137,7 @@ export class EmpleadosComponent implements OnInit {
     });
  }
 
- onSelect(){
-  this.empleadosF = this.empleados.filter( e => e.nomemp == this.seleccionado || e.categoria == this.selected );
- }
 
- onSelectCat(){
-  this.categoriasF = this.empleados.filter( c => c.categoria == this.selected );
-  console.log(this.categoriasF);
- }
 
  removeFilter(){
    this.seleccionado = "";

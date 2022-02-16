@@ -48,7 +48,7 @@ export class RutasComponent implements OnInit {
 
       this.getZonas();
       this._rutas.getRutas().subscribe( data => {
-      console.log(data);
+      //console.log(data);
       this.rutas = data;
       this.rutasF = this.rutas;
 
@@ -60,7 +60,7 @@ export class RutasComponent implements OnInit {
 
   verRuta( idx:number ){
     this._rutas.getRuta( this.idx ).subscribe( (res:any) => {
-      console.log( res);
+      //console.log( res);
       this.ruta = res;
     })
   }
@@ -68,7 +68,7 @@ export class RutasComponent implements OnInit {
   getZona(){
     this._comarcasRuta.getComarcaRuta( this.idx ).subscribe( (comarcaRuta:any) =>{
       this.zona=comarcaRuta;
-      console.log("Zona: "+this.zona);
+      //console.log("Zona: "+this.zona);
     });
   }
 
@@ -76,17 +76,12 @@ export class RutasComponent implements OnInit {
   getZonas(){
     return this._comarcasRuta.getComarcasRuta().subscribe( (zs:any) => {
       this.zonas = zs;
-
-      for(let x in this.zonas){
-        console.log(this.zonas[x])
-      }
-
     });
   }
 
   borrarRuta( ){
     return this._rutas.deleteRuta( this.idx ).subscribe( (dato:any) =>{
-      console.log("Ruta a borrar = " + dato.denom );
+      //console.log("Ruta a borrar = " + dato.denom );
     });
   }
 
