@@ -43,11 +43,13 @@ export class ContenedoresRutasService {
   }
 
 
+  // addContenedorRuta( idx : number, contenedor : ContenedoresRutasModel){
+  //   return this.http.post(`http://localhost:8093/addcontenedorruta/${idx}`, contenedor );
+  // }
 
-  addContenedorRuta( idx : number, contenedor : ContenedoresRutasModel){
-    return this.http.post(`http://localhost:8093/addcontenedorruta/${idx}`, contenedor );
+  asociarContenedorARuta( idruta:number, idconten:number, contenruta:ContenedoresRutasModel ){
+    return this.http.post(`http://localhost:8093/contenedoraruta/${idruta}/${idconten}`, contenruta);
   }
-
 
 
 

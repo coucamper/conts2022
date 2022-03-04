@@ -11,7 +11,8 @@ import { NgModule } from "@angular/core";
 
 export class ContenedorVOModule {
   idcontenedor: number;
-  localidad: string;
+  zona: number;
+  localidad: number;
   barrio: string;
   denom: string;
   ubicacion: string;

@@ -14,6 +14,7 @@ import { PesajeModel } from '../models/pesajeModel';
 export class ConcejosComarcasService {
 
   url = 'http://localhost:8093/concejoscomarca';
+  url2 = 'http://localhost:8093/concejosporcomarca';
 
   constructor( private http: HttpClient, private activatedRoute:ActivatedRoute ) {
     console.log("servicio de zonas funcionando!");
@@ -33,6 +34,9 @@ export class ConcejosComarcasService {
     return this.http.get(`${ this.url }/${ idx }`);
   }
 
+  getConcejosPorComarca( idcomarca:number){
+    return this.http.get(`${ this.url2 }/${ idcomarca }`);
+  }
 
 
 

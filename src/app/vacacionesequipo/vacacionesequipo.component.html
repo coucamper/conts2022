@@ -60,8 +60,8 @@
           <td>{{ v.diasrestantes }}</td>
           <td>{{ v.anyoanterior }}</td>
           <td>{{ v.pendientesanyoanterior }}</td>
-          <td><a class="btn" mat-raised-button color="accent">EDITAR</a></td>
-          <td><a class="btn" mat-raised-button color="warn">ELIMINAR</a></td>
+          <td><a class="btn" mat-raised-button color="accent">Editar</a></td>
+          <td><a class="btn" mat-raised-button color="warn">Eliminar</a></td>
         </tr>
       </tbody>
 
@@ -79,7 +79,8 @@
 
     <div class="row">
       <div class="col">
-        <a routerLinkActive="active"  mat-raised-button color="warn" class="btn mr-3">Añadir vacaciones</a>
+        <a routerLinkActive="active"  mat-raised-button color="warn" class="btn mr-3" [routerLink]="['/empleados']">Volver</a>
+        <a routerLinkActive="active"  mat-raised-button color="warn" class="btn mr-3" [routerLink]="['/salvarvacaciones']">Añadir vacaciones</a>
         <a mat-raised-button color="warn" class="btn">Informes</a>
       </div>
       <div class="col">

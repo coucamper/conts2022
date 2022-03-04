@@ -16,7 +16,9 @@
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav">
                             <a class="nav-link fsmall" [routerLink]="['/mantenimientos']">> Mantenimientos </a>
-                            <a class="nav-link fsmall" href="#">> Incidencias <i class="fas fa-envelope red"></i></a>
+                            <a class="nav-link fsmall" [routerLink]="['/multas']">> Multas </a>
+                            <a class="nav-link fsmall" [routerLink]="['/polizas']">> Polizas </a>
+                            <!-- <a class="nav-link fsmall" href="#">> Incidencias <i class="fas fa-envelope red"></i></a> -->
 
                         </div>
                     </div>
@@ -55,8 +57,9 @@
                         <td>{{ v.modelo }}</td>
                         <td>{{ v.matricula  }}</td>
                         <td>{{ v.fechacompra  }}</td>
-                        <td><a mat-raised-button class="btn">Poliza</a></td>
-                        <td><a mat-raised-button class="btn">Multas</a></td>
+                        <td><a mat-raised-button class="btn"
+                          [routerLink]="['/poliza', v.idvehiculo ]" >Poliza</a></td>
+                        <td><a [routerLink]="['/multav', v.idvehiculo ]" mat-raised-button class="btn">Multas</a></td>
                         <td><a mat-raised-button class="btn" (click)="verMantenVehiculo( v.idvehiculo )"
                           [routerLink]="['/mantenimiento', v.idvehiculo ]">Mantenimientos</a></td>
                         <td><a mat-raised-button color="accent" class="btn" (click)="verVehiculo( v.idvehiculo )" [routerLink]="['/salvarvehiculo', v.idvehiculo ]">Editar</a></td>

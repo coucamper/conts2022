@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ContenedorVOModule } from 'src/app/models/contenedor-vo/contenedorModel';
+import { ComarcaService } from 'src/app/services/comarca.service';
+import { ConcejosComarcasService } from 'src/app/services/concejoscomarcas.service';
 import { ContenedoresService } from 'src/app/services/contenedores.service';
+import { ZonasService } from 'src/app/services/zonas.service';
+
 
 
 @Component({
@@ -16,27 +20,34 @@ export class SalvarcontenedorComponent implements OnInit {
 
   // Variable para guardar el id de navegación
   idx: number;
-
+  idExiste: boolean = false;
+  idcomarca:number;
+  localidades:any[] = [];
+  zonas:any[] = [];
+  control:any;
   // modelo para salvar los datos de contenedor en la DB
-  contenedor: ContenedorVOModule = new ContenedorVOModule();
-
-  // modelo para traer los datos del contenedor
-  conten: ContenedorVOModule;
+  contenedor: ContenedorVOModule = new ContenedorVOModule(); // El contenedor creado para persistirlo
+  conten: ContenedorVOModule; // El contenedor devuelto
 
   contenedores: any[] = [];
   //Booleano para comprobar si el id de empleado existe en la DB
-  idExiste: boolean = false;
+
+
 
   constructor(
     private router: Router,
     private fB: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private _contenedores: ContenedoresService
+    private _contenedores: ContenedoresService,
+    private _localidades: ConcejosComarcasService,
+    private _comarcas: ComarcaService
   ) {
     this.idx = this.activatedRoute.snapshot.params['id'];
 
     this.crearFormulario();
     this.cambiaTitulo();
+    this.traerZonas();
+    this.traerLocalidadesZonas(this.idcomarca);
 
     //this.cargarDatos( this.ruta );
     // this.guardarRuta( this.formRuta );
@@ -48,33 +59,62 @@ export class SalvarcontenedorComponent implements OnInit {
     });
   }
 
+
+
+  traerLocalidadesZonas( idcom:number ){
+    this._localidades.getConcejosPorComarca( this.idcomarca ).subscribe((concejos:any) =>{
+      this.localidades=concejos;
+      console.log(this.localidades);
+    });
+  }
+
+
+  traerZonas(){
+    this._comarcas.getComarcas().subscribe((coms:any) =>{
+      this.zonas=coms;
+      console.log(this.zonas);
+    });
+  }
+
+
   ngOnInit(): void {
     this.idx = this.activatedRoute.snapshot.params['id'];
   }
 
-  // get idrutaNoValida(){
-  //   return this.formContenedor.get('idruta')?.invalid && this.formContenedor.get('idruta')?.touched;
-  // }
+  get zonaNoValida(){
+    return this.formContenedor.get('zona')?.invalid && this.formContenedor.get('zona')?.touched;
+  }
 
-  // get denomNoValida(){
-  //   return this.formContenedor.get('denom')?.invalid && this.formContenedor.get('denom')?.touched;
-  // }
+  get localidadNoValida(){
+    return this.formContenedor.get('localidad')?.invalid && this.formContenedor.get('localidad')?.touched;
+  }
 
-  // get fechainiNoValida(){
-  //   return this.formContenedor.get('fechaini')?.invalid && this.formContenedor.get('fechaini')?.touched;
-  // }
 
-  // get periodoNoValida(){
-  //   return this.formContenedor.get('periodo')?.invalid && this.formContenedor.get('periodo')?.touched;
-  // }
+  get denomNoValida(){
+    return this.formContenedor.get('denom')?.invalid && this.formContenedor.get('denom')?.touched;
+  }
 
-  // get rutaNoValida(){
-  //   return this.formContenedor.get('ruta')?.invalid && this.formContenedor.get('ruta')?.touched;
-  // }
+  get barrioNoValida(){
+    return this.formContenedor.get('barrio')?.invalid && this.formContenedor.get('barrio')?.touched;
+  }
 
-  // get zonaNoValida(){
-  //   return this.formContenedor.get('zona')?.invalid && this.formContenedor.get('zona')?.touched;
-  // }
+  get ubicacionNoValida(){
+    return this.formContenedor.get('ubicacion')?.invalid && this.formContenedor.get('ubicacion')?.touched;
+  }
+
+  get coordNoValida(){
+    return this.formContenedor.get('coordenadas')?.invalid && this.formContenedor.get('coordenadas')?.touched;
+  }
+
+  get mapaNoValida(){
+    return this.formContenedor.get('mapa')?.invalid && this.formContenedor.get('mapa')?.touched;
+  }
+
+  get fechaNoValida(){
+    return this.formContenedor.get('fechaimplantacion')?.invalid && this.formContenedor.get('fechaimplantacion')?.touched;
+  }
+
+
 
   cambiaTitulo() {
     this.idExiste = this.activatedRoute.snapshot.params['id'];
@@ -89,13 +129,14 @@ export class SalvarcontenedorComponent implements OnInit {
   crearFormulario() {
     this.formContenedor = new FormGroup({
       idcontenedor: new FormControl(),
-      denom: new FormControl(),
-      barrio: new FormControl(),
+      zona: new FormControl(),
       localidad: new FormControl(),
+      barrio: new FormControl(),
+      denom: new FormControl(),
       ubicacion: new FormControl(),
       coordenadas: new FormControl(),
-      fechaimplantacion: new FormControl(),
       mapa: new FormControl(),
+      fechaimplantacion: new FormControl()
     });
   }
 
@@ -113,11 +154,22 @@ export class SalvarcontenedorComponent implements OnInit {
     }
   }
 
+
+  onChange(newValue:any) {
+
+    this.control = this.formContenedor.controls['denom'].value;
+    this.control = newValue;  // don't forget to update the model here
+    this.idcomarca=Number(newValue.charAt(0));
+    this.traerLocalidadesZonas( this.idcomarca );
+    console.log(this.idcomarca);
+}
+
+
   guardarContenedor() {
     this.validarForm(this.formContenedor.value);
 
-    if (this.conten.idcontenedor) {
-      this.contenedor = this.formContenedor.value;
+    if (this.contenedor.idcontenedor) {
+      this.conten = this.formContenedor.value;
       return this._contenedores
         .putContenedor(this.idx, this.contenedor)
         .subscribe();
@@ -125,7 +177,7 @@ export class SalvarcontenedorComponent implements OnInit {
       // Como el id de la ruta no existe, le paso un objeto ruta
       this._contenedores.postContenedor(this.contenedor).subscribe();
 
-      return this.contenedor;
+      return this.conten;
     }
   }
 

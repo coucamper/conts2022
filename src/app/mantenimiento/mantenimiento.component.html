@@ -1,5 +1,5 @@
 
-	<div class="container-fluid">
+	<div class="container-fluid" *ngIf="vehiculo">
 
     <app-navegacion></app-navegacion>
 
@@ -26,20 +26,26 @@
 
     </div>
 
+
+
   <div class="col-lg-12 col-md-12 col-sm-12">
     <h2 class="pl-2 pt-4">Listado de mantenimientos del vehiculo: {{vehiculo.marca}} {{vehiculo.modelo}} {{vehiculo.matricula}}</h2>
 
 
+    <div class="row" *ngIf="!idExiste">
+      <h2 class="pl-2 pt-4">Este vehículo no tiene mantenimientos registrados</h2>
+    </div>
 
 
-    <table class="table bordbot table-striped">
+    <table class="table bordbot table-striped" *ngIf="idExiste">
                 <thead class="thead-dark">
                     <tr>
                         <th>ID</th>
                         <th>FECHA</th>
+                        <th>ID VEHICULO</th>
                         <th>VEHICULO</th>
-                        <th>MATRICULA</th>
                         <th>MODELO</th>
+                        <th>MATRICULA</th>
                         <th>DESCRIPCIÓN</th>
                         <th>COSTE</th>
                         <th>PROVEEDOR</th>
@@ -50,18 +56,19 @@
                     </tr>
                 </thead>
                 <tbody class="table-striped">
-                    <tr *ngFor="let m of manten">
-                        <td>{{ m.idmantenimiento }}</td>
-                        <td>{{ m.fechamantenimiento }}</td>
-                        <td>{{ m.idvehiculo.modelo}}</td>
-                        <td>{{ m.idvehiculo.matricula}}</td>
-                        <td>{{ m.mantenimiento }}</td>
-                        <td>{{ m.coste }} €</td>
-                        <td>{{ m.proveedor }}</td>
-                        <td>{{ m.numfactura }}</td>
-                        <td>{{ m.tipomante }}</td>
-                        <td>{{ m.tipomante }}</td>
-                        <td><a mat-raised-button color="accent" class="btn">Editar</a></td>
+                    <tr *ngFor="let mantenimiento of mantenVehiculo">
+                        <td>{{ mantenimiento.idmantenimiento }}</td>
+                        <td>{{ mantenimiento.fechamantenimiento }}</td>
+                        <td>{{ vehiculo.idvehiculo}}</td>
+                        <td>{{ vehiculo.marca}}</td>
+                        <td>{{ vehiculo.modelo}}</td>
+                        <td>{{ vehiculo.matricula}}</td>
+                        <td>{{ mantenimiento.mantenimiento }}</td>
+                        <td>{{ mantenimiento.coste }} €</td>
+                        <td>{{ mantenimiento.proveedor }}</td>
+                        <td>{{ mantenimiento.numfactura }}</td>
+                        <td>{{ mantenimiento.tipomante }}</td>
+                        <td><a [routerLink]="['/salvarmantenimiento', mantenimiento.idvehiculo.idvehiculo]" mat-raised-button color="accent" class="btn">Editar</a></td>
                         <!-- <td><a mat-raised-button color="accent" class="btn" (click)="verVehiculo( v.idvehiculo )" [routerLink]="['/salvarvehiculo', v.idvehiculo ]">Editar</a></td> -->
                         <td><a mat-raised-button color="warn" class="btn">Eliminar</a></td>
                         <!-- <td><a th:href="@{/empleado(idempleado=${r.idempleado})}" class="btn btn-warning">Ficha empleado</a></td> -->
@@ -72,7 +79,8 @@
     </table>
             <div class="row">
                 <div class="col">
-                    <a routerLinkActive="router-link-active" mat-raised-button color="warn" class="btn mr-3 mb-5">Añadir Mantenimiento</a>
+                    <a routerLinkActive="router-link-active" mat-raised-button color="warn" class="btn mr-3 mb-5" [routerLink]="['/vehiculos']">Volver</a>
+                    <a [routerLink]="['/salvarmantenimientoid', idx]" routerLinkActive="router-link-active" mat-raised-button color="warn" class="btn mr-3 mb-5">Añadir Mantenimiento</a>
                     <a href="#" mat-raised-button color="warn" class="btn mr-3 mb-5">Informes</a>
                 </div>
                 <div class="col">
@@ -81,6 +89,9 @@
                 </div>
             </div>
   </div>
+  <!-- <div class="col-lg-12 col-md-12 col-sm-12" *ngIf="!idExiste">
+    <h2 class="pl-2 pt-4">Este vehículo no tiene mantenimientos registrados</h2>
+  </div> -->
 </div>
 
 

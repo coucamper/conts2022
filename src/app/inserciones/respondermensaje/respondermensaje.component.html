@@ -1,0 +1,38 @@
+<div class="container-fluid">
+  <app-navegacion></app-navegacion>
+  <div class="col-lg-12">
+    <h2 class="pl-2 pt-4">Responder mensaje</h2>
+      <!-- <h2 class="pl-2 pt-4" *ngIf="!idExiste">Insertar nuevo contenedor</h2> -->
+      <!-- <h2 class="pl-2 pt-4" *ngIf="idExiste">Actualizar datos de contenedor - {{ conten.denom }} ({{ conten.barrio}} - {{ conten.localidad }}) </h2> -->
+
+      <form [formGroup]="formRespuesta" #f="ngForm" (ngSubmit)="guardarRespuesta()">
+        <h3 for="contenido" class="ml-3">Redactar respuesta:</h3>
+        <textarea [(ngModel)]="mensaje.contenido" formControlName="contenido" name="contenido" id="contenido" rows="10" placeholder="Redactar respuesta" class="ml-3 especial" >
+
+        </textarea>
+
+        <h4 class="ml-3 mt-3 under">Mensaje original: </h4>
+        <div class="ml-2" *ngIf="mensa">
+
+          <h3 class="ml-2"><strong>Asunto: </strong>{{ mensa.asunto }}</h3>
+          <h3 class="ml-2"><strong>Remitente: </strong>{{ remitente.nomemp }} {{ remitente.ape1emp }}</h3>
+          <p class="ml-2 mb-5">{{ mensa.contenido }}</p>
+
+
+
+          <!-- <small *ngIf="idrutaNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small> -->
+        </div>
+
+        <div class="ml-3 mt-3">
+          <button type="button" [routerLink]="['/panel']" mat-raised-button color="accent" class="btn submit mr-3" (click)="guardarRespuesta()">Responder mensaje</button>
+        </div>
+
+      </form>
+
+
+
+  </div>
+  <div class="col-lg-12 ml-3 mt-3">
+    <a [routerLink]="['/panel']" routerLinkActive="router-link-active" mat-raised-button color="warn"
+      class="btn mb-5">Volver</a>
+  </div>

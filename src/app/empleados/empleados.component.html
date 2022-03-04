@@ -48,21 +48,13 @@
           </thead>
           <tbody class="table-striped">
             <tr *ngFor="let ec of empleadoscategorias">
-              <!-- <td>{{ em.idempleado }}</td>
-              <td>{{ em.nomemp }}</td>
-              <td>{{ em.ape1emp }}</td>
-              <td>{{ em.ape2emp }}</td>
-              <td>{{ em.telecontacto}}</td>
-              <td>{{ em.antiguedad }}</td>
-              <td><a mat-raised-button class="btn">Vacaciones</a></td>
-              <td>{{ ec.categoria.denom }}</td> -->
               <td>{{ ec.empleado.idempleado }}</td>
               <td>{{ ec.empleado.nomemp }}</td>
               <td>{{ ec.empleado.ape1emp }}</td>
               <td>{{ ec.empleado.ape2emp }}</td>
               <td>{{ ec.empleado.telecontacto}}</td>
               <td>{{ ec.empleado.antiguedad }}</td>
-              <td><a mat-raised-button class="btn">Vacaciones</a></td>
+              <td><a mat-raised-button class="btn" [routerLink]="['/vacacionesempleado', ec.empleado.idempleado ]">Vacaciones</a></td>
               <td>{{ ec.categoria.denom }}</td>
 
               <!-- <td><a mat-raised-button color="accent" class="btn" [routerLink]="['/empleado', em.idempleado]" routerLinkActive="active" (click)="getEmpleado( em.idempleado )">Ficha empleado</a></td> -->

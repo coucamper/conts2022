@@ -70,20 +70,30 @@ a.red, a.redlink {
 	padding: .5% 0;
 }
 
-input[type="text"], input[type="date"], input[type="tel"], input[type="email"], input[type="file"], textarea, select, .form-control {
+input[type="text"], input[type="date"], input[type="tel"], input[type="email"], input[type="file"], select, .form-control {
 	margin: 1% 0 .5% 1%;
 	display: inline-block;
 	width: 40%;
 }
 
-input[type="text"].fc-big , input[type="date"].fc-big, input[type="tel"].fc-big, input[type="email"].fc-big, input[type="file"].fc-big, textarea.fc-big, select.fc-big, .form-control.fc-big {
+textarea {
+  width: 40%;
+  height: 20%;
+}
+
+textarea{
+  resize: none;
+}
+
+
+input[type="text"].fc-big , input[type="date"].fc-big, input[type="tel"].fc-big, input[type="email"].fc-big, input[type="file"].fc-big, select.fc-big, .form-control.fc-big {
 	margin: 1% 0 .5% 1%;
 	display: inline-block;
 	width: 85%;
   font-size: .8rem;
 }
 
-input[type="text"].fc-login , input[type="date"].fc-login, input[type="tel"].fc-login, input[type="email"].fc-login, input[type="file"].fc-login, textarea.fc-login, select.fc-login, .form-control.fc-login {
+input[type="text"].fc-login , input[type="date"].fc-login, input[type="tel"].fc-login, input[type="email"].fc-login, input[type="file"].fc-login, select.fc-login, .form-control.fc-login {
 	margin: 1% 0 .5% 1%;
 	display: inline-block;
 	width: 98%;
@@ -298,4 +308,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .white_text{
   color: white;
+}
+
+
+.especial{
+  width: 40%;
+  border: 1px solid rgb(196, 196, 196);
+  box-shadow: 0px 3px 3px 0px rgb(223, 223, 223);
+  border-radius: 5px;
+}
+
+.under{
+  text-decoration: underline;
 }

@@ -20,7 +20,7 @@ import { ZonasService } from '../services/zonas.service';
 })
 export class RutasComponent implements OnInit {
 
-
+  aviso:boolean = false;
   rutas:any[] = [];
   rutasF:any[] = [];
   zonas:any[] = [];
@@ -45,7 +45,7 @@ export class RutasComponent implements OnInit {
 
       this.idx = this.activatedRoute.snapshot.params['id'];
       this.div1Function();
-
+      this.verRutas();
       this.getZonas();
       this._rutas.getRutas().subscribe( data => {
       //console.log(data);
@@ -55,6 +55,20 @@ export class RutasComponent implements OnInit {
       this.verRuta( this.idx );
   });
 
+  }
+
+  getNombreLocalidad(){
+
+
+
+  }
+
+
+  verRutas(){
+    this._rutas.getRutas().subscribe((rutas:any) =>{
+      this.rutas=rutas;
+      console.log(this.rutas)
+    });
   }
 
 

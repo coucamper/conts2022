@@ -14,8 +14,7 @@
         <div class="navbar-nav">
           <a class="nav-link fsmall" [routerLink]="['/zonas']">> Zonas</a>
           <a class="nav-link fsmall" [routerLink]="['/localidades']">> Localidades</a>
-          <a class="nav-link fsmall" href="#">> Incidencias en ruta</a>
-          <a class="nav-link fsmall" href="#">> Avisos <i class="fas fa-envelope red"></i></a>
+          <a class="nav-link fsmall" href="#" *ngIf="!aviso">> Avisos <i class="fas fa-envelope red"></i></a>
 
         </div>
       </div>
@@ -50,16 +49,16 @@
       </thead>
       <tbody class="table-striped">
         <!-- <tr *ngFor="let rut of rutas; let zn of zona"> -->
-        <tr *ngFor="let cr of zonas">
-          <td>{{ cr.ruta.idruta }}</td>
-          <td>{{ cr.comarca.denom}}</td>
-          <td>{{ cr.ruta.localidad }}</td>
-          <td>{{ cr.ruta.denom }}</td>
-          <td>{{ cr.ruta.fechaini}}</td>
-          <td>{{ cr.ruta.periodo }}</td>
-          <td><a mat-raised-button class="btn" [routerLink]="['/ruta', cr.ruta.idruta ]">Ver contenedores</a></td>
-          <td><a mat-raised-button color="accent" class="btn" (click)="verRuta(cr.ruta.idruta )"
-              [routerLink]="['/salvarruta', cr.ruta.idruta ]">Editar</a></td>
+        <tr *ngFor="let cr of rutas">
+          <td>{{ cr.idruta }}</td>
+          <td>{{ cr.zona }}</td>
+          <td>{{ cr.localidad }}</td>
+          <td>{{ cr.denom }}</td>
+          <td>{{ cr.fechaini}}</td>
+          <td>{{ cr.periodo }}</td>
+          <td><a mat-raised-button class="btn" [routerLink]="['/ruta', cr.idruta ]">Ver contenedores</a></td>
+          <td><a mat-raised-button color="accent" class="btn" (click)="verRuta(cr.idruta )"
+              [routerLink]="['/salvarruta', cr.idruta ]">Editar</a></td>
           <td><a mat-raised-button color="warn" class="btn" (click)="borrarRuta()">Eliminar</a></td>
           <!-- <td><a th:href="@{/empleado(idempleado=${r.idempleado})}" class="btn btn-warning">Ficha empleado</a></td> -->
 

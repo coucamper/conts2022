@@ -1,0 +1,65 @@
+<div class="container-fluid">
+  <app-navegacion></app-navegacion>
+  <div class="col-lg-12">
+    <h2 class="pl-2 pt-4">Redactar nuevo mensaje</h2>
+      <!-- <h2 class="pl-2 pt-4" *ngIf="!idExiste">Insertar nuevo contenedor</h2> -->
+      <!-- <h2 class="pl-2 pt-4" *ngIf="idExiste">Actualizar datos de contenedor - {{ conten.denom }} ({{ conten.barrio}} - {{ conten.localidad }}) </h2> -->
+
+      <form [formGroup]="formMensaje" #f="ngForm" (ngSubmit)="guardarMensaje()">
+
+        <div>
+          <label for="idmensaje" *ngIf="isPresent">ID Mensaje: </label>
+          <input type="text" name="idmensaje" id="idmensaje" formControlName="idmensaje" class="form-control"
+            [(ngModel)]="mensaje.idmensaje" *ngIf="isPresent">
+          <br>
+          <!-- <small *ngIf="idrutaNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small> -->
+        </div>
+
+
+        <label for="idreceptor">Receptor: </label>
+        <select name="idreceptor" class="form-control" formControlName="idreceptor" (ngModelChange)="onChangeReceptor($event)"
+          [(ngModel)]="mensaje.idreceptor">
+          <option *ngFor="let emps of empleados" [value]="">{{ emps.idempleado }} - {{ emps.nomemp }} {{ emps.ape1emp }} {{ emps.ape2emp }}</option>
+        </select>
+
+        <br>
+        <!-- <small *ngIf="zonaNoValida" class="text-danger ml-3">Denominacion descriptiva (Mínimo 10 caracteres) </small> -->
+
+
+        <label for="importancia">Importancia: </label>
+        <select name="importancia" class="form-control" formControlName="importancia" (ngModelChange)="onChangeImportancia($event)"
+          [(ngModel)]="mensaje.idtipoimportancia">
+          <option *ngFor="let imp of importancias" [value]="">{{ imp.idtipoimportancia }} - {{ imp.denomimportancia }}</option>
+        </select>
+
+
+        <label for="asunto">Asunto: </label>
+        <input type="text" name="asunto" id="asunto" formControlName="asunto" class="form-control"
+        [(ngModel)]="mensaje.asunto">
+
+        <br>
+        <!-- <small *ngIf="zonaNoValida" class="text-danger ml-3">Denominacion descriptiva (Mínimo 10 caracteres) </small> -->
+
+
+        <label for="contenido">Contenido: </label>
+        <textarea name="contenido" id="contenido" rows="8" formControlName="contenido" class="form-control"
+        [(ngModel)]="mensaje.contenido"></textarea>
+
+        <br>
+        <!-- <small *ngIf="zonaNoValida" class="text-danger ml-3">Denominacion descriptiva (Mínimo 10 caracteres) </small> -->
+
+
+        <div class="ml-3 mt-3">
+          <button type="button" mat-raised-button color="accent" class="btn submit mr-3" (click)="guardarMensaje()"
+          [routerLink]="['/panel']" >Enviar mensaje</button>
+        </div>
+
+      </form>
+
+
+
+  </div>
+  <div class="col-lg-12 ml-3 mt-3">
+    <a [routerLink]="['/panel']" routerLinkActive="router-link-active" mat-raised-button color="warn"
+      class="btn mb-5">Volver</a>
+  </div>

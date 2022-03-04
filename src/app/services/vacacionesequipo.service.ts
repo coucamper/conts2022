@@ -11,7 +11,8 @@ import { vacacionEquipoModel } from '../models/vacacionequipoModel';
 })
 export class VacacionesequipoService {
 
-  url = 'http://localhost:8093/vacacionesws'
+  url = 'http://localhost:8093/vacacionesws';
+  urlemp = 'http://localhost:8093/vacacionesempleado'
 
   constructor( private http: HttpClient,
                private activatedRoute:ActivatedRoute) {
@@ -40,6 +41,10 @@ export class VacacionesequipoService {
 
   deleteVacacionequipo( idx:number ){
     return this.http.delete(`${ this.url }/${ idx }`);
+  }
+
+  getVacacionesEmpleado( idemp:number ){
+    return this.http.get(`${this.urlemp }/${ idemp }`);
   }
 
 

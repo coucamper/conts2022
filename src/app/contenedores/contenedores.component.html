@@ -1,7 +1,7 @@
 <div class="container-fluid">
 
 <app-navegacion></app-navegacion>
-    <div class="col">
+    <div class="col" *ngIf="idExiste">
 			<nav class="navbar navbar-expand-lg navbar-light bg-light fsmall">
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarNavAltMarkup"
@@ -11,11 +11,8 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 					<div class="navbar-nav">
-						<a class="nav-link fsmall" href="#">> Fecha</a>
-						<a class="nav-link fsmall" href="#">> Vehículo</a>
-						<a class="nav-link fsmall" href="#">> Operario</a>
-						<a class="nav-link fsmall" href="#">> Peso local</a>
-						<a class="nav-link fsmall" href="#">> Incidencias</a>
+						<a class="nav-link fsmall" [routerLink]="['/llenados']">> Rango de Llenado</a>
+            <a class="nav-link fsmall" href="#">> Mantenimientos</a>
 
 					</div>
 				</div>
@@ -30,6 +27,7 @@
         <thead class="thead-dark">
           <tr>
             <th>ID</th>
+            <th>ZONA</th>
             <th>LOCALIDAD</th>
             <th>BARRIO</th>
             <th>DENOMINACION</th>
@@ -44,15 +42,16 @@
         <tbody class="table-striped">
           <tr *ngFor="let cont of contenedores">
             <td>{{ cont.idcontenedor }}</td>
+            <td>{{ cont.zona }}</td>
             <td>{{ cont.localidad }}</td>
             <td>{{ cont.barrio }}</td>
             <td>{{ cont.denom }}</td>
             <td>{{ cont.ubicacion }}</td>
             <td>{{ cont.coordenadas }}</td>
             <td>{{ cont.fechaimplantacion | date: 'dd-MM-yyyy'}}</td>
-            <td><a mat-raised-button class="btn" [routerLink]="['/contenedores']">Mapa</a></td>
+            <td><a mat-raised-button class="btn" href="{{ cont.mapa }}">Mapa</a></td>
             <td><a mat-raised-button color="accent" class="btn" color="accent" [routerLink]="['/salvarcontenedor', cont.idcontenedor]">Modificar</a></td>
-            <td><a mat-raised-button color="warn" class="btn" >Eliminar</a>
+            <td><a mat-raised-button color="warn" class="btn" (click)="eliminarContenedor( cont.idcontenedor ); refresh()">Eliminar</a>
             </td>
 
 
@@ -63,7 +62,7 @@
       </table>
       <div class="row">
         <div class="col">
-          <a mat-raised-button color="warn" class="btn mr-3 mb-5" [routerLink]="['/insertarcontenedor']" routerLinkActive="router-link-active">Añadir Contenedor</a>
+          <a mat-raised-button color="warn" class="btn mr-3 mb-5" [routerLink]="['/salvarcontenedor']" routerLinkActive="router-link-active">Añadir Contenedor</a>
           <a mat-raised-button color="warn" class="btn">Informes</a>
         </div>
         <div class="col">

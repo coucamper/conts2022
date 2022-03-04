@@ -29,10 +29,6 @@ export class LocalidadesComponent implements OnInit {
       this.localidades=locs;
       console.log(this.localidades)
 
-      for( let l in this.localidades){
-        console.log("Huli " + this.localidades[l]);
-      }
-
     })
   }
 

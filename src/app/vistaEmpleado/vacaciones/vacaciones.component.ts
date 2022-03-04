@@ -2,7 +2,7 @@ import { getAttrsForDirectiveMatching } from '@angular/compiler/src/render3/view
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { DemoComponent } from 'src/app/demo-component/demo-component.component';
-import { DemoUtilsModule } from 'src/app/models/module';
+
 
 
 

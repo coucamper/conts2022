@@ -1,0 +1,56 @@
+<div class="container-fluid" *ngIf="avisos">
+
+  <app-navegacion></app-navegacion>
+
+
+  <div class="col-lg-12 col-md-12 col-sm-12">
+    <h2 class="pl-2 pt-4">Listado de notificaciones</h2>
+
+    <!-- BARRA DE FILTROS RUTAS -->
+    <!-- FIN BARRA DE FILTROS RUTAS -->
+
+
+
+    <table class="table bordbot table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>FECHA</th>
+          <th>ASUNTO</th>
+          <th>CONTENIDO</th>
+          <th>REMITENTE</th>
+          <th>EDITAR</th>
+          <th>ELIMINAR</th>
+        </tr>
+      </thead>
+      <tbody class="table-striped">
+        <!-- <tr *ngFor="let rut of rutas; let zn of zona"> -->
+        <tr *ngFor="let cr of avisos">
+          <td>{{ cr.idaviso }}</td>
+          <td>{{ cr.fechahora }}</td>
+          <td>{{ cr.asunto }}</td>
+          <td>{{ cr.contenido }}</td>
+          <td>{{ cr.remitente.nomemp }}</td>
+          <td><a mat-raised-button color="accent" class="btn"
+              [routerLink]="['/salvarruta', cr.idruta ]">Editar</a></td>
+          <td><a mat-raised-button color="warn" class="btn" >Eliminar</a></td>
+          <!-- <td><a th:href="@{/empleado(idempleado=${r.idempleado})}" class="btn btn-warning">Ficha empleado</a></td> -->
+
+
+        </tr>
+      </tbody>
+    </table>
+    <div class="row">
+      <div class="col">
+        <a [routerLink]="['/salvaraviso']" routerLinkActive="router-link-active" mat-raised-button color="warn"
+          class="btn mr-3 mb-5">Añadir notificacion</a>
+          <a [routerLink]="['/panel']" mat-raised-button color="warn" class="btn mr-3 mb-5">Volver</a>
+        <a href="#" mat-raised-button color="warn" class="btn mr-3 mb-5">Informes</a>
+      </div>
+      <div class="col">
+        <mat-paginator [length]="200" [pageSizeOptions]="[5, 10]" aria-label="Select page">
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>

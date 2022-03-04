@@ -4,6 +4,11 @@ import { FormGroup, FormBuilder, Validators, FormControl, NgForm, ReactiveFormsM
 import { EmpleadosService } from 'src/app/services/empleados.service';
 import { EmpleadoModel } from 'src/app/models/empleado';
 import { Observable } from 'rxjs';
+import { CategoriasService } from 'src/app/services/categorias.service';
+import { EmpleadocategoriaService } from 'src/app/services/empleadocategoria.service';
+import { TipocontratoService } from 'src/app/services/tipocontrato.service';
+import { CategoriaModel } from 'src/app/models/categoriaModel';
+import { EmpleadocategoriaModel } from 'src/app/models/empleadocategoria';
 
 
 
@@ -17,48 +22,59 @@ import { Observable } from 'rxjs';
 })
 export class SalvarempleadoComponent implements OnInit {
 
-  // Variable de tipo FormGroup para generar el formulario de inserción
+
   formEmpleado:FormGroup;
-
-  // Variable para guardar el id de navegación
   idx:number;
-
-  // modelo para salvar los datos de empleado en la DB
   empleado:EmpleadoModel = new EmpleadoModel();
-
-  //modelo para recuperar datos de empleado de la DB
   emp:any = new EmpleadoModel();
-
-  //Booleano para comprobar si el id de empleado existe en la DB
   idExiste: boolean = false;
 
-  tipoContrato = [
-    { tipocontrato : "estructura"},
-    { tipocontrato: "insercion"}
-  ]
-
-  tipoContra:any;
-
-
-
+  tiposContrato:any[] = []; // Devuelve un array con los tipos de contrato existentes
+  radioContrato:any; // Button radio para seleccionar tipo de contrato
+  idcontrato:number; // El id del tipo de contrato
+  tipoContra:any; // Verificar asignación?
+  categorias:any[] = []; // Devuleve un array de categorías existentes
+  inputCategoria:any; // control para tipo de categoría
+  categoria:EmpleadocategoriaModel;
+  idcategoria:number;
 
   constructor(private router: Router,
-    private fB: FormBuilder, private _empleados: EmpleadosService, private activatedRoute: ActivatedRoute) {
+              private fB: FormBuilder,
+              private _empleados: EmpleadosService,
+              private _categorias: CategoriasService,
+              private _empleadocategoria: EmpleadocategoriaService,
+              private _tipocontrato: TipocontratoService,
+              private activatedRoute: ActivatedRoute) {
 
-      // Obtengo el id de la ruta si es que existe
-      this.idx = this.activatedRoute.snapshot.params['id'];
+              // Obtengo el id de la ruta si es que existe
+              this.idx = this.activatedRoute.snapshot.params['id'];
 
-    // Llamada a las funciones del componente
+              this._empleados.getEmpleado( this.idx ).subscribe( (emp:any) =>{
+                this.empleado = emp;
+                return this.empleado;
+              });
 
-    this.cambiaTitulo();
-    this.crearFormulario( );
-    this.cargarEmpleado( this.idx );
+              this._categorias.getCategorias().subscribe((categorias:any) => {
+                this.categorias=categorias;
+                console.log(this.categorias);
+              });
 
-    this._empleados.getEmpleado( this.idx ).subscribe( (emp:any) =>{
-      this.empleado = emp;
-      return this.empleado;
-    });
-  }
+
+              this._tipocontrato.getTiposContrato().subscribe((tipos:any) => {
+                this.tiposContrato=tipos;
+                console.log(this.tiposContrato);
+              });
+
+              // Llamada a las funciones del componente
+              this.cambiaTitulo();
+              this.crearFormulario( );
+              this.cargarEmpleado( this.idx );
+
+
+
+              console.log("Empleado?"+this.empleado.nomemp);
+
+          }
 
 
   ngOnInit(): void {
@@ -77,14 +93,11 @@ export class SalvarempleadoComponent implements OnInit {
       console.log("El empleado no existe");
     } else {
          this._empleados.getEmpleado( id ).subscribe( (e:any) =>{
-         //console.log(e);
          this.emp = e;
-         console.log("Empleado: "+ this.emp.nomemp );
 
          // -----------------------------------------------------------
 
          if( this.emp.tipocontrato ){
-           console.log("puta" + this.emp.tipocontrato );
             this.formEmpleado.patchValue({
               "tipocontrato" : [`${ this.emp.tipocontrato }`]
             });
@@ -113,7 +126,7 @@ export class SalvarempleadoComponent implements OnInit {
                 "emailemp" : [`${ this.emp.emailemp}`],
                 "domicilio" : [`${ this.emp.domicilio}`],
                 "iban" : [`${ this.emp.iban}`],
-                "categoria" : [`${ this.emp.categoria}`],
+                "categoria" : [`${ this.categoria.idempleadocategoria}`],
                 "tipocontrato" : [`${ this.emp.tipocontrato}`]
               });
          //return this.emp;
@@ -124,7 +137,6 @@ export class SalvarempleadoComponent implements OnInit {
 
   cambiaTitulo(){
     let idexiste = this.activatedRoute.snapshot.params['id'];
-
     if(idexiste){
       this.idExiste = true;
     } else {
@@ -162,11 +174,8 @@ export class SalvarempleadoComponent implements OnInit {
 
   validarForm( form: NgForm ){
     console.warn(this.formEmpleado.value);
-
     if( this.formEmpleado.invalid ){
-
       return Object.values( this.formEmpleado.controls ).forEach( control => {
-
         if( control instanceof FormGroup ){
           Object.values( control.controls ).forEach( control => control.markAsTouched() );
         } else {
@@ -176,10 +185,30 @@ export class SalvarempleadoComponent implements OnInit {
     }
   }
 
+
+
+  onChange(newValue:any) {
+    this.inputCategoria = this.formEmpleado.controls['categoria'].value;
+    this.inputCategoria = newValue;  // don't forget to update the model here
+    this.idcategoria=Number(newValue.substring(0,2));
+    console.log(this.idcategoria);
+  }
+
+
+
+  onChangeContrato(valor:any){
+    this.radioContrato = this.formEmpleado.controls['tipocontrato'].value;
+    this.radioContrato = valor;
+    this.idcontrato=Number(valor);
+    console.log(this.idcontrato);
+  }
+
+
+
+
    guardar(  ){
 
     this.validarForm( this.formEmpleado.value );
-
      if( this.emp.idempleado ){
 
      this.empleado = this.formEmpleado.value;

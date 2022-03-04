@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ContenedorVOModule } from '../models/contenedor-vo/contenedorModel';
 import { ContenedoresService } from '../services/contenedores.service';
+
 
 
 
@@ -16,27 +17,39 @@ export class ContenedoresComponent implements OnInit {
   contenedores:any[] = [];
 
   contenedor:ContenedorVOModule = new ContenedorVOModule();
-
-
+  idx:number;
+  idExiste:boolean;
 
   fecha = new Date();
   mes = new Date().toLocaleString( 'default', { month: 'long' } );
   anio = new Date().getFullYear().toLocaleString();
 
   constructor( private router:Router,
-               private _contenedores: ContenedoresService ) {
+               private _contenedores: ContenedoresService,
+               private activatedRoute: ActivatedRoute ) {
 
       this._contenedores.getContenedores().subscribe( (conts:any) => {
         this.contenedores = conts;
         console.log( this.contenedores );
         return this.contenedores;
       });
+
     }
 
 
   ngOnInit(): void {
+    this.idx = this.activatedRoute.snapshot.params['id'];
   }
 
+
+  eliminarContenedor( idcont:number ){
+    this._contenedores.deleteContenedor( idcont ).subscribe();
+  }
+
+
+  refresh(): void {
+    window.location.reload();
+  }
 }
 
 

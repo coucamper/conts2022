@@ -18,49 +18,19 @@ import { ZonasService } from 'src/app/services/zonas.service';
 })
 export class SalvarrutaComponent implements OnInit {
 
-  // Variable de tipo FormGroup para generar el formulario de inserción
+
   formRuta:FormGroup;
-
-  // Variable para guardar el id de navegación
   idx:number;
-
-  // modelo para salvar los datos de empleado en la DB
   ruta:rutaModel = new rutaModel();
-
-  //modelo para recuperar datos de empleado de la DB
   r:rutaModel;
-
-
-
-  //Booleano para comprobar si el id de empleado existe en la DB
   idExiste:boolean = false;
-
-  idcom:number;
-
-  // Mock para cargar nombres de zonas en un select (deberá cambiarse cuando se cree la tabla real en el backend)
-
-  // zonas = [
-  //   { zona: "Centro"},
-  //   { zona: "Oriente"},
-  //   { zona: "Occidente"}
-  // ];
-
-  // localidades = [
-  //   { localidad: "Avilés"},
-  //   { localidad: "Gijón"},
-  //   { localidad: "Llanes"},
-  //   { localidad: "Oviedo"},
-  //   { localidad: "Ponga"},
-  //   { localidad: "villaviciosa"},
-
-  // ];
-
+  idcomarca:number;
   zonas:any[] = [];
   localidades:any[] = [];
   comarcas:any[] = [];
   concejos:any[] = [];
   concejosComarca:any[] = [];
-
+  control:any;
 
 
   constructor(private router: Router,
@@ -68,7 +38,7 @@ export class SalvarrutaComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private _rutas: RutasService,
               private _zonas:ZonasService,
-              private _concejos: ConcejosComarcasService,
+              private _localidades: ConcejosComarcasService,
               private _comarcas:ComarcaService,
               private  _comarca: ComarcaModel ) {
               this.idx = this.activatedRoute.snapshot.params['id'];
@@ -80,17 +50,7 @@ export class SalvarrutaComponent implements OnInit {
       this.obtenerRuta( this.idx );
       this.cargarDatos( this.ruta );
       this.cargarComarcas();
-      this.cargarConcejos();
-      this.cargarConcejosComarca();
-
-     // this.guardarRuta( this.formRuta );
-
-      // this._rutas.getRuta( this.idx ).subscribe( (dato:any) => {
-      //   this.ruta = dato;
-      //   return this.ruta;
-      // });
-
-
+      // this.cargarConcejosComarca();
 
     }
 
@@ -114,26 +74,40 @@ export class SalvarrutaComponent implements OnInit {
 
 
 
-  cargarConcejos(){
-    this._concejos.getConcejosComarcas().subscribe((concejos:any) => {
-      this.concejos=concejos;
-      console.log(this.concejos);
+  // cargarConcejosComarca(){
+  //   this._localidades.getConcejosComarcas().subscribe((concejos:any) => {
+  //     this.localidades=concejos;
+  //     console.log(this.concejos);
+  //   });
+  // }
+
+  /*
+
+  traerLocalidadesZonas( idcom:number ){
+    this._localidades.getConcejosPorComarca( this.idcomarca ).subscribe((concejos:any) =>{
+      this.localidades=concejos;
+      console.log(this.localidades);
     });
   }
 
 
-  cargarConcejosComarca(){
+  */
 
-    var x = Number(this.formRuta.get('zona'));
-    console.log("Putiña! "+x.valueOf())
-    this._concejos.getConcejoComarca(x).subscribe( (c:any) => {
-      console.log("El id de la comarca es: "+this._comarca.idcomarca);
-      this.idcom=c;
-      console.log(this.idcom.valueOf)
-    });
-  }
+  onChange(newValue:any) {
+    this.control = this.formRuta.controls['denom'].value;
+    this.control = newValue;  // don't forget to update the model here
+    this.idcomarca=Number(newValue.charAt(0));
+    this.traerLocalidadesZonas( this.idcomarca );
+    console.log(this.idcomarca);
+}
 
 
+traerLocalidadesZonas( idcom:number ){
+  this._localidades.getConcejosPorComarca( this.idcomarca ).subscribe((concejos:any) =>{
+    this.localidades=concejos;
+    console.log(this.localidades);
+  });
+}
 
 
   get idrutaNoValida(){

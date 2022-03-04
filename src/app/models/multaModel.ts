@@ -11,4 +11,17 @@ import { CalendarHeaderComponent } from '../demo-utils/calendar-header.component
   declarations: [CalendarHeaderComponent],
   exports: [CalendarHeaderComponent],
 })
-export class DemoUtilsModule {}
+export class MultaModule {
+
+  idmulta:number;
+  fechamulta:string;
+  causamulta:string;
+  lugarmulta:string;
+  importe:number;
+  vehiculo:number;
+  empleado:number;
+
+  constructor(){}
+
+
+}

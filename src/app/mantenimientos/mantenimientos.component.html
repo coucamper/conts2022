@@ -38,8 +38,8 @@
                         <th>ID</th>
                         <th>FECHA</th>
                         <th>VEHICULO</th>
-                        <th>MATRICULA</th>
                         <th>MODELO</th>
+                        <th>MATRICULA</th>
                         <th>DESCRIPCIÓN</th>
                         <th>COSTE</th>
                         <th>PROVEEDOR</th>
@@ -53,6 +53,7 @@
                     <tr *ngFor="let m of mantenimientos">
                         <td>{{ m.idmantenimiento }}</td>
                         <td>{{ m.fechamantenimiento }}</td>
+                        <td>{{ m.idvehiculo.marca}}</td>
                         <td>{{ m.idvehiculo.modelo}}</td>
                         <td>{{ m.idvehiculo.matricula}}</td>
                         <td>{{ m.mantenimiento }}</td>
@@ -60,10 +61,9 @@
                         <td>{{ m.proveedor }}</td>
                         <td>{{ m.numfactura }}</td>
                         <td>{{ m.tipomante }}</td>
-                        <td>{{ m.tipomante }}</td>
                         <td><a mat-raised-button color="accent" class="btn">Editar</a></td>
                         <!-- <td><a mat-raised-button color="accent" class="btn" (click)="verVehiculo( v.idvehiculo )" [routerLink]="['/salvarvehiculo', v.idvehiculo ]">Editar</a></td> -->
-                        <td><a mat-raised-button color="warn" class="btn">Eliminar</a></td>
+                        <td><a mat-raised-button color="warn" class="btn" (click)="eliminarMantenimiento(m.idmantenimiento); refresh()">Eliminar</a></td>
                         <!-- <td><a th:href="@{/empleado(idempleado=${r.idempleado})}" class="btn btn-warning">Ficha empleado</a></td> -->
 
 
@@ -72,7 +72,7 @@
     </table>
             <div class="row">
                 <div class="col">
-                    <a [routerLink]="['/salvarvehiculo']" routerLinkActive="router-link-active" mat-raised-button color="warn" class="btn mr-3 mb-5">Añadir Mantenimiento</a>
+                    <a [routerLink]="['/salvarmantenimiento']" routerLinkActive="router-link-active" mat-raised-button color="warn" class="btn mr-3 mb-5">Añadir Mantenimiento</a>
                     <a href="#" mat-raised-button color="warn" class="btn mr-3 mb-5">Informes</a>
                 </div>
                 <div class="col">

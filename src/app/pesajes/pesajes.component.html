@@ -12,11 +12,6 @@
 				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 					<div class="navbar-nav">
 						<a class="nav-link fsmall" [routerLink]="['/llenados']">> Llenados</a>
-						<a class="nav-link fsmall" href="#">> Vehículo</a>
-						<a class="nav-link fsmall" href="#">> Operario</a>
-						<a class="nav-link fsmall" href="#">> Peso local</a>
-						<a class="nav-link fsmall" href="#">> Incidencias</a>
-
 					</div>
 				</div>
 			</nav>
@@ -51,9 +46,9 @@
 							<td>{{ pesa.pesajes.ruta.denom }}</td>
 							<td>{{ pesa.pesajes.pesaje }} Kg</td>
               <td>{{ pesa.vehiculos.marca}}  {{ pesa.vehiculos.matricula }}</td>
-							<td>{{ pesa.pesajes.operario.empleado.nomemp }}</td>
+							<td>{{ pesa.pesajes.operario.nomemp }}</td>
 							<td>{{ pesa.pesajes.comprobante }}</td>
-              <td><a mat-raised-button class="btn" [routerLink]="['/ruta', pesa.idvehipesaje ]">Niveles</a></td>
+              <td><a mat-raised-button class="btn" [routerLink]="['/niveles', pesa.pesajes.ruta.idruta ]">Niveles</a></td>
 							<td><a href="#" mat-raised-button color="accent" class="btn mr-3" (click)="verVehiculoPesaje( pesa.idvehipesaje )" [routerLink]="['/salvarpesaje/', pesa.idvehipesaje ]">Modificar</a></td>
 							<td><button mat-raised-button color="warn" class="btn mr-3" id="eliminar"
 									name="eliminar">Eliminar</button></td>

@@ -1,5 +1,6 @@
 
 import { RouterModule, Routes } from "@angular/router";
+import { AvisosComponent } from "./avisos/avisos.component";
 import { ContenedoresComponent } from './contenedores/contenedores.component';
 import { ContenedoresrutasComponent } from "./contenedoresrutas/contenedoresrutas.component";
 import { EmpleadoComponent } from "./empleados/empleado/empleado.component";
@@ -8,23 +9,34 @@ import { IncidenciasComponent } from "./incidencias/incidencias.component";
 import { InicioComponent } from "./inicio/inicio.component";
 import { AsociarcontenedorComponent } from "./inserciones/asociarcontenedor/asociarcontenedor.component";
 import { ContenedorinsertarComponent } from "./inserciones/contenedorinsertar/contenedorinsertar.component";
+import { RespondermensajeComponent } from "./inserciones/respondermensaje/respondermensaje.component";
+import { SalvaravisoComponent } from "./inserciones/salvaraviso/salvaraviso.component";
 import { SalvarcontenedorComponent } from "./inserciones/salvarcontenedor/salvarcontenedor.component";
 import { SalvarcontenedorrutaComponent } from "./inserciones/salvarcontenedorruta/salvarcontenedorruta.component";
 import { SalvarempleadoComponent } from "./inserciones/salvarempleado/salvarempleado.component";
 import { SalvarincidenciaComponent } from "./inserciones/salvarincidencia/salvarincidencia.component";
+import { SalvarmantenimientoComponent } from "./inserciones/salvarmantenimiento/salvarmantenimiento.component";
+import { SalvarmensajeComponent } from "./inserciones/salvarmensaje/salvarmensaje.component";
 import { SalvarpesajeComponent } from "./inserciones/salvarpesaje/salvarpesaje.component";
 import { SalvarrutaComponent } from "./inserciones/salvarruta/salvarruta.component";
+import { SalvarvacacionesempleadoComponent } from "./inserciones/salvarvacacionesempleado/salvarvacacionesempleado.component";
 import { SalvarvehiculoComponent } from "./inserciones/salvarvehiculo/salvarvehiculo.component";
 import { LlenadosComponent } from "./llenados/llenados.component";
 import { LocalidadesComponent } from "./localidades/localidades.component";
 import { MantenimientoComponent } from "./mantenimiento/mantenimiento.component";
 import { MantenimientosComponent } from "./mantenimientos/mantenimientos.component";
+import { MultaComponent } from "./multa/multa.component";
+import { MultasComponent } from "./multas/multas.component";
+import { NivelesComponent } from "./niveles/niveles.component";
 import { PanelComponent } from "./panel/panel.component";
 import { PesajeComponent } from "./pesaje/pesaje.component";
 import { PesajesComponent } from "./pesajes/pesajes.component";
+import { PolizaComponent } from "./poliza/poliza.component";
+import { PolizasComponent } from "./polizas/polizas.component";
 import { RutaComponent } from "./ruta/ruta.component";
 import { RutasComponent } from './rutas/rutas.component';
 import { LoginComponent } from "./shared/login/login.component";
+import { VacacionesempleadoComponent } from "./vacacionesempleado/vacacionesempleado.component";
 import { VacacionesequipoComponent } from "./vacacionesequipo/vacacionesequipo.component";
 import { VehiculosComponent } from "./vehiculos/vehiculos.component";
 import { ContenedoresConductorComponent } from "./vistaEmpleado/contenedores/contenedoresconductor.component";
@@ -46,18 +58,29 @@ import { ZonasComponent } from "./zonas/zonas.component";
 
 
 
+
+
+
+
+
 export const APP_ROUTES: Routes = [
     { path: 'inicio', component: InicioComponent },
     { path: 'login', component: LoginComponent },
     { path: 'panel', component: PanelComponent },
     { path: 'panelempleado', component: PanelempleadoComponent },
+    { path: 'salvarmensaje', component: SalvarmensajeComponent },
+    { path: 'avisos', component: AvisosComponent },
+    { path: 'salvaraviso', component: SalvaravisoComponent },
+    { path: 'respondermensaje/:id', component: RespondermensajeComponent },
     { path: 'empleados', component: EmpleadosComponent },
     { path: 'peticiones', component: PeticionesComponent },
     { path: 'permisosretribuidos', component: PermisosretribuidosComponent },
     { path: 'permisosnoretribuidos', component: PermisosNoRetribuidosComponent},
     { path: 'horasmedico', component: HorasmedicoComponent },
     { path: 'vacacionesequipo', component: VacacionesequipoComponent },
-    { path: 'vacaciones/:id', component: VacacionesComponent },
+    { path: 'vacacionesempleado/:id', component: VacacionesempleadoComponent },
+    { path: 'salvarvacaciones', component: SalvarvacacionesempleadoComponent },
+    { path: 'salvarvacaciones/:id', component: SalvarvacacionesempleadoComponent },
     { path: 'empleado/:id', component: EmpleadoComponent },
     { path: 'salvarempleado', component: SalvarempleadoComponent },
     { path: 'salvarempleado/:id', component: SalvarempleadoComponent },
@@ -69,16 +92,24 @@ export const APP_ROUTES: Routes = [
     { path: 'localidades', component: LocalidadesComponent },
     { path: 'vehiculos', component: VehiculosComponent},
     { path: 'mantenimientos', component: MantenimientosComponent},
+    { path: 'salvarmantenimiento', component: SalvarmantenimientoComponent},
+    { path: 'salvarmantenimientoid/:id', component: SalvarmantenimientoComponent},
     { path: 'mantenimiento', component: MantenimientoComponent},
     { path: 'mantenimiento/:id', component: MantenimientoComponent},
+    { path: 'niveles/:id', component: NivelesComponent},
     { path: 'salvarvehiculo', component: SalvarvehiculoComponent},
     { path: 'salvarvehiculo/:id', component: SalvarvehiculoComponent},
+    { path: 'multas', component: MultasComponent},
+    { path: 'multav/:id', component: MultaComponent},
+    { path: 'polizas', component: PolizasComponent},
+    { path: 'poliza/:id', component: PolizaComponent},
     { path: 'contenedores', component: ContenedoresComponent },
     { path: 'contenedoresconductor', component: ContenedoresConductorComponent },
     { path: 'salvarcontenedor', component: SalvarcontenedorComponent },
     { path: 'salvarcontenedor/:id', component: SalvarcontenedorComponent },
     { path: 'contenedoresruta', component: ContenedoresrutasComponent },
     { path: 'contenedoresruta/:id', component: ContenedoresrutasComponent },
+    { path: 'asociarcontenedor', component: AsociarcontenedorComponent },
     { path: 'asociarcontenedor/:id', component: AsociarcontenedorComponent },
     { path: 'insertarcontenedor', component: ContenedorinsertarComponent },
     { path: 'pesajes', component: PesajesComponent },

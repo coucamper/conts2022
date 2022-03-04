@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MantenimientoModule } from '../models/mantenimientoModel';
 import { MantenimientosService } from '../services/mantenimientos.service';
 import { VehiculosService } from '../services/vehiculos.service';
 
@@ -13,16 +14,27 @@ export class MantenimientoComponent implements OnInit {
 
   idx:number;
   mantenimientos:any[] = [];
+  mantenimiento = new MantenimientoModule();
   mantenVehiculo:any [] = [];
   manten:any[] = [];
   vehiculo:any;
   mants:any [] = [];
+  idvehiculo:any;
+  idExiste:boolean = false;
 
   constructor(private route: Router,
               private activatedRoute: ActivatedRoute,
               private _mantenimientos: MantenimientosService,
               private _vehiculo: VehiculosService) {
               this.idx = this.activatedRoute.snapshot.params['id'];
+
+
+              this._mantenimientos.getMantenimiento( this.idx ).subscribe( (dato:any) =>{
+                this.mantenimientos = dato;
+              });
+
+
+
               this.mantenimientosVehiculo();
               console.log(this.manten)
               this.localizarVehiculo();
@@ -33,16 +45,15 @@ export class MantenimientoComponent implements OnInit {
   localizarVehiculo(){
     this._vehiculo.getVehiculo(this.idx).subscribe((vehic:any) => {
       this.vehiculo=vehic;
-      console.log("El vehiculo es: "+this.vehiculo.marca)
+     console.log(this.vehiculo)
     });
   }
 
   traerMantenimientos(){
     this._mantenimientos.getMantenimientos().subscribe((mans:any) => {
       this.mantenimientos=mans;
-
-      this.mantenVehiculo = this.mantenimientos.filter(m => this.mantenimientos.includes(this.idx));
-      console.log(this.mantenVehiculo)
+      this.idvehiculo=this.mantenimientos[1].idvehiculo.idvehiculo;
+      //console.log("El id es: "+this.mantenimientos[1].idvehiculo.idvehiculo)
     });
   }
 
@@ -51,8 +62,14 @@ export class MantenimientoComponent implements OnInit {
     this._mantenimientos.getMantenimiento( this.idx ).subscribe((mantenimiento:any) => {
       this.mantenVehiculo=mantenimiento;
       console.log("mantenimiento: "+this.mantenVehiculo)
-      for(let m of this.mantenVehiculo){
-        console.log("m"+this.mantenVehiculo[m])
+      for(let i in this.mantenVehiculo){
+        console.log(this.mantenVehiculo[i]);
+      }
+
+      if( this.mantenVehiculo.length < 0 ){
+        this.idExiste = false;
+      }else{
+        this.idExiste = true;
       }
     });
   }

@@ -24,14 +24,7 @@ import { PermisoNoRetribuidoModel } from './models/permisonoretribuidoModel';
 import { permisoretribuidoModel } from './models/permisoretribuidoModel';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { DemoUtilsModule } from './models/module';
 import { CategoriaModel } from './models/categoriaModel';
-
-
-
-
-
-
 
 
 
@@ -91,11 +84,11 @@ import { ZonasComponent } from './zonas/zonas.component';
 import { SalvarempleadoComponent } from './inserciones/salvarempleado/salvarempleado.component';
 import { VacacionesComponent } from './vistaEmpleado/vacaciones/vacaciones.component';
 import { JwPaginationModule } from 'jw-angular-pagination';
-
-
-
-
-
+import { LoginComponent } from './shared/login/login.component';
+import { LocalidadesComponent } from './localidades/localidades.component';
+import { SharedComponent } from './shared/shared/shared.component';
+import { MultasComponent } from './multas/multas.component';
+import { PolizasComponent } from './polizas/polizas.component';
 
 
 
@@ -127,7 +120,6 @@ import { vacacionEquipoModel } from './models/vacacionequipoModel';
 import { MatIconModule } from '@angular/material/icon';
 import { AvisosService } from './services/avisos.service';
 import { AvisoModel } from './models/avisoModel';
-import { LoginComponent } from './shared/login/login.component';
 import { CategoriasService } from './services/categorias.service';
 import { EmpleadocategoriaModel } from './models/empleadocategoria';
 import { EmpleadocategoriaService } from './services/empleadocategoria.service';
@@ -138,9 +130,26 @@ import { ComarcaService } from './services/comarca.service';
 import { ComarcaModel } from './models/comarcaModel';
 import { ContModule } from './models/contModel';
 import { MantenimientosService } from './services/mantenimientos.service';
-import { LocalidadesComponent } from './localidades/localidades.component';
 import { LocalidadesService } from './services/localidades.service';
-import { SharedComponent } from './shared/shared/shared.component';
+import { MultasService } from './services/multas.service';
+import { PolizasService } from './services/polizas.service';
+import { PolizaComponent } from './poliza/poliza.component';
+import { MultaComponent } from './multa/multa.component';
+import { VacacionesempleadoComponent } from './vacacionesempleado/vacacionesempleado.component';
+import { NivelesComponent } from './niveles/niveles.component';
+import { NivelesContenedoresRutaService } from './services/nivelescontenedoresruta.service';
+import { SalvarmantenimientoComponent } from './inserciones/salvarmantenimiento/salvarmantenimiento.component';
+import { TipomantenimientoService } from './services/tipomantenimiento.service';
+import { SalvarmensajeComponent } from './inserciones/salvarmensaje/salvarmensaje.component';
+import { MensajeModel } from './models/mensajeModel';
+import { TipoimportanciamensajeService } from './services/tipoimportanciamensaje.service';
+import { SalvarvacacionesempleadoComponent } from './inserciones/salvarvacacionesempleado/salvarvacacionesempleado.component';
+import { TipocontratoService } from './services/tipocontrato.service';
+import { MensajeformularioModel } from './models/mensajeformularioModel';
+import { RespondermensajeComponent } from './inserciones/respondermensaje/respondermensaje.component';
+import { SalvaravisoComponent } from './inserciones/salvaraviso/salvaraviso.component';
+import { AvisosComponent } from './avisos/avisos.component';
+
 
 
 
@@ -201,7 +210,19 @@ import { SharedComponent } from './shared/shared/shared.component';
     ZonasComponent,
     LocalidadesComponent,
     SharedComponent,
-    MantenimientoComponent
+    MantenimientoComponent,
+    MultasComponent,
+    PolizasComponent,
+    PolizaComponent,
+    MultaComponent,
+    VacacionesempleadoComponent,
+    NivelesComponent,
+    SalvarmantenimientoComponent,
+    SalvarmensajeComponent,
+    SalvarvacacionesempleadoComponent,
+    RespondermensajeComponent,
+    SalvaravisoComponent,
+    AvisosComponent
   ],
   imports: [
     BrowserModule,
@@ -229,7 +250,6 @@ import { SharedComponent } from './shared/shared/shared.component';
     permisoretribuidoModel,
     BrowserAnimationsModule,
     PermisoNoRetribuidoModel,
-    DemoUtilsModule,
     vacacionEquipoModel,
     MatIconModule,
     AvisoModel,
@@ -238,7 +258,10 @@ import { SharedComponent } from './shared/shared/shared.component';
     ComarcasRutaModel,
     ComarcaModel,
     ContModule,
-    JwPaginationModule
+    JwPaginationModule,
+    MensajeModel,
+    EmpleadocategoriaModel,
+    MensajeformularioModel
   ],
   providers: [
    ContenedoresService,
@@ -258,7 +281,13 @@ import { SharedComponent } from './shared/shared/shared.component';
    EmpleadocategoriaService,
    ComarcaService,
    MantenimientosService,
-   LocalidadesService
+   LocalidadesService,
+   MultasService,
+   PolizasService,
+   NivelesContenedoresRutaService,
+   TipomantenimientoService,
+   TipoimportanciamensajeService,
+   TipocontratoService
 
   ],
   bootstrap: [AppComponent]

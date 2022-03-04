@@ -21,8 +21,8 @@
       <small *ngIf="denomNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small>
 
       <label for="zona">Zona: </label>
-      <select name="zona" class="form-control" formControlName="zona" [(ngModel)]="ruta.zona">
-        <option *ngFor="let cm of comarcas" [value]="">{{ cm.denom }}</option>
+      <select name="zona" class="form-control" formControlName="zona" [(ngModel)]="ruta.zona" (ngModelChange)="onChange($event)">
+        <option *ngFor="let cm of comarcas" [value]="cm.idcomarca">{{ cm.idcomarca }} - {{ cm.denom }}</option>
       </select>
       <br>
       <small *ngIf="zonaNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small>
@@ -30,7 +30,8 @@
 
       <label for="localidad">Localidad: </label>
       <select name="localidad" class="form-control" formControlName="localidad" [(ngModel)]="ruta.localidad">
-        <option *ngFor="let cj of concejos" [value]="">{{ cj.concejo.denom }}</option>
+        <option *ngIf="!idcomarca">Seleccionar zona para ver localidades</option>
+        <option *ngFor="let cj of localidades" [value]="cj.concejo.idconcejo">{{ cj.concejo.idconcejo }} - {{ cj.concejo.denom }}</option>
       </select>
       <br>
       <small *ngIf="zonaNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small>

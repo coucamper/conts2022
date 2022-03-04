@@ -21,8 +21,8 @@ export class rutaModel {
 
   idruta: number;
   denom: string;
-  zona: string;
-  localidad: string;
+  zona: number;
+  localidad: number;
   fechaini: string;
   periodo: string;
   ruta: string;

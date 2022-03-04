@@ -2,6 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Color, BaseChartDirective, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chart.js';
+import { RutasService } from '../services/rutas.service';
+import { Router } from '@angular/router';
+import { PesajesService } from '../services/pesajes.service';
+
 
 @Component({
   selector: 'app-graficolinea',
@@ -9,6 +13,13 @@ import * as pluginAnnotations from 'chart.js';
   styleUrls: ['./graficolinea.component.css']
 })
 export class graficolineaComponent implements OnInit {
+
+  datos:any [] = [];
+
+
+
+
+
   lineChartData: ChartDataSets[] = [
     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
     { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
@@ -87,7 +98,18 @@ export class graficolineaComponent implements OnInit {
 
   @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
 
-  constructor() { }
+
+  pesajes:any[] = [];
+
+  constructor(private router:Router,
+              private _datos: PesajesService) {
+
+                this._datos.getPesajes().subscribe((ps:any) => {
+                  this.pesajes=ps;
+                  console.log(this.pesajes)
+                });
+
+              }
 
   ngOnInit(): void {
   }

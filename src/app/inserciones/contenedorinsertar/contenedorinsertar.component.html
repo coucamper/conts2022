@@ -8,19 +8,47 @@
 
         <!-- Formulario para insertar nuevo contenedor -->
 
-		<form autocomplete="off" [formGroup]="form" (ngSubmit)="guardar()">
+		<form autocomplete="off" [formGroup]="form" (ngSubmit)="guardarContenedor()">
 
-            <label for="localidad">Localidad: </label>
-            <input
+            <label for="localidad">Zona: </label>
+            <select name="zona" class="form-control" formControlName="zona" (ngModelChange)="onChange($event)">
+              <option *ngFor="let cn of zonas" [value]="cn.idcomarca">{{ cn.idcomarca }} - {{ cn.denom }} </option>
+            </select>
+            <!-- <input
                 class="form-control"
                 type="text"
                 id="localidad"
                 name="localidad"
                 formControlName="localidad"
-                [class.is-invalid]="localidadNoValida">
+                [class.is-invalid]="localidadNoValida"> -->
             <br>
             <small *ngIf="denomNoValida" class="text-danger ml-3">Denominacion descriptiva (Mínimo 10 caracteres) </small>
 
+
+            <label for="localidad">Localidad: </label>
+            <select name="localidad" class="form-control" formControlName="localidad" >
+              <option *ngFor="let cn of localidades" [value]="cn.concejo.idconcejo">{{ cn.concejo.idconcejo }} - {{ cn.concejo.denom }} </option>
+            </select>
+            <!-- <input
+                class="form-control"
+                type="text"
+                id="localidad"
+                name="localidad"
+                formControlName="localidad"
+                [class.is-invalid]="localidadNoValida"> -->
+            <br>
+            <small *ngIf="localidadNoValida" class="text-danger ml-3">Denominacion descriptiva (Mínimo 10 caracteres) </small>
+
+
+            <label for="denom">Barrio: </label>
+            <input
+                class="form-control"
+                type="text"
+                id="barrio"
+                name="barrio"
+                formControlName="barrio"
+                [class.is-invalid]="barrioNoValida">
+            <br>
 
             <label for="denom">Denominación: </label>
             <input

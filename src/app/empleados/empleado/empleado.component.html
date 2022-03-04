@@ -15,7 +15,6 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <div class="navbar-nav">
-                                <a class="nav-link fsmall" href="#">> Incidencias </a>
                                 <a class="nav-link fsmall" href="#" title="Avisos Importantes">> Avisos <i class="fas fa-envelope red"></i></a>
 
                             </div>
@@ -41,7 +40,7 @@
               <th>EMAIL</th>
               <th>ANTIGÜEDAD</th>
               <th>CONTRATO</th>
-              <th>NIF</th>
+
             </tr>
           </thead>
           <tbody>
@@ -54,11 +53,12 @@
               <td>{{ emp.emailemp }}</td>
               <td>{{ emp.antiguedad }}</td>
               <td>{{ emp.tipocontrato }}</td>
-              <td>{{ emp.nif }}</td>
+
             </tr>
           </tbody>
           <thead class="thead">
             <tr>
+              <th>NIF</th>
               <th>NSS</th>
               <th>DIRECCIÓN</th>
               <th>IBAN</th>
@@ -70,6 +70,7 @@
           </thead>
           <tbody>
             <tr>
+              <td>{{ emp.nif }}</td>
               <td>{{ emp.nss }}</td>
               <td>{{ emp.domicilio }}</td>
               <td>{{ emp.iban }}</td>

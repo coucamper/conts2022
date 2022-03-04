@@ -48,7 +48,7 @@ export class RutaComponent implements OnInit {
       this.ContenedoresRuta = dato;
       this.ContenedoresRuta.forEach( contenedor =>{
 
-        if(contenedor.rutas.idruta == this.idx ){
+        if(contenedor.ruta.idruta == this.idx ){
           this.contenedoresRuta.push(contenedor);
           console.log(this.contenedoresRuta);
 
@@ -107,11 +107,11 @@ export class RutaComponent implements OnInit {
 
      if( this.ruta.idruta){
        this._rutas.updateRuta( this.ruta.idruta, this.ruta ).subscribe( (data: any) => {
-         //console.log( data );
+         console.log( data );
        });
      } else {
        this._rutas.saveRuta( this.ruta ).subscribe( (res:any) => {
-         //console.log(res);
+         console.log(res);
        });
      }
 

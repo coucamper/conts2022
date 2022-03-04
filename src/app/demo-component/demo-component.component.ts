@@ -12,7 +12,6 @@ import {
 } from 'angular-calendar';
 import { WeekViewHour, WeekViewHourColumn } from 'calendar-utils';
 import { CalendarHeaderComponent } from '../demo-utils/calendar-header.component';
-import { DemoUtilsModule } from '../models/module';
 
 
 

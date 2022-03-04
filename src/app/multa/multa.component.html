@@ -1,0 +1,119 @@
+
+	<div class="container-fluid" *ngIf="vehiculo">
+
+    <app-navegacion></app-navegacion>
+
+  <div class="col-lg-12 col-md-12 col-sm-12 mb-5" *ngIf="vehiculo">
+
+
+                <nav class="navbar navbar-expand-lg navbar-light bg-light fsmall">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarNavAltMarkup"
+                        aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <a class="nav-link fsmall" th:href="@{/contenedores}">> Contenedores incluidos</a>
+                            <a class="nav-link fsmall" href="#">> Incidencias en ruta.idruta</a>
+                            <a class="nav-link fsmall" href="#">> Avisos <i class="fas fa-envelope red"></i></a>
+
+                        </div>
+                    </div>
+                </nav>
+
+
+
+    <h2 class="pl-2 pt-4" #titulo *ngIf="idExiste">Multas del vehículo: {{ vehiculo.marca }} {{ vehiculo.modelo }} {{ vehiculo.matricula }}</h2>
+    <h2 class="pl-2 pt-4" #titulo *ngIf="!idExiste">No hay multas asociadas a este vehículo</h2>
+
+    <!-- <table class="table bordbot table-striped" *ngIf="idExiste">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>MOTIVO</th>
+                        <th>FECHA MULTA</th>
+                        <th>IMPORTE</th>
+                        <th>LUGAR MULTA</th>
+                        <th>EMPLEADO</th>
+                        <th>VEHICULO</th>
+                        <th>EDITAR</th>
+                        <th>ELIMINAR</th>
+                    </tr>
+                </thead>
+                <tbody class="table-striped">
+                    <tr>
+                        <td>{{ multa }}</td>
+                        <td>{{ multaMod.causamulta}}</td>
+                        <td>{{ multaMod.fechamulta }}</td>
+                        <td>{{ multaMod.importe}}</td>
+                        <td>{{ multaMod.lugarmulta}}</td>
+                        <td>{{ multaMod.empleado}}</td>
+                        <td>{{ multaMod.vehiculo}}</td>
+                        <td><a mat-raised-button color="accent" class="btn" [routerLink]="['/salvarruta', multaMod.idmulta]">Editar</a></td>
+                        <td><a mat-raised-button color="warn" class="btn">Eliminar</a></td>
+                    </tr>
+                </tbody>
+    </table> -->
+
+
+
+    <div *ngIf="multasvehiculo.length < 1">
+
+      <h2>No existen multas asociadas a este vehiculo </h2>
+    </div>
+    <div *ngIf="multasvehiculo.length > 0">
+      <h3 class="clean pl-2 pt-4" >Multas asociadas a este vehiculo </h3>
+      <table class="table bordbot table-striped">
+        <thead class="thead-dark">
+            <tr>
+              <th>ID</th>
+              <th>MOTIVO</th>
+              <th>FECHA MULTA</th>
+              <th>IMPORTE</th>
+              <th>LUGAR MULTA</th>
+              <th>EMPLEADO</th>
+              <th>VEHICULO</th>
+              <th>EDITAR</th>
+              <th>ELIMINAR</th>
+            </tr>
+        </thead>
+        <tbody class="table-striped mb-5">
+            <tr *ngFor="let multa of multasvehiculo">
+              <td>{{ multa.idmulta }}</td>
+              <td>{{ multa.causamulta}}</td>
+              <td>{{ multa.fechamulta }}</td>
+              <td>{{ multa.importe}}</td>
+              <td>{{ multa.lugarmulta}}</td>
+              <td>{{ multa.empleado.nomemp}}</td>
+              <td>{{ multa.vehiculo.idvehiculo}}</td>
+                <td><a mat-raised-button color="accent" class="btn">Editar</a></td>
+                <td><a mat-raised-button color="warn" class="btn">Eliminar</a></td>
+
+            </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+<div class="row">
+  <div class="col">
+      <a routerLinkActive="router-link-active" mat-raised-button color="warn" class="btn mr-3 mb-5" [routerLink]="['/vehiculos']">Volver</a>
+      <a href="#" mat-raised-button color="warn" class="btn mr-3 mb-5" [routerLink]="['/asociarcontenedor', idx]">Insertar poliza</a>
+      <!-- <a href="#" mat-raised-button color="warn" class="btn mr-3 mb-5" [routerLink]="['/asociarcontenedor', idx]">Insertar contenedor</a> -->
+      <a href="#" mat-raised-button color="warn" class="btn mr-3 mb-5">Informes</a>
+  </div>
+  <div class="col">
+
+  </div>
+  <div class="col">
+    <mat-paginator [length]="200" [pageSizeOptions]="[5, 10]" aria-label="Select page">
+    </mat-paginator>
+</div>
+</div>
+
+</div>
+
+
+</div>

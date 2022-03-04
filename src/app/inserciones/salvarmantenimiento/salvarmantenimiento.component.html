@@ -1,0 +1,85 @@
+<div class="container-fluid">
+  <app-navegacion></app-navegacion>
+  <div class="col-lg-12">
+    <h2 class="pl-2 pt-4" *ngIf="!idExiste">Insertar nuevo mantenimiento</h2>
+    <h2 class="pl-2 pt-4" *ngIf="idExiste">Actualizar datos de mantenimiento - {{ mantenimiento.mantenimiento }} </h2>
+
+    <form [formGroup]="formMantenimiento" #f="ngForm">
+
+      <div *ngIf="idExiste">
+        <label for="idruta">ID Mantenimiento: </label>
+        <input type="text" value="{{ mantenimiento.idmantenimiento }}" name="idmantenimiento" id="idmantenimiento"
+          formControlName="idmantenimiento" class="form-control" [(ngModel)]="mantenimiento.idmantenimiento">
+        <br>
+        <!-- <small *ngIf="idrutaNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small> -->
+      </div>
+
+
+      <label for="tipomante">Tipo mantenimiento: </label>
+      <select name="tipomante" id="tipomante" formControlName="tipomante" [class.is-invalid]="tipomanteNoValida"
+        class="form-control" [(ngModel)]="mantenimiento.tipomante" (ngModelChange)="onChangeTipoMante($event)">
+        <option [value]="" *ngFor="let m of tiposmantenimiento">{{ m.idtipomante}} - {{ m.denommante }}</option>
+      </select>
+      <br>
+
+
+      <label for="idvehiculo">Vehículo: </label>
+      <select name="idvehiculo" id="idvehiculo" formControlName="idvehiculo" [class.is-invalid]="tipomanteNoValida"
+        class="form-control" [(ngModel)]="mantenimiento.idvehiculo" (ngModelChange)="onChange($event)">
+        <option [value]="" *ngFor="let v of vehiculos">{{ v.idvehiculo}} - {{ v.marca }} {{ v.modelo }} {{ v.matricula }}
+      </select>
+      <br>
+      <!-- <small *ngIf="denomNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small> -->
+
+      <label for="mantenimiento">Mantenimiento: </label>
+      <input type="text" [value]="" name="mantenimiento" id="mantenimiento"
+        formControlName="mantenimiento" [class.is-invalid]="mantenimientoNoValida" class="form-control"
+        [(ngModel)]="mantenimiento.mantenimiento">
+      <br>
+      <!-- <small *ngIf="denomNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small> -->
+
+      <label for="coste">Importe: </label>
+      <input type="text" [value]="" name="coste" id="coste" formControlName="coste"
+        [class.is-invalid]="costeNoValida" class="form-control" [(ngModel)]="mantenimiento.coste">
+      <br>
+      <!-- <small *ngIf="denomNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small> -->
+
+      <label for="proveedor">Proveedor: </label>
+      <input type="text" [value]="" name="proveedor" id="proveedor"
+        formControlName="proveedor" [class.is-invalid]="costeNoValida" class="form-control"
+        [(ngModel)]="mantenimiento.proveedor">
+      <br>
+      <!-- <small *ngIf="denomNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small> -->
+
+      <label for="numfactura">Número de factura: </label>
+      <input type="text" [value]="" name="numfactura" id="numfactura"
+        formControlName="numfactura" [class.is-invalid]="costeNoValida" class="form-control"
+        [(ngModel)]="mantenimiento.numfactura">
+      <br>
+      <!-- <small *ngIf="denomNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small> -->
+
+      <label for="fechamantenimiento">Fecha mantenimiento: </label>
+      <input type="date" [value]="" name="fechamantenimiento"
+        id="fechamantenimiento" formControlName="fechamantenimiento" [class.is-invalid]="fechamantenimientoNoValida"
+        class="form-control" [(ngModel)]="mantenimiento.fechamantenimiento">
+      <br>
+      <small *ngIf="fechamantenimientoNoValida" class="text-danger ml-3">Insertar fecha de mantenimiento</small>
+
+
+
+
+      <div class="ml-3 mt-3">
+        <button type="submit" value="Salvar Ruta" mat-raised-button color="accent" class="btn submit mr-3"
+          (click)="guardarMantenimiento()" >Salvar mantenimiento</button>
+
+      </div>
+
+    </form>
+
+
+
+  </div>
+  <div class="col-lg-12 ml-3 mt-3">
+    <a [routerLink]="['/rutas']" routerLinkActive="router-link-active" mat-raised-button color="warn"
+      class="btn mb-5">Volver</a>
+  </div>

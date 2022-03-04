@@ -9,8 +9,8 @@
 	        <div class="col"> <!-- LA PUTISISIMA COLUMNA -->
 	            <form [formGroup]="formEmpleado" #f="ngForm" (ngSubmit)="guardar()">
                 <!-- <form [formGroup]="formEmpleado" #f="ngForm" (ngSubmit)="guardar( formEmpleado.value )"></form> -->
-                <label for="idempleado">ID: </label>
-                <input type="text" name="idempleado" id="idempleado" formControlName="idempleado"  class="form-control" [(ngModel)]="empleado.idempleado">
+                <label for="idempleado" *ngIf="idExiste">ID: </label>
+                <input type="text" name="idempleado" id="idempleado" formControlName="idempleado"  class="form-control" [(ngModel)]="empleado.idempleado" *ngIf="idExiste">
                 <br>
 
 
@@ -99,15 +99,18 @@
                     <!-- <small *ngIf="ibanNoValida" class="text-danger ml-3">Introducir los 24 caracteres </small> -->
 
                     <label for="categoria">Categoría: </label>
-                    <input type="text" name="categoria" id="categoria" formControlName="categoria"
+                    <select name="categoria" id="categoria" formControlName="categoria" class="form-control" (ngModelChange)="onChange($event)">
+                      <option [value]="categoria.idcategoria" *ngFor="let categoria of categorias">{{ categoria.idcategoria }} - {{ categoria.denom }}</option>
+                    </select>
+                    <!-- <input type="text" name="categoria" id="categoria" formControlName="categoria"
 
-                    class="form-control" [(ngModel)]="empleado.categoria">
+                    class="form-control" [(ngModel)]="empleado.categoria"> -->
                     <br>
                     <!-- <small *ngIf="categoriaNoValida" class="text-danger ml-3">Introducir categría </small> -->
 
                     <label for="tipocontrato" class="mb-3">Tipo de contrato: </label>
-                    <mat-radio-group aria-label="Select tipocontrato" class="ml-3" formControlName="tipocontrato" [(ngModel)]="empleado.tipocontrato">
-                      <mat-radio-button *ngFor="let tipo of tipoContrato" [value]="tipo.tipocontrato" formControlName="tipocontrato" ngDefaultControl class="mr-5 mat-warn" >{{ tipo.tipocontrato }} </mat-radio-button>
+                    <mat-radio-group aria-label="Select tipocontrato" class="ml-3" formControlName="tipocontrato" [(ngModel)]="empleado.tipocontrato" (ngModelChange)="onChangeContrato($event)">
+                      <mat-radio-button *ngFor="let tipo of tiposContrato" [value]="tipo.idtipocontrato" formControlName="tipocontrato" ngDefaultControl class="mr-5 mat-warn" >{{ tipo.denomcontrato }} </mat-radio-button>
                        <!-- <mat-radio-button [value]="estructura" formControlName="tipocontrato" ngDefaultControl class="mr-5 mat-warn">Estructura </mat-radio-button>
                       <mat-radio-button value="insercion" formControlName="tipocontrato" ngDefaultControl class="mat-warn">Inserción </mat-radio-button> -->
                     </mat-radio-group>
@@ -116,11 +119,10 @@
 
                     <div class="ml-3 mt-3">
                       <button type="submit" value="Salvar Empleado" mat-raised-button color="accent" class="btn submit mr-3"
-                      [routerLink]="['/empleados']" (click)="guardar()">Salvar Empleado</button>
+                      [routerLink]="['/salvarempleado']" (click)="guardar()">Salvar Empleado</button>
                       <!-- <button type="submit" value="Salvar Empleado" mat-raised-button color="accent" class="btn submit mr-3"
                       (click)="guardar( formEmpleado.value )" [routerLink]="['/empleados']">Salvar Empleado</button> -->
                     </div>
-
                 </form>
 
 

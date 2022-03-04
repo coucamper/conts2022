@@ -14,7 +14,6 @@ export class AvisosService {
   idx:number;
 
   constructor( private http: HttpClient, private activatedR: ActivatedRoute ) {
-    console.log("Servicio avisos funcionando");
    }
 
   getAvisos(){
@@ -25,8 +24,8 @@ export class AvisosService {
     return this.http.get(`${ this.url }/${ idx }`);
   }
 
-  postAviso( aviso:AvisoModel ){
-    return this.http.post(`${ this.url }`, aviso );
+  postAviso( idremitente:number, aviso:AvisoModel ){
+    return this.http.post(`${ this.url }/${idremitente}`, aviso );
   }
 
   putAviso( idx:number, aviso:AvisoModel ){
@@ -34,7 +33,7 @@ export class AvisosService {
   }
 
   deleteAviso( idx:number ){
-    return this.http.delete(`${ this.url }/${ idx }`);
+    return this.http.delete(`${this.url}/${Number(idx)}`);
   }
 
 }

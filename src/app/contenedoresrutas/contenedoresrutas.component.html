@@ -44,25 +44,9 @@
 						<th>EDITAR</th>
 						<th>ELIMINAR</th>
 					</tr>
-					<tr th:each="c : ${idruta}">
-						<td th:text="${c.contenedores.idcontenedor}"></td>
-						<td th:text="${c.contenedores.denom}"></td>
-						<td th:text="${c.contenedores.ubicacion}"></td>
-						<td th:text="${c.contenedores.coordenadas}"></td>
-						<td th:text="${c.contenedores.fechaimplantacion}"></td>
 
-						<td><a th:href="${c.contenedores.mapa}" class="btn btn-light">Mapa</a></td>
-						<td><a href="#" class="btn btn-warning">Modificar</a></td>
-						<td><button class="btn btn-danger" id="eliminar" name="eliminar">Eliminar</button></td>
 
-					<!--
-											<td><a th:href="@{/eliminarlinea(idlinea=${linea.idlinea})}" class="links">Eliminar</a></td>
-						<td><a th:href="@{/modificarlinea(idlinea=${linea.idlinea})}" class="links">Modificar</a></td>
-						<td><a th:href="@{/recuperaparadas(idlinea=${linea.idlinea})}" class="links">Paradas</a></td>
-
-					 -->
-
-           <!-- <tr *ngFor="let rut of rutas">
+           <tr *ngFor="let rut of ContenedoresRuta">
             <td>{{ rut.idruta }}</td>
             <td>{{ rut.zona_idzona }}</td>
             <td>{{ rut.localidad }}</td>
@@ -71,14 +55,8 @@
             <td>{{ rut.periodo }}</td>
             <td><a mat-raised-button class="btn">Ruta</a></td>
             <td><a mat-raised-button class="btn" [routerLink]="['/ruta', rut.idruta ]">Ver contenedores</a></td>
-            <td><a mat-raised-button color="accent" class="btn" (click)="verRuta( rut.idruta )" [routerLink]="['/salvarruta', rut.idruta ]">Editar</a></td>
+            <td><a mat-raised-button color="accent" class="btn" (click)="verRuta()" [routerLink]="['/salvarruta', rut.idruta ]">Editar</a></td>
             <td><a mat-raised-button color="warn" class="btn" (click)="borrarRuta()">Eliminar</a></td>
-
-
-        </tr> -->
-
-
-
 					</tr>
 				</table>
 

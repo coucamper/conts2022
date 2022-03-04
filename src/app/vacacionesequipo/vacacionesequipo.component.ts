@@ -10,13 +10,13 @@ import { VacacionesequipoService } from '../services/vacacionesequipo.service';
 })
 export class VacacionesequipoComponent implements OnInit {
 
-  vacacionesGlobales:any;
+  vacacionesGlobales:any [] = [];
 
   constructor( private router: Router, private activatedRoute: ActivatedRoute, private _vacaciones: VacacionesequipoService, private vacacion: vacacionEquipoModel ) {
 
     this._vacaciones.getVacacionesequipo().subscribe( (vacaciones:any) =>{
-      console.log(vacaciones);
       this.vacacionesGlobales = vacaciones;
+      console.log(this.vacacionesGlobales);
     });
 
    }

@@ -1,136 +1,143 @@
+<div class="container-fluid">
+  <app-navegacion></app-navegacion>
 
-	<div class="container-fluid">
-		<app-navegacion></app-navegacion>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fsmall">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+</div>
 
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light fsmall">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarNavAltMarkup"
-                            aria-controls="navbarNavAltMarkup" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                    </nav>
-
-			</div>
-
-		<!-- end cabecera -->
-        <div class="row" *ngIf="usuario">
-            <div class="col-lg-10 offset-lg-1 entrada_recogida mt-3 bordbot">
-            	<div class="usuario_img avatar">
-            		<img src="assets/img/irene.jpg" alt="Avatar de usuario" class="avatar">
-            	</div>
-                <h3 class="avatar_saludo ml-3">¡Buenos días, <span id="nombre_usuario">{{ usuario.nomemp }}</span>!</h3>
-            </div>
-            <div class="col-lg-10 offset-lg-1">
+<!-- end cabecera -->
+<div class="row" *ngIf="usuario">
+  <div class="col-lg-10 offset-lg-1 entrada_recogida mt-3 bordbot">
+    <div class="usuario_img avatar">
+      <img src="assets/img/hector.jpg" alt="Avatar de usuario" class="avatar">
+    </div>
+    <h3 class="avatar_saludo ml-3">¡Buenos días, <span id="nombre_usuario">{{ usuario.nomemp }}</span>!</h3>
+  </div>
+  <div class="col-lg-10 offset-lg-1">
 
 
-            </div>
-        </div> <!--  End de contenido del saludo al usuario -->
-        <div class="row">
-        	<div class="col-lg-10 offset-lg-1 mt-5">
-        		<h3>Últimos mensajes &nbsp;&nbsp; <small class="red"><i class="fas fa-exclamation red"></i>&nbsp; Recuerda, los mensajes son visibles solo para ti</small></h3>
-        	</div>
-        	<div class="col-lg-10 offset-lg-1">
-				<table class="table">
-					<tr>
-						<th>FECHA</th>
-						<th>REMITENTE</th>
-						<th>RECEPTOR</th>
-						<th>ASUNTO</th>
-						<th>CONTENIDO</th>
-						<th>IMPORTANCIA</th>
-						<th>RESPONDER</th>
-						<th>ELIMINAR</th>
-					</tr>
+  </div>
+</div> <!--  End de contenido del saludo al usuario -->
+<div class="row">
+  <div class="col-lg-10 offset-lg-1 mt-5">
+    <h3>Últimos mensajes &nbsp;&nbsp; <small class="red"><i class="fas fa-exclamation red"></i>&nbsp; Recuerda, los
+        mensajes son visibles solo para ti</small></h3>
+  </div>
+  <div class="col-lg-10 offset-lg-1">
+    <table class="table">
+      <tr>
+        <th>FECHA</th>
+        <th>REMITENTE</th>
+        <th>ASUNTO</th>
+        <th>CONTENIDO</th>
+        <th>IMPORTANCIA</th>
+        <th>RESPONDER</th>
+        <th>ELIMINAR</th>
+      </tr>
 
-				    <tr *ngFor="let m of mensajes">
+      <tr *ngFor="let m of mensajesreceptor">
 
-				    	<td><i class="fas fa-envelope red"></i> {{ m.fechahora | date:'medium' }}</td>
-				    	<td>{{ m.remitente.nomemp }}</td>
-				    	<td>{{ m.receptor.nomemp }}</td>
-				    	<td>{{ m.asunto }}</td>
-				    	<td>{{ m.contenido }}</td>
-				    	<td>{{ m.importancia }}</td>
-				    	<td><a mat-raised-button class="btn">Responder</a></td>
-						<td><a mat-raised-button color="warn" class="btn">Eliminar</a></td>
-				    </tr>
-
-
-				</table>
-			</div>
-
-        </div>
-
-        <div class="row"> <!-- SECCION DE AVISOS -->
-             <div class="col-lg-12"> <!-- titulo panel -->
-             	<div class="col-lg-10 offset-lg-1 mt-4 mb-4 p-0 bordbot">
-             		<h3>Últimas notificaciones &nbsp;&nbsp; <small class="red"><i class="fas fa-exclamation red"></i>&nbsp; Recuerda, las notificaciones son visibles para todo el equipo</small></h3>
-             	</div>
-             </div> <!-- fin titulo panel -->
+        <td><i class="fas fa-envelope red"></i> {{ m.fechahora | date:'medium' }}</td>
+        <td>{{ m.remitente.nomemp }}</td>
+        <td>{{ m.asunto }}</td>
+        <td>{{ m.contenido }}</td>
+        <td>{{ m.idtipoimportancia }}</td>
+        <td><a mat-raised-button class="btn" [routerLink]="['/respondermensaje/', m.idmensaje]">Responder</a></td>
+        <td><a mat-raised-button color="warn" class="btn"
+            (click)="eliminarMensaje( m.idmensaje ); refresh()">Eliminar</a></td>
+      </tr>
 
 
+    </table>
+
+    <div>
+      <a [routerLink]="['/salvarmensaje']" mat-raised-button color="warn" class="btn mb-5">Nuevo mensaje</a>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="row">
+  <!-- SECCION DE AVISOS -->
+  <div class="col-lg-12">
+    <!-- titulo panel -->
+    <div class="col-lg-10 offset-lg-1 mt-4 mb-4 p-0 bordbot">
+      <h3>Últimas notificaciones &nbsp;&nbsp; <small class="red"><i class="fas fa-exclamation red"></i>&nbsp; Recuerda,
+          las notificaciones son visibles para todo el equipo</small></h3>
+    </div>
+  </div> <!-- fin titulo panel -->
 
 
-            <div class="col-lg-12">
 
-              <div class="row">
-                <div class="col-lg-10 offset-lg-1">
-                  <div class="col-lg-3 ib" *ngFor="let av of avisos">
-                    <div class="card" >
-                      <div class="card materialBox">
-                        <h5 class="card-header bg-primary text-white">{{ av.asunto }}</h5>
-                        <div class="card-body">
-                          <p>Fecha: <strong>{{ av.fechahora | date:'short' }}</strong></p>
-                          <h4 class="card-title">Asunto: <strong>{{ av.asunto }}</strong></h4>
-                          <p>Notifica: <strong>{{ av.remitente.nomemp }}</strong></p>
-                          <p class="card-text bordered">{{ av.contenido }}</p>
 
-                          <a href="#" mat-raised-button class="btn mr-3"><i class="far fa-eye"></i> Ver detalles</a>
-                          <a href="#" mat-raised-button class="btn red"><i class="fas fa-times"></i> Cerrar</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+  <div class="col-lg-12">
 
-                </div>
-
+    <div class="row">
+      <div class="col-lg-10 offset-lg-1">
+        <div class="col-lg-3 ib" *ngFor="let av of avisosMostrados">
+          <div class="card">
+            <div class="card materialBox">
+              <h5 class="card-header bg-primary text-white">{{ av.asunto }}</h5>
+              <div class="card-body">
+                <p>Fecha: <strong>{{ av.fechahora }}</strong></p>
+                <h4 class="card-title">Asunto: <strong>{{ av.asunto }}</strong></h4>
+                <p>Notifica: <strong>{{ av.remitente.nomemp }}</strong></p>
+                <p class="card-text bordered">{{ av.contenido }}</p>
+                <a href="#" mat-raised-button class="btn mr-3"><i class="far fa-eye"></i> Editar</a>
+                <a  mat-raised-button class="btn red"><i class="fas fa-times" (click)="eliminarAviso( av.idaviso ); refresh()"></i> Eliminar</a>
               </div>
-
-
             </div>
+          </div>
+        </div>
+        <div>
+          <a [routerLink]="['/salvaraviso']" mat-raised-button color="warn" class="btn mb-5 mt-5 mr-3">Nueva
+            notificación</a>
+          <a [routerLink]="['/avisos']" mat-raised-button color="warn" class="btn mb-5 mt-5">Ver anteriores</a>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
 
 
 
 
 
 
-        	 </div> <!-- FIN SECCION DE AVISOS -->
+</div> <!-- FIN SECCION DE AVISOS -->
 
 
-			 <div>
+<div>
 
-			 </div>
-
-
-        	 <div class="row">
-        	 <div class="col-lg-10 offset-lg-1 mt-5 mb-5 bordbot">
-        	 <h3>Rotación de turnos de conductores</h3>
-        	 </div>
-
-        	 	<div class="col-lg-10 offset-lg-1">
-        	 		<div id="example3.1" style=" width: 100%; height: 280px;"></div>
-        	 	</div>
+</div>
 
 
+<div class="row">
+  <div class="col-lg-10 offset-lg-1 mt-5 mb-5 bordbot">
+    <h3>Rotación de turnos de conductores</h3>
+  </div>
+
+  <div class="col-lg-10 offset-lg-1">
+    <div id="example3.1" style=" width: 100%; height: 280px;"></div>
+  </div>
 
 
-             <div class="col-lg-10 offset-lg-1 mt-5 bordbot">
-        	 <h3>Estadísticas de recogida y cargas</h3>
-        	 </div>
-        	 	<div class="col-lg-6 pl-5">
-        	 		<div id="chart_div" style="width: 100%; height: 500px; border-radius: 10px;" class="ml-1 mt-4"></div>
-        	 	</div>
-        	 	<div class="col-lg-6 mt-4">
-        	 		<div id="piechart_3d" style="width: 900px; height: 500px;"></div>
-        	 	</div>
-        	 </div>
+
+
+  <div class="col-lg-10 offset-lg-1 mt-5 bordbot">
+    <h3>Estadísticas de recogida y cargas</h3>
+  </div>
+  <div class="col-lg-6 pl-5">
+    <div id="chart_div" style="width: 100%; height: 500px; border-radius: 10px;" class="ml-1 mt-4"></div>
+  </div>
+  <div class="col-lg-6 mt-4">
+    <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+  </div>
+</div>

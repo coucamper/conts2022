@@ -12,11 +12,10 @@ import { NgModule } from "@angular/core";
 export class AvisoModel {
 
   idaviso:number;
-  tiposaviso:string;
   asunto:string;
-  detalles:string;
-  fechaaviso:string;
-  idempleado:number;
+  contenido:string;
+  fechahora:string;
+  idremitente:number;
 
   constructor(){}
 

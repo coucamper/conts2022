@@ -5,29 +5,20 @@
     <!-- <h2 class="pl-2 pt-4" *ngIf="idExiste">Actualizar datos de contenedor - {{ contenedor.denom }} ({{ contenedor.barrio}} - {{ contenedor.localidad }}) </h2> -->
 
 
-      <form [formGroup]="formContenedor" #f="ngForm">
-        <label for="zona">Contenedores registrados: </label>
-        <select name="denom" class="form-control" formControlName="denom" [(ngModel)]="contenedor.denom"  (ngModelChange)="onChange($event)">
-          <option *ngFor="let cn of contenedores" [value]="">{{ cn.idcontenedor }} - {{ cn.denom }} - {{ cn.ubicacion}}  ({{ cn.localidad }})</option>
-        </select>
-      </form>
-
-
-
+    <form [formGroup]="formContenedor" #f="ngForm">
+      <label for="zona">Contenedores registrados: </label>
+      <select name="idcontenedor" class="form-control" formControlName="idcontenedor" [(ngModel)]="idcontenedor"
+        (ngModelChange)="onChange($event)">
+        <option *ngFor="let cn of contenedores" [value]="">{{ cn.idcontenedor }} - {{ cn.denom }} - {{ cn.ubicacion}}
+        </option>
+      </select>
+    </form>
   </div>
-
   <div class="col-lg-12 ml-3 mt-3">
-
-    <!--
-                    <div class="col">
-                        <a [routerLink]="['/salvarruta']" routerLinkActive="router-link-active" mat-raised-button color="warn" class="btn mr-3 mb-5">Añadir Ruta</a>
-                        <a href="#" mat-raised-button color="warn" class="btn mr-3 mb-5">Informes</a>
-                    </div>
-
-    -->
-
-    <a [routerLink]="['/ruta', idx]" routerLinkActive="router-link-active" mat-raised-button color="warn" class="btn mr-3 mb-5" (click)="guardar()">Añadir a la ruta</a>
-    <a [routerLink]="['/rutas']" routerLinkActive="router-link-active" mat-raised-button color="warn" class="btn mr-3 mb-5">Volver</a>
+    <a [routerLink]="['/rutas']" routerLinkActive="router-link-active" mat-raised-button color="warn"
+      class="btn mr-3 mb-5" (click)="guardar()">Añadir a la ruta</a>
+    <a [routerLink]="['/rutas']" routerLinkActive="router-link-active" mat-raised-button color="warn"
+      class="btn mr-3 mb-5">Volver</a>
   </div>
 
 
