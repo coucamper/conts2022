@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { HttpClient, HttpClientModule} from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { ContenedorVOModule } from './models/contenedor-vo/contenedorModel';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -149,7 +149,12 @@ import { MensajeformularioModel } from './models/mensajeformularioModel';
 import { RespondermensajeComponent } from './inserciones/respondermensaje/respondermensaje.component';
 import { SalvaravisoComponent } from './inserciones/salvaraviso/salvaraviso.component';
 import { AvisosComponent } from './avisos/avisos.component';
-
+import { LoginModel } from './models/loginModel';
+import { RolModel } from './models/rolModel';
+import { UsuarioModel } from './models/usuarioModel';
+import { ClientesComponent } from './clientes/clientes.component';
+import { AuthInterceptor } from './services/auth-interceptor';
+import { UsersAuthService } from './services/users-auth.service';
 
 
 
@@ -222,7 +227,8 @@ import { AvisosComponent } from './avisos/avisos.component';
     SalvarvacacionesempleadoComponent,
     RespondermensajeComponent,
     SalvaravisoComponent,
-    AvisosComponent
+    AvisosComponent,
+    ClientesComponent
   ],
   imports: [
     BrowserModule,
@@ -261,7 +267,10 @@ import { AvisosComponent } from './avisos/avisos.component';
     JwPaginationModule,
     MensajeModel,
     EmpleadocategoriaModel,
-    MensajeformularioModel
+    MensajeformularioModel,
+    LoginModel,
+    RolModel,
+    UsuarioModel
   ],
   providers: [
    ContenedoresService,

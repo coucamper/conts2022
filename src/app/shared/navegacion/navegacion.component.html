@@ -55,6 +55,7 @@
             class="sr-only">(current)</span></a>
         <a class="nav-link" [routerLink]="['/pesajes']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fas fa-weight"></i> &nbsp;Pesajes</a>
         <a class="nav-link" [routerLink]="['/contenedores']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fas fa-dumpster"></i>&nbsp; Contenedores</a>
+        <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="logout()"><i class="fas fa-solid fa-door-closed"></i>&nbsp; Logout</a>
 
       </div>
     </div>

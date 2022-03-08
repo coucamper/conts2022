@@ -8,15 +8,18 @@
       <h2 class="white">ACCESO PRIVADO: </h2>
 
 
-      <form>
-        <label for="user_name">Nombre de usuario:</label>
-        <input type="text" placeholder="Introducir nombre de usuario" id="user_name" class="form-control fc-login">
+      <form [formGroup]="formLogin" #f="ngForm">
+        <label for="username">Nombre de usuario:</label>
+        <input type="text" placeholder="Introducir nombre de usuario" id="username" class="form-control fc-login"
+          [(ngModel)]="user.username" formControlName="username" autofocus required>
 
-        <label for="user_pass">Password de usuario:</label>
-        <input type="password" placeholder="Introducir password de usuario" id="user_name" class="form-control fc-login">
+        <label for="password">Password de usuario:</label>
+        <input type="password" placeholder="Introducir password de usuario" id="password" class="form-control fc-login"
+          [(ngModel)]="user.password" formControlName="password" autocomplete=“current-password” required>
 
         <div class="ml-2 mt-5">
-          <button type="submit" class="btn" mat-raised-button [routerLink]="['/panel']">
+          <!-- <button type="button" class="btn" mat-raised-button (click)="logIn()"> ESTA ES LA VERSION PARA EL BACKEND SECURITY PRODUCCION 2-->
+            <button type="button" class="btn" mat-raised-button [routerLink]="['/panel']">
             Validar Acceso
           </button>
         </div>
@@ -24,7 +27,8 @@
       </form>
 
       <p class="mt-5"><small><strong>Adia Soft Solutions 2021</strong> - Un Proyecto Open Source conceptualizado y
-        desarrollado por <strong>Héctor del Campo@HDCMedia</strong> con la colaboración de: <br></small><strong class="white_text">Cáritas Koopera Astur S.Coop.Astur</strong></p>
+          desarrollado por <strong>Héctor del Campo@HDCMedia</strong> con la colaboración de: <br></small><strong
+          class="white_text">Cáritas Koopera Astur S.Coop.Astur</strong></p>
     </div>
   </div>
 </div>

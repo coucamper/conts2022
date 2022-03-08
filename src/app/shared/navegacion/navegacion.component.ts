@@ -21,4 +21,8 @@ export class NavegacionComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  logout(){
+
+  }
+
 }

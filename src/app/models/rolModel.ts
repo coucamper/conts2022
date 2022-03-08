@@ -9,12 +9,10 @@ import { NgModule } from "@angular/core";
   ]
 })
 
+export class RolModel {
 
-export class ClienteModel {
-
-  clienteid: number;
-  cliente:string;
-  email: string;
+  idrol: number;
+  nombre: string;
 
   constructor(){}
 

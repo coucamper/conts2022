@@ -1,6 +1,7 @@
 
 import { RouterModule, Routes } from "@angular/router";
 import { AvisosComponent } from "./avisos/avisos.component";
+import { ClientesComponent } from "./clientes/clientes.component";
 import { ContenedoresComponent } from './contenedores/contenedores.component';
 import { ContenedoresrutasComponent } from "./contenedoresrutas/contenedoresrutas.component";
 import { EmpleadoComponent } from "./empleados/empleado/empleado.component";
@@ -64,6 +65,8 @@ import { ZonasComponent } from "./zonas/zonas.component";
 
 
 export const APP_ROUTES: Routes = [
+    { path: 'clientes', component: ClientesComponent },
+    //{ path: 'clientes/:id', component: ClientesComponent },
     { path: 'inicio', component: InicioComponent },
     { path: 'login', component: LoginComponent },
     { path: 'panel', component: PanelComponent },
