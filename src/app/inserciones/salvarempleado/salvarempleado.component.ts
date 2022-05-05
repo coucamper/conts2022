@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit , Output} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl, NgForm, ReactiveFormsModule, NgModel } from '@angular/forms';
 import { EmpleadosService } from 'src/app/services/empleados.service';
@@ -9,6 +9,7 @@ import { EmpleadocategoriaService } from 'src/app/services/empleadocategoria.ser
 import { TipocontratoService } from 'src/app/services/tipocontrato.service';
 import { CategoriaModel } from 'src/app/models/categoriaModel';
 import { EmpleadocategoriaModel } from 'src/app/models/empleadocategoria';
+import { EmpleadoRecuperadoModel } from 'src/app/models/empleadoRecuperadoModel';
 
 
 
@@ -18,25 +19,32 @@ import { EmpleadocategoriaModel } from 'src/app/models/empleadocategoria';
 @Component({
   selector: 'app-salvarempleado',
   templateUrl: './salvarempleado.component.html',
+  template:` <app-salvarcategoria [childMessage]="parentMessage"></app-salvarcategoria>`,
   styleUrls: ['./salvarempleado.component.css']
 })
 export class SalvarempleadoComponent implements OnInit {
 
+  parentMessage = "message from parent";
 
   formEmpleado:FormGroup;
   idx:number;
-  empleado:EmpleadoModel = new EmpleadoModel();
+  @Output() empleado:EmpleadoModel = new EmpleadoModel();
+  empleadonif:EmpleadoModel = new EmpleadoModel();
   emp:any = new EmpleadoModel();
   idExiste: boolean = false;
 
+  empleados:any[] = [];
   tiposContrato:any[] = []; // Devuelve un array con los tipos de contrato existentes
+  categorias:any[] = []; // Devuleve un array de categorías existentes
   radioContrato:any; // Button radio para seleccionar tipo de contrato
   idcontrato:number; // El id del tipo de contrato
   tipoContra:any; // Verificar asignación?
-  categorias:any[] = []; // Devuleve un array de categorías existentes
   inputCategoria:any; // control para tipo de categoría
   categoria:EmpleadocategoriaModel;
   idcategoria:number;
+
+  controlnif:any;
+  @Output() nif:string;
 
   constructor(private router: Router,
               private fB: FormBuilder,
@@ -49,40 +57,37 @@ export class SalvarempleadoComponent implements OnInit {
               // Obtengo el id de la ruta si es que existe
               this.idx = this.activatedRoute.snapshot.params['id'];
 
-              this._empleados.getEmpleado( this.idx ).subscribe( (emp:any) =>{
-                this.empleado = emp;
-                return this.empleado;
-              });
 
-              this._categorias.getCategorias().subscribe((categorias:any) => {
-                this.categorias=categorias;
-                console.log(this.categorias);
-              });
-
-
-              this._tipocontrato.getTiposContrato().subscribe((tipos:any) => {
-                this.tiposContrato=tipos;
-                console.log(this.tiposContrato);
-              });
-
-              // Llamada a las funciones del componente
-              this.cambiaTitulo();
-              this.crearFormulario( );
-              this.cargarEmpleado( this.idx );
-
-
-
-              console.log("Empleado?"+this.empleado.nomemp);
 
           }
 
 
   ngOnInit(): void {
 
-    // Esto está duplicado mejor usar el del constructor
 
-    // this.idx = this.activatedRoute.snapshot.params['id'];
+    this.idx = this.activatedRoute.snapshot.params['id'];
+    this._empleados.getEmpleado( this.idx ).subscribe( (emp:any) =>{
+      this.empleado = emp;
+      return this.empleado;
+    });
 
+    this._categorias.getCategorias().subscribe((categorias:any) => {
+      this.categorias=categorias;
+      console.log(this.categorias);
+    });
+
+
+    this._tipocontrato.getTiposContrato().subscribe((tipos:any) => {
+      this.tiposContrato=tipos;
+      console.log(this.tiposContrato);
+    });
+
+    // Llamada a las funciones del componente
+    this.cambiaTitulo();
+    this.crearFormulario( );
+    this.cargarEmpleado( this.idx );
+
+    console.log("Empleado?"+this.empleado.nomemp);
 
   }
 
@@ -93,7 +98,9 @@ export class SalvarempleadoComponent implements OnInit {
       console.log("El empleado no existe");
     } else {
          this._empleados.getEmpleado( id ).subscribe( (e:any) =>{
+         //console.log(e);
          this.emp = e;
+         console.log("Empleado: "+ this.emp.nomemp );
 
          // -----------------------------------------------------------
 
@@ -126,7 +133,7 @@ export class SalvarempleadoComponent implements OnInit {
                 "emailemp" : [`${ this.emp.emailemp}`],
                 "domicilio" : [`${ this.emp.domicilio}`],
                 "iban" : [`${ this.emp.iban}`],
-                "categoria" : [`${ this.categoria.idempleadocategoria}`],
+                "categoria" : [`${ this.emp.categoria}`],
                 "tipocontrato" : [`${ this.emp.tipocontrato}`]
               });
          //return this.emp;
@@ -160,9 +167,7 @@ export class SalvarempleadoComponent implements OnInit {
       telecontacto: new FormControl(),
       emailemp: new FormControl(),
       domicilio: new FormControl(),
-      iban: new FormControl(),
-      categoria: new FormControl(),
-      tipocontrato: new FormControl()
+      iban: new FormControl()
     });
   }
 
@@ -203,26 +208,43 @@ export class SalvarempleadoComponent implements OnInit {
     console.log(this.idcontrato);
   }
 
+  onChangeNif(valor:any){
+    this.controlnif = this.formEmpleado.controls['nif'].value;
+    this.controlnif = valor;
+    this.nif=valor;
+    //console.log(this.nif);
+  }
 
 
 
-   guardar(  ){
 
+
+   guardar(){
     this.validarForm( this.formEmpleado.value );
+
      if( this.emp.idempleado ){
-
      this.empleado = this.formEmpleado.value;
-
-     return this._empleados.putEmpleado( this.idx , this.empleado ).subscribe();
-
+       this.nif = this.empleado.nif;
+       this._empleados.putEmpleado( this.idx , this.empleado ).subscribe();
+       //console.log(this.nif);
+       this.router.navigate(['/empleados']);
      }else {
+      this.empleado = this.formEmpleado.value;
+      this.nif = this.formEmpleado.controls['nif'].value;
+      console.log(this.empleado);
+       this._empleados.postEmpleado( this.empleado ).subscribe();
+       //console.log(this.nif);
+       this.nif =this.empleado.nif;
+       this.router.navigate(['/empleados']);
 
-       return this._empleados.postEmpleado( this.empleado ).subscribe();
      }
-
-     //return this.empleado;
+     return this.nif;
 
    }
+
+
+
+
 
 
 }

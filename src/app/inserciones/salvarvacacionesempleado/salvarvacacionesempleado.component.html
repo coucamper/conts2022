@@ -1,90 +1,66 @@
 <div class="container-fluid">
   <app-navegacion></app-navegacion>
-  <div class="col-lg-12">
+  <div class="col-lg-12" *ngIf="empleado">
     <h2 class="pl-2 pt-4" *ngIf="!idExiste">Insertar nuevas vacaciones</h2>
     <h2 class="pl-2 pt-4" *ngIf="idExiste">Actualizar vacaciones de: {{ empleado.nomemp }} {{ empleado.ape1emp }}</h2>
 
-    <form [formGroup]="formVacaEmpleado" #f="ngForm" (ngSubmit)="guardarVacaciones()">
+    <form [formGroup]="formVacaEmpleado" #f="ngForm" (ngSubmit)="guardarVacacionEmpleado()">
 
       <div *ngIf="!idExiste"> <!-- SI EL ID NO EXISTE EN LA BD -->
-
 
         <label for="empleado">Empleado: </label>
         <select name="empleado" id="empleado" formControlName="empleado" class="form-control" [(ngModel)]="empleado" *ngIf="listaEmpleados">
           <option value="" *ngFor="let empleado of listaEmpleados">{{ empleado.idempleado }} - {{ empleado.nomemp }} {{ empleado.ape1emp }}</option>
         </select>
 
-
-
       </div>
 
+      <label for="idplanvacaciones" *ngIf="idExiste">Id registro</label>
+      <input type="text" name="idplanvacaciones" id="idplanvacaciones" class="form-control"
+      formControlName="idplanvacaciones" [(ngModel)]="vacacionEditar.idplanvacaciones" *ngIf="idExiste">
 
-      <!-- <label for="tipomante">Tipo mantenimiento: </label>
-      <select name="tipomante" id="tipomante" formControlName="tipomante" [class.is-invalid]="tipomanteNoValida"
-        class="form-control" [(ngModel)]="mantenimiento.tipomante">
-        <option value="" *ngFor="let v of vehiculos">{{ v.idvehiculo}} - {{ v.marca }} {{ v.modelo }} {{ v.matricula }}
-        </option>
-      </select>
-      <br> -->
+      <label for="anyo">Año</label>
+      <input type="text" name="anyo" id="anyo" formControlName="anyo" class="form-control" [(ngModel)]="vacacionEditar.anyo"
+      placeholder="teclear año">
+
+      <label for="mes">Mes</label>
+      <input type="text" name="mes" id="mes" formControlName="mes" class="form-control"
+      placeholder="teclear Nombre del mes"  [(ngModel)]="vacacionEditar.mes">
+
+      <label for="diasdisponibles">Dias disponibles (por defecto 21)</label>
+      <input type="number" name="diasdisponibles" id="diasdisponibles"
+      formControlName="diasdisponibles" class="form-control" placeholder="seleccionar número"  [(ngModel)]="vacacionEditar.diasdisponibles">
+
+      <label for="finiciovaca">Fecha de inicio</label>
+      <input type="date" name="finiciovaca" id="finiciovaca" formControlName="finiciovaca"
+      class="form-control" placeholder="seleccionar fecha de inicio"  [(ngModel)]="vacacionEditar.finiciovaca">
 
 
-      <!-- <label for="idvehiculo">Vehículo: </label>
-      <select name="idvehiculo" id="idvehiculo" formControlName="idvehiculo" [class.is-invalid]="tipomanteNoValida"
-        class="form-control" [(ngModel)]="mantenimiento.idvehiculo" (ngModelChange)="onChange($event)">
-        <option value="" *ngFor="let m of tiposmantenimiento">{{ m.idtipomante}} - {{ m.denommante }}</option>
-      </select>
-      <br> -->
-      <!-- <small *ngIf="denomNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small> -->
+      <label for="ffinvaca">Fecha de finalización</label>
+      <input type="date" name="ffinvaca" id="ffinvaca" formControlName="ffinvaca" class="form-control"
+      placeholder="seleccionar fecha de finalización"  [(ngModel)]="vacacionEditar.ffinvaca">
 
-      <!-- <label for="mantenimiento">Mantenimiento: </label>
-      <input type="text" value="{{ mantenimiento.mantenimiento }}" name="mantenimiento" id="mantenimiento"
-        formControlName="mantenimiento" [class.is-invalid]="mantenimientoNoValida" class="form-control"
-        [(ngModel)]="mantenimiento.mantenimiento">
-      <br> -->
-      <!-- <small *ngIf="denomNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small> -->
+      <label for="diasconsume">Dias que disfruta</label>
+      <input type="number" name="diasconsume" id="diasconsume" class="form-control" formControlName="diasconsume"
+      placeholder="seleccionar número"  [(ngModel)]="vacacionEditar.diasconsume">
 
-      <!-- <label for="coste">Importe: </label>
-      <input type="text" value="{{ mantenimiento.coste }}" name="coste" id="coste" formControlName="coste"
-        [class.is-invalid]="costeNoValida" class="form-control" [(ngModel)]="mantenimiento.coste">
-      <br> -->
-      <!-- <small *ngIf="denomNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small> -->
 
-      <!-- <label for="proveedor">Proveedor: </label>
-      <input type="text" value="{{ mantenimiento.proveedor }}" name="proveedor" id="proveedor"
-        formControlName="proveedor" [class.is-invalid]="costeNoValida" class="form-control"
-        [(ngModel)]="mantenimiento.proveedor">
-      <br> -->
-      <!-- <small *ngIf="denomNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small> -->
-
-      <!-- <label for="numfactura">Número de factura: </label>
-      <input type="text" value="{{ mantenimiento.numfactura }}" name="numfactura" id="numfactura"
-        formControlName="numfactura" [class.is-invalid]="costeNoValida" class="form-control"
-        [(ngModel)]="mantenimiento.numfactura">
-      <br> -->
-      <!-- <small *ngIf="denomNoValida" class="text-danger ml-3">Mínimo 20 carácteres</small> -->
-<!--
-      <label for="fechamantenimiento">Fecha mantenimiento: </label>
-      <input type="date" value="{{ mantenimiento.fechamantenimiento }}" name="fechamantenimiento"
-        id="fechamantenimiento" formControlName="fechamantenimiento" [class.is-invalid]="fechamantenimientoNoValida"
-        class="form-control" [(ngModel)]="mantenimiento.fechamantenimiento">
-      <br>
-      <small *ngIf="fechamantenimientoNoValida" class="text-danger ml-3">Insertar fecha de mantenimiento</small>
- -->
-
+      <label for="diasvacaciones">Dias restantes</label>
+      <input type="number" name="diasvacaciones" id="diasvacaciones" formControlName="diasvacaciones"
+      class="form-control" placeholder="seleccionar número"  [(ngModel)]="vacacionEditar.diasvacaciones">
 
 
       <div class="ml-3 mt-3">
         <button type="button" value="Salvar Ruta" mat-raised-button color="accent" class="btn submit mr-3"
-         [routerLink]="['/mantenimientos']">Salvar vacaciones</button>
-
+         (click)="guardarVacacionEmpleado()">Salvar vacaciones</button>
       </div>
+
+
 
     </form>
 
-
-
   </div>
-  <div class="col-lg-12 ml-3 mt-3">
-    <a [routerLink]="['/vacacionesequipo']" routerLinkActive="router-link-active" mat-raised-button color="warn"
+  <div class="col-lg-12 ml-3 mt-3" *ngIf="empleado">
+    <a [routerLink]="['/vacacionesempleado', empleado.idempleado]" routerLinkActive="router-link-active" mat-raised-button color="warn"
       class="btn mb-5">Volver</a>
   </div>

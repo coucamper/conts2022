@@ -25,7 +25,7 @@
   <!-- end cabecera -->
   <div class="subheader col-lg-12 bordbot">
     <ul class="minimal">
-      <li><b>Usuario:</b>&nbsp;&nbsp; Héctor Javier del Campo </li>
+      <li><b>Usuario:</b>&nbsp;&nbsp; {{usuarioSesion}}</li>
       <li>&nbsp;&nbsp;<b>Sesión: </b> </li>
       <li>&nbsp;&nbsp;{{ fecha | date:'medium' }} </li>
 
@@ -55,7 +55,8 @@
             class="sr-only">(current)</span></a>
         <a class="nav-link" [routerLink]="['/pesajes']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fas fa-weight"></i> &nbsp;Pesajes</a>
         <a class="nav-link" [routerLink]="['/contenedores']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fas fa-dumpster"></i>&nbsp; Contenedores</a>
-        <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="logout()"><i class="fas fa-solid fa-door-closed"></i>&nbsp; Logout</a>
+        <a *ngIf="authService.isAutheticated()"class="nav-link" [routerLink]="['/login']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="logout()"><i class="fas fa-solid fa-door-closed"></i>&nbsp; Logout</a>
+        <a *ngIf="!authService.isAutheticated()"   class="nav-link" [routerLink]="['/login']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fas fa-solid fa-door-closed"></i>&nbsp; login</a>
 
       </div>
     </div>

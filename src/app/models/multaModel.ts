@@ -18,10 +18,10 @@ export class MultaModule {
   causamulta:string;
   lugarmulta:string;
   importe:number;
-  vehiculo:number;
-  empleado:number;
+  idvehiculo:number;
+  idempleado:number;
 
-  constructor(){}
+
 
 
 }

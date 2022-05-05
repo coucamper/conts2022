@@ -1,0 +1,57 @@
+<div class="container-fluid">
+  <app-navegacion></app-navegacion>
+    <div class="col-lg-12">
+
+      <h2 class="pl-2" #titulo>Asignar categoría a Empleado</h2>
+
+      {{ this.nif }} - {{ this.empleado }}
+
+        <div class="col"> <!-- LA PUTISISIMA COLUMNA -->
+            <form [formGroup]="formCategoria" #f="ngForm" (ngSubmit)="guardarCategoria()">
+              <!-- <form [formGroup]="formEmpleado" #f="ngForm" (ngSubmit)="guardar( formEmpleado.value )"></form> -->
+
+
+
+                  <label for="empleado">Empleado: </label>
+                  <select name="empleado" id="empleado" formControlName="empleado" class="form-control" (ngModelChange)="onChangeEmpleado($event)">
+                    <option [value]="e.idempleado" *ngFor="let e of empleados | reverse">{{ e.idempleado }} - {{ e.nomemp }} {{ e.ape1emp }} {{ e.ape2emp }}</option>
+                  </select>
+
+                  <label for="categoria">Categoría: </label>
+                  <select name="categoria" id="categoria" formControlName="categoria" class="form-control" (ngModelChange)="onChange($event)">
+                    <option [value]="categoria.idcategoria" *ngFor="let categoria of categorias">{{ categoria.idcategoria }} - {{ categoria.denom }}</option>
+                  </select>
+                  <!-- <input type="text" name="categoria" id="categoria" formControlName="categoria"
+                  <br>
+                   <small *ngIf="categoriaNoValida" class="text-danger ml-3">Introducir categría </small> -->
+
+                  <!-- <label for="tipocontrato" class="mb-3">Tipo de contrato: </label>
+                  <mat-radio-group aria-label="Select tipocontrato" class="ml-3" formControlName="tipocontrato"  (ngModelChange)="onChangeContrato($event)">
+                    <mat-radio-button *ngFor="let tipo of tiposContrato" [value]="tipo.idtipocontrato"
+                    formControlName="tipocontrato" ngDefaultControl class="mr-5 mat-warn" >{{ tipo.denomcontrato }} </mat-radio-button> -->
+                     <!-- <mat-radio-button [value]="estructura" formControlName="tipocontrato" ngDefaultControl class="mr-5 mat-warn">Estructura </mat-radio-button>
+                    <mat-radio-button value="insercion" formControlName="tipocontrato" ngDefaultControl class="mat-warn">Inserción </mat-radio-button> -->
+                  <!-- </mat-radio-group> -->
+                  <br>
+                  <!-- <small *ngIf="tipocontratoNoValida" class="text-danger ml-3">Introducir tipo de contrato </small> -->
+                  <button type="button" value="prueba" mat-raised-button color="accent" class="btn submit mr-3"
+                   (click)="ActualizarCategoriaEmpleado()">actualizar</button>
+
+                  <div class="ml-3 mt-3">
+                    <button type="button" value="Salvar Empleado" mat-raised-button color="accent" class="btn submit mr-3"
+                    [routerLink]="['/salvarcategoria']" (click)="guardarCategoria()">Salvar Categoría</button>
+                    <!-- <button type="submit" value="Salvar Empleado" mat-raised-button color="accent" class="btn submit mr-3"
+                    (click)="guardar( formEmpleado.value )" [routerLink]="['/empleados']">Salvar Empleado</button> -->
+                  </div>
+              </form>
+
+
+        </div> <!-- FIN DE LA PUTA COLUMNA-->
+
+    <div class="col-lg-12 pt-3 mb-5">
+      <a mat-raised-button color="warn" class="enlaces btn mb-5" [routerLink]="['/empleados']" routerLinkActive="active" class="btn ml-3 mb-5">Volver</a>
+      <!-- <a mat-raised-button color="warn" class="enlaces btn mb-5"
+      [routerLink]="['/empleados']" routerLinkActive="active" class="btn ml-3 mb-5" [disabled]="!formEmpleado.valid">Volver</a> -->
+    </div>
+  </div>
+</div>

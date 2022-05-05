@@ -16,10 +16,18 @@
         <label for="password">Password de usuario:</label>
         <input type="password" placeholder="Introducir password de usuario" id="password" class="form-control fc-login"
           [(ngModel)]="user.password" formControlName="password" autocomplete=“current-password” required>
+        <div class="mt-2">
+          <input [(ngModel)]="recordarUsuario" formControlName="recordarUsuario"
+          id="recordarUsuario" name="recordarUsuario" class="form-check-input ml-2 mr-2"
+          type="checkbox" id="flexCheckDefault" (ngModelChange)="onChangeRecordarUsuario($event)">
+          <label class="form-check-label ml-4" for="flexCheckDefault">
+            Recordar usuario
+          </label>
+        </div>
+        <div class="ml-2 mt-3">
 
-        <div class="ml-2 mt-5">
-          <!-- <button type="button" class="btn" mat-raised-button (click)="logIn()"> ESTA ES LA VERSION PARA EL BACKEND SECURITY PRODUCCION 2-->
-            <button type="button" class="btn" mat-raised-button [routerLink]="['/panel']">
+          <button type="button" class="btn" mat-raised-button (click)="logIn()">
+            <!-- <button type="button" class="btn" mat-raised-button [routerLink]="['/panel']"> -->
             Validar Acceso
           </button>
         </div>

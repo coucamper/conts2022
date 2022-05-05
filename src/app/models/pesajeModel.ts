@@ -16,10 +16,10 @@ import { EmpleadoComponent } from 'src/app/empleados/empleado/empleado.component
 export class PesajeModel {
 
   idpesaje: number;
-  fechapesaje: number;
+  fechapesaje: string;
   pesaje: number;
-  vehiculo: string;
-  idoperario: number;
+  vehiculo: number;
+  idempleado: number;
   idruta: number;
 
   constructor(){}

@@ -14,8 +14,8 @@
 
 
 	      <label for="ruta">Ruta: </label>
-	      <select formControlName="idruta" [class.is-invalid]="idrutaNoValida" class="form-control" [(ngModel)]="vehiculopesaje">
-	        <option *ngFor="let r of rutas" name="idruta" id="idruta">{{ r.denom }}</option>
+	      <select formControlName="idruta" [class.is-invalid]="idrutaNoValida" class="form-control" [(ngModel)]="vehiculopesaje" (ngModelChange)="onChangeRuta($event)">
+	        <option *ngFor="let r of rutas" name="idruta" id="idruta" [value]="r.idruta">{{ r.idruta}} - {{ r.denom }}</option>
 	      </select>
 	      <br>
 	      <small *ngIf="idrutaNoValida" class="text-danger ml-3">Coordenadas de google maps </small>
@@ -31,8 +31,8 @@
 
 
 	      <label for="vehiculo">vehículo: </label>
-	      <select name="vehiculo" id="vehiculo" class="form-control">
-	        <option *ngFor="let v of vehiculos">{{ v.matricula }} - {{ v.marca }}
+	      <select name="vehiculo" id="vehiculo" class="form-control"  formControlName="vehiculo" (ngModelChange)="onChangeVehiculo($event)">
+	        <option *ngFor="let v of vehiculos" [value]="v.idvehiculo">{{ v.idvehiculo}} - {{ v.matricula }} - {{ v.marca }}
 	          {{ v.modelo }}</option>
 	      </select>
 	      <br>
@@ -41,9 +41,9 @@
 
 
 	      <label for="idoperario">Operario: </label>
-	      <select formControlName="idempleado" [class.is-invalid]="idempleadoNoValida" class="form-control">
-	        <option *ngFor="let e of empleados" name="idempleado" id="idempleado">
-	          {{ e.nomemp }}</option>
+	      <select formControlName="idempleado" [class.is-invalid]="idempleadoNoValida" class="form-control" (ngModelChange)="onChangeEmpleado($event)">
+	        <option *ngFor="let e of empleados" name="idempleado" id="idempleado" [value]="e.idempleado">
+	          {{ e.idempleado }} - {{ e.nomemp }} {{ e.ape1emp }}</option>
 	        <!-- OJITO, PARA QUE TE FUNCIONE EL SELECT TIENES QUE OBTENER LOS CLIENTES EN EL
 			MISMO CONTROLADOR QUE CARGA ESTA PÁGINA: "/insertaexportacion" -->
 	      </select>
@@ -57,10 +57,11 @@
 	      <small *ngIf="comprobanteNoValida" class="text-danger ml-3">Coordenadas de google maps </small>
 
 	      <div class="ml-3 mt-3">
-	        <button type="submit" value="Salvar Pesaje" mat-raised-button color="accent" class="btn submit" (click)="guardar()">Salvar Pesaje</button>
+	        <button type="button" value="Salvar Pesaje" mat-raised-button color="accent" class="btn submit" (click)="guardar()" [routerLink]="['/pesajes']">Salvar Pesaje</button>
 	      </div>
 
 	    </form>
+
 
 
 

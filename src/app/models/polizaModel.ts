@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { VehiculoModel } from './vehiculoModel';
 
 
 
@@ -17,7 +18,7 @@ export class PolizaModule {
   franquicia:number;
   importepoliza:number;
   periodofact:string;
-  vehiculo:number;
+  vehiculo:VehiculoModel;
 
   constructor(){}
 

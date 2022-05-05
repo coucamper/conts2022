@@ -1,0 +1,54 @@
+<div class="container-fluid">
+  <app-navegacion></app-navegacion>
+<div class="col-lg-12">
+  <h2 class="pl-2 pt-4" >Asociar multa a vehículo</h2>
+
+<form [formGroup]="formMulta">
+
+
+  <label for="idmulta" *ngIf="idExiste">ID Multa</label>
+  <input type="text" id="idmulta" name="idmulta" formControlName="idmulta" class="form-control" *ngIf="idExiste">
+
+  <label for="causamulta">Causa de la multa</label>
+  <input type="text" name="causamulta" id="causamulta" formControlName="causamulta" class="form-control">
+
+  <label for="lugarmulta">Lugar de la multa</label>
+  <input type="text" name="lugarmulta" id="lugarmulta" formControlName="lugarmulta" class="form-control">
+
+  <label for="fechamulta">Fecha de la multa</label>
+  <input type="date" id="fechamulta" name="fechamulta" formControlName="fechamulta" class="form-control">
+
+  <label for="importe">Importe</label>
+  <input type="text" name="importe" id="importe" formControlName="importe" class="form-control">
+
+  <label for="idempleado">Empleado</label>
+  <select name="idvehiculo" id="idvehiculo" formControlName="idvehiculo" class="form-control" (ngModelChange)="onChangeEmpleado($event)">
+    <option [value]="e.idempleado" *ngFor="let e of empleados"> {{ e.idempleado }} - {{ e.nomemp }} {{ e.ape1emp }}</option>
+  </select>
+
+  <label for="idvehiculo">Vehículo</label>
+  <select name="idvehiculo" id="idvehiculo" formControlName="idvehiculo" class="form-control" (ngModelChange)="onChangeVehiculo($event)">
+    <option [value]="v.idvehiculo" *ngFor="let v of vehiculos"> {{ v.idvehiculo}} - {{ v.marca }} {{ v.modelo }} - {{ v.matricula }}</option>
+  </select>
+
+
+
+  <div class="ml-3 mt-3">
+      <button type="submit" value="Salvar Vehículo" mat-raised-button color="accent" class="btn submit mr-3" (click)="guardarMulta()">Salvar póliza</button>
+  </div>
+
+</form>
+
+
+
+</div>
+     <div class="col-lg-12 ml-3 mt-3">
+              <a [routerLink]="['/vehiculos']" routerLinkActive="router-link-active"  mat-raised-button color="warn" class="btn mb-5">Volver</a>
+    </div>
+
+
+
+
+
+
+

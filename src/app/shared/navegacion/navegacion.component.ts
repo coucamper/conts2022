@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { RouterLinkActive } from '@angular/router';
+import { Router, RouterLinkActive } from '@angular/router';
+import { AuthService } from 'src/app/services/auth-service.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -15,14 +17,37 @@ export class NavegacionComponent implements OnInit {
   fecha = new Date();
   mes = new Date().toLocaleString( 'default', { month: 'long' } );
   anio = new Date().getFullYear().toLocaleString();
+  usuarioLogueado:any = this.authService.usuario.username;
+  username:any;
+  usuarioSesion:any;
 
-  constructor() { }
 
-  ngOnInit(): void {
+
+
+  constructor( public authService:AuthService, private router:Router ) {
+
+    if(sessionStorage.getItem('usuario')){
+     this.usuarioSesion = this.authService.usuario.username;
+    }
+
   }
 
-  logout(){
 
+
+  ngOnInit(): void {
+    // let cadena = this.usuarioLogueado.split(",");
+    // console.log(cadena);
+    // let cadena2 = cadena.substring();
+    // console.log(cadena2)
+    // console.log("user: "+cadena[2]);
+    this.username = this.authService.usuario.username;
+    console.log(this.username)
+  }
+
+  logout():void{
+
+    this.authService.logout();
+    Swal.fire('login', `Hola ${this.username}, has cerrado sesión con éxito`, 'success');
   }
 
 }

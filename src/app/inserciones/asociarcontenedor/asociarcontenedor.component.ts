@@ -91,7 +91,7 @@ export class AsociarcontenedorComponent implements OnInit {
   onChange(newValue: any) {
     this.control = this.formContenedor.controls['idcontenedor'].value;
     this.control = newValue; // don't forget to update the model here
-    this.idcontenedor = Number(newValue&&newValue.substring(0,2));
+    this.idcontenedor = newValue;
     console.log('El id que obtengo es: ' + this.idcontenedor);
   }
 

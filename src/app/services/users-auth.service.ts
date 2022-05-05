@@ -3,6 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Usuario } from '../usuarios/usuario';
+import { UsuarioModel } from '../models/usuarioModel';
+import { URL_BACKEND } from '../config/config';
+
 
 
 
@@ -12,13 +15,16 @@ import { Usuario } from '../usuarios/usuario';
 })
 export class UsersAuthService {
 
+  user:UsuarioModel = new UsuarioModel();
+
   constructor( private http: HttpClient,
                private activatedRoute:ActivatedRoute,
                private _router: Router ) { }
 
 
-  logIn( user:Usuario ):Observable<any> {
-    const urlEndpoint = 'http://localhost:8093/oauth/token';
+  logIn( user:UsuarioModel ):Observable<any> {
+    //const urlEndpoint = 'http://localhost:8093/oauth/token';
+    const urlEndpoint = URL_BACKEND + '/oauth/token';
     const credenciales = btoa('angularapp'+':'+'12345');
     const httpHeaders = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded','Authorization':'Basic ' + credenciales});
 

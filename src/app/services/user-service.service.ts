@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-const API_URL = 'http://localhost:8093/login';
+import { URL_BACKEND } from '../config/config';
+
+
+//const API_URL = 'http://localhost:8093/login';
+
+const API_URL = URL_BACKEND + '/login';
+
+
 
 @Injectable({
   providedIn: 'root'

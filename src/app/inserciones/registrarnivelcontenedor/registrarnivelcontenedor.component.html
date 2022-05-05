@@ -1,0 +1,40 @@
+<div class="container-fluid" *ngIf="ruta">
+  <app-navegacion></app-navegacion>
+  <div class="col-lg-12" >
+    <h2 class="pl-2 pt-4 mb-4" *ngIf="idExiste">Registrar niveles de pesaje: {{ datosPesaje.idpesaje }} - {{ datosPesaje.ruta.denom }} ({{ datosPesaje.fechapesaje }}) {{ datosPesaje.operario.nomemp }} {{ datosPesaje.operario.ape1emp }}</h2>
+    <!-- <h2 class="pl-2 pt-4" *ngIf="idExiste">Actualizar datos de contenedor - {{ contenedor.denom }} ({{ contenedor.barrio}} - {{ contenedor.localidad }}) </h2> -->
+
+
+
+
+    <form [formGroup]="formNivelContenedor">
+      <div class="bordbot">
+        <p>{{ cont.idcontenedor }}</p>
+        <div *ngFor="let cont of contenedoresDeRuta; let i = index" class="col-lg-3 ib">
+          <label for="idcontenedor">{{ cont.idcontenrutas }}: {{ cont.contenedor.denom | uppercase}}</label>
+          <input type="number" name="idcontenedor" [(id)]="cont.contenedor.idcontenedor" formControlName="idcontenedor"
+          class="form-control mb-4" placeholder="insertar valor" min="1" max="5" placeholder="indicar valor">
+          <button type="button" mat-raised-button color="warn" class="ml-3" (click)="registrar( cont.contenedor.idcontenedor )">Registrar</button>
+        </div>
+    </div>
+    </form>
+
+    <div class="bordbot">
+      <div *ngFor="let m of mensajesEstado">{{ m }}</div>
+    </div>
+
+
+
+
+
+  </div>
+  <div class="col-lg-12 ml-3 mt-3">
+    <a [routerLink]="['/rutas']" routerLinkActive="router-link-active" mat-raised-button color="warn"
+      class="btn mr-3 mb-5" (click)="guardar()">Añadir a la ruta</a>
+    <a [routerLink]="['/rutas']" routerLinkActive="router-link-active" mat-raised-button color="warn"
+      class="btn mr-3 mb-5">Volver</a>
+  </div>
+
+
+
+</div>

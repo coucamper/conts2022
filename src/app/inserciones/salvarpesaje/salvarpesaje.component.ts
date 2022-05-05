@@ -33,7 +33,21 @@ export class SalvarpesajeComponent implements OnInit {
   pesaje:PesajeModel = new PesajeModel();
   vehiculopesaje:VehiculosPesajesModel = new VehiculosPesajesModel();
 
+
+
   idx:number;
+
+  idvehiculo:number;
+  idempleado:number;
+  idruta:number;
+
+  controlVehiculo:any;
+  controlEmpleado:any;
+  controlRuta:any;
+
+  rutaTemporal:any;
+
+  timer1:any;
 
   constructor( private router: Router,
     private fB: FormBuilder, private _empleados:EmpleadosService, private _rutas: RutasService,
@@ -59,6 +73,7 @@ export class SalvarpesajeComponent implements OnInit {
       this.cargarVehiculos();
       this.cargarempleados();
       this.cargarPesajes();
+
 
     }
 
@@ -157,21 +172,83 @@ export class SalvarpesajeComponent implements OnInit {
     }
   }
 
+
+
+  onChangeVehiculo(newValue:any){
+    this.controlVehiculo = this.formPesaje.controls['vehiculo'].value;
+    this.controlVehiculo = newValue;
+    this.idvehiculo = Number(newValue);
+    console.log(this.idvehiculo);
+    return this.idvehiculo;
+  }
+
+  onChangeEmpleado(newValue:any){
+    this.controlEmpleado = this.formPesaje.controls['idempleado'].value;
+    this.controlEmpleado = newValue;
+    this.idempleado = Number(newValue);
+    console.log(this.idempleado);
+    return this.idempleado;
+  }
+
+  onChangeRuta(newValue:any){
+    this.controlRuta = this.formPesaje.controls['idruta'].value;
+    this.controlRuta = newValue;
+    this.idruta = Number(newValue);
+    console.log(this.idruta);
+    return this.idruta;
+  }
+
+
+
+
+
+
+
+
+/*
+    this.control = this.formRuta.controls['denom'].value;
+    this.control = newValue;  // don't forget to update the model here
+    this.idcomarca=Number(newValue.charAt(0));
+    this.traerLocalidadesZonas( this.idcomarca );
+    console.log(this.idcomarca);
+*/
+
+
+  formarPesaje(){
+    this.pesaje.fechapesaje = this.formPesaje.controls['fechapesaje'].value;
+    this.pesaje.idruta = this.idruta;
+    this.pesaje.idempleado = this.idempleado;
+    this.pesaje.pesaje = this.formPesaje.controls['pesaje'].value;
+    return this.pesaje;
+  }
+
+  formarVehiculoPesaje(){
+
+  }
+
+
   guardar(){
+
+    this.formarPesaje();
+    console.log(this.pesaje);
 
     this.validarFormulario( this.formPesaje.value );
 
+    // ---------------------------------------
     if( this.vehiculopesaje.idvehipesaje ){
-
       this.vehiculopesaje = this.formPesaje.value;
-      return this._vehiPesa.putVehiculoPesaje( this.idx, this.vehiculopesaje ).subscribe();
-
+      this._vehiPesa.putVehiculoPesaje( this.idx, this.vehiculopesaje ).subscribe();
       }else {
-        return this._vehiPesa.postVehiculoPesaje( this.vehiculopesaje ).subscribe();
+        this._pesajes.postPesaje(Number(this.idruta), this.idempleado, this.idvehiculo, this.pesaje).subscribe();
       }
+    // ---------------------------------------
 
-      //return this.empleado;
+    //this.rutaTemporal = this._pesajes.recuperarPesaje( this.pesaje.fechapesaje, this.pesaje.idruta, this.pesaje.idempleado).subscribe();
 
   }
+
+
+
+
 
 }

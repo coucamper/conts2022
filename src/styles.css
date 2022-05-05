@@ -1,4 +1,12 @@
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+
+body{
+  font-size: .55rem;
+}
+
+
 
 /* You can add global styles to this file, and also import other style files */
 .nav-link.fsmall{
@@ -100,11 +108,26 @@ input[type="text"].fc-login , input[type="date"].fc-login, input[type="tel"].fc-
   font-size: 1rem;
 }
 
+input[type="date"].chartinput{
+  width: 100%;
+}
+
 input[type="date"].fc-mid, .form-control.fc-mid {
 	margin: 1% 0 .5% 1%;
 	display: inline-block;
 	width: 60%;
   font-size: .8rem;
+}
+
+.tamanyo{
+  width: 7.5%;
+  margin-top: -1px;
+}
+
+select.pageSize{
+  width: 100%;
+  font-size: .73rem;
+  display: flex;
 }
 
 label {
@@ -321,3 +344,31 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .under{
   text-decoration: underline;
 }
+
+.localidadId{
+  width: 3%;
+}
+
+.localidadLine{
+  width: 50%;
+}
+
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+
+.toolbar-title {
+  margin-right: 1rem;
+  text-decoration: none;
+  color: #fff;
+}
+
+a[mat-button], a[mat-button]:hover {
+  color: inherit !important;
+}
+
+

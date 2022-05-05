@@ -10,13 +10,9 @@ import { NgModule } from "@angular/core";
 })
 
 export class UserModel {
-
   public idusuario:number;
   public username:string;
-  //public apellido:string;
-  // public user_email:string;
-  // public user_name: string;
-  // public user_pass?:string;
-
+  public password:string;
+  public roles:string[] = [];
   constructor(){}
 }

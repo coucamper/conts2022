@@ -23,9 +23,10 @@ import { tipoincidenciaModel } from './models/tipoincidenciaModel';
 import { PermisoNoRetribuidoModel } from './models/permisonoretribuidoModel';
 import { permisoretribuidoModel } from './models/permisoretribuidoModel';
 import { FlatpickrModule } from 'angularx-flatpickr';
-import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { CategoriaModel } from './models/categoriaModel';
-
+import { JwtModule } from '@auth0/angular-jwt';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 
 
@@ -93,6 +94,7 @@ import { PolizasComponent } from './polizas/polizas.component';
 
 
 
+
 // Importar routes
 
 import { APP_ROUTES } from './app.routes';
@@ -113,7 +115,6 @@ import { ZonasService } from './services/zonas.service';
 import { TiposincidenciaService } from './services/tiposincidencia.service';
 import { PermisosretribuidosService } from './services/permisosretribuidos.service';
 import { PermisosnoretribuidosService } from './services/permisosnoretribuidos.service';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { DemoComponent } from './demo-component/demo-component.component';
 import { VacacionesequipoService } from './services/vacacionesequipo.service';
 import { vacacionEquipoModel } from './models/vacacionequipoModel';
@@ -155,6 +156,42 @@ import { UsuarioModel } from './models/usuarioModel';
 import { ClientesComponent } from './clientes/clientes.component';
 import { AuthInterceptor } from './services/auth-interceptor';
 import { UsersAuthService } from './services/users-auth.service';
+import { ConcejoModel } from './models/concejoModel';
+import { PaginatorComponent } from './paginator/paginator.component';
+import { ClienteComponent } from './cliente/cliente.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { PaginatorAvisosComponent } from './paginator/paginator-avisos/paginator-avisos.component';
+import { AngularHolidayPlannerModule } from 'angular-holiday-planner';
+import { GoogleChartComponent, GoogleChartsModule } from 'angular-google-charts';
+import { TurnoEmpleadoModel } from './models/turnoEmpleadoModel';
+import { TurnosconductoresComponent } from './turnosconductores/turnosconductores.component';
+import { GraficapesajesComponent } from './graficapesajes/graficapesajes.component';
+import { PaginatorContenedoresComponent } from './paginator/paginator-contenedores/paginator-contenedores.component';
+import { PaginatorRutasComponent } from './paginator/paginator-rutas/paginator-rutas.component';
+import { PaginatorComarcasComponent } from './paginator/paginator-comarcas/paginator-comarcas.component';
+import { PaginatorVehiculosComponent } from './paginator/paginator-vehiculos/paginator-vehiculos.component';
+import { PaginatorMantenimientosComponent } from './paginator/paginator-mantenimientos/paginator-mantenimientos.component';
+import { PaginatorMultasComponent } from './paginator/paginator-multas/paginator-multas.component';
+import { PaginatorPolizasComponent } from './paginator/paginator-polizas/paginator-polizas.component';
+import { PaginatorPesajesComponent } from './paginator/paginator-pesajes/paginator-pesajes.component';
+import { PaginatorEmpleadosComponent } from './paginator/paginator-empleados/paginator-empleados.component';
+import { PaginatorVacacionesComponent } from './paginator/paginator-vacaciones/paginator-vacaciones.component';
+import { PaginatorNivelesComponent } from './paginator/paginator-niveles/paginator-niveles.component';
+import { NivelesrutaComponent } from './nivelesruta/nivelesruta.component';
+import { contratoEmpleadoModel } from './models/contratoempleadoModel';
+import { EmpleadoRecuperadoModel } from './models/empleadoRecuperadoModel';
+import { SalvarcategoriaComponent } from './inserciones/salvarempleado/salvarcategoria/salvarcategoria.component';
+import { ReversepipePipe } from './pipes/reversepipe.pipe';
+import { VacacionEmpleado } from './models/vacacioneEmpleado';
+import { SalvarvacacionesgeneralComponent } from './inserciones/salvarvacacionesgeneral/salvarvacacionesgeneral.component';
+import { VacacionGeneralModel } from './models/vacaciongeneralModel';
+import { SalvarpolizaComponent } from './inserciones/salvarpoliza/salvarpoliza.component';
+import { SalvarmultaComponent } from './inserciones/salvarmulta/salvarmulta.component';
+import { PolizaModule } from './models/polizaModel';
+import { RegistrarnivelcontenedorComponent } from './inserciones/registrarnivelcontenedor/registrarnivelcontenedor.component';
+import { NivelContenedorModel } from './models/NivelContenedorModel';
+import { CardnivelesComponent } from './cardniveles/cardniveles.component';
+import { NivelContenedorRuta } from './models/NivelContenedorRutaModel';
 
 
 
@@ -228,9 +265,34 @@ import { UsersAuthService } from './services/users-auth.service';
     RespondermensajeComponent,
     SalvaravisoComponent,
     AvisosComponent,
-    ClientesComponent
+    ClientesComponent,
+    PaginatorComponent,
+    ClienteComponent,
+    PaginatorAvisosComponent,
+    TurnosconductoresComponent,
+    GraficapesajesComponent,
+    PaginatorContenedoresComponent,
+    PaginatorRutasComponent,
+    PaginatorComarcasComponent,
+    PaginatorVehiculosComponent,
+    PaginatorMantenimientosComponent,
+    PaginatorMultasComponent,
+    PaginatorPolizasComponent,
+    PaginatorPesajesComponent,
+    PaginatorEmpleadosComponent,
+    PaginatorVacacionesComponent,
+    PaginatorNivelesComponent,
+    NivelesrutaComponent,
+    SalvarcategoriaComponent,
+    ReversepipePipe,
+    SalvarvacacionesgeneralComponent,
+    SalvarpolizaComponent,
+    SalvarmultaComponent,
+    RegistrarnivelcontenedorComponent,
+    CardnivelesComponent
   ],
   imports: [
+    NgxPaginationModule,
     BrowserModule,
     RouterModule.forRoot( APP_ROUTES),
     HttpClientModule,
@@ -263,14 +325,42 @@ import { UsersAuthService } from './services/users-auth.service';
     EmpleadocategoriaModel,
     ComarcasRutaModel,
     ComarcaModel,
+    ConcejoModel,
     ContModule,
     JwPaginationModule,
     MensajeModel,
     EmpleadocategoriaModel,
     MensajeformularioModel,
+    contratoEmpleadoModel,
     LoginModel,
+    GoogleChartsModule,
+    EmpleadoRecuperadoModel,
+    TurnoEmpleadoModel,
+    VacacionGeneralModel,
+    PolizaModule,
+    VacacionEmpleado,
+    NivelContenedorModel,
+    NivelContenedorRuta,
     RolModel,
-    UsuarioModel
+    NgxEchartsModule.forRoot({
+      /**
+       * This will import all modules from echarts.
+       * If you only need custom modules,
+       * please refer to [Custom Build] section.
+       */
+      echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
+    }),
+    UsuarioModel,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('access_token');
+        },
+        allowedDomains: ['localhost:8093'],
+        disallowedRoutes: []
+      }
+    }),
+
   ],
   providers: [
    ContenedoresService,
@@ -297,7 +387,6 @@ import { UsersAuthService } from './services/users-auth.service';
    TipomantenimientoService,
    TipoimportanciamensajeService,
    TipocontratoService
-
   ],
   bootstrap: [AppComponent]
 })

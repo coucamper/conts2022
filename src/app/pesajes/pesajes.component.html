@@ -1,5 +1,5 @@
 
-	<div class="container-fluid">
+	<div class="container-fluid"*ngIf="pesajes">
         <app-navegacion></app-navegacion>
            <div class="col-lg-12">
 			<nav class="navbar navbar-expand-lg navbar-light bg-light fsmall">
@@ -39,19 +39,19 @@
 							<th>ELIMINAR</th>
 						</tr>
 					</thead>
-					<tbody class="table-striped">
-						<tr *ngFor="let pesa of vehiculosPesajes">
-							<td>{{ pesa.idvehipesaje}}</td>
-							<td>{{ pesa.pesajes.fechapesaje }}</td>
-							<td>{{ pesa.pesajes.ruta.denom }}</td>
-							<td>{{ pesa.pesajes.pesaje }} Kg</td>
-              <td>{{ pesa.vehiculos.marca}}  {{ pesa.vehiculos.matricula }}</td>
-							<td>{{ pesa.pesajes.operario.nomemp }}</td>
-							<td>{{ pesa.pesajes.comprobante }}</td>
-              <td><a mat-raised-button class="btn" [routerLink]="['/niveles', pesa.pesajes.ruta.idruta ]">Niveles</a></td>
-							<td><a href="#" mat-raised-button color="accent" class="btn mr-3" (click)="verVehiculoPesaje( pesa.idvehipesaje )" [routerLink]="['/salvarpesaje/', pesa.idvehipesaje ]">Modificar</a></td>
+					<tbody class="table-striped" *ngIf="pesajes">
+						<tr *ngFor="let pesa of pesajes">
+							<td>{{ pesa.idpesaje}}</td>
+							<td>{{ pesa.fechapesaje }}</td>
+							<td>{{ pesa.ruta.denom }}</td>
+							<td>{{ pesa.pesaje }} Kg</td>
+              <td>{{ pesa.vehiculo.marca}}  {{ pesa.vehiculo.matricula }}</td>
+							<td>{{ pesa.operario.nomemp }}</td>
+							<td>{{ pesa.comprobante }}</td>
+              <td><a mat-raised-button class="btn" [routerLink]="['/niveles', pesa.idpesaje ]">Niveles</a></td>
+							<td><a href="#" mat-raised-button color="accent" class="btn mr-3" (click)="verVehiculoPesaje( pesa.idpesaje )" [routerLink]="['/salvarpesaje/', pesa.idvehipesaje ]">Modificar</a></td>
 							<td><button mat-raised-button color="warn" class="btn mr-3" id="eliminar"
-									name="eliminar">Eliminar</button></td>
+									name="eliminar" (click)="eliminarPesaje(pesa.idpesaje); refresh()">Eliminar</button></td>
 
 
 
@@ -64,8 +64,7 @@
 						<a href="#"  mat-raised-button color="warn" class="btn mr-3">Informes</a>
 					</div>
 					<div class="col">
-						<mat-paginator [length]="200" [pageSizeOptions]="[5, 10]" aria-label="Select page">
-						</mat-paginator>
+            			<app-paginator-pesajes *ngIf="paginador" [paginador]="paginador"></app-paginator-pesajes>
 					</div>
 				</div>
 			</div>

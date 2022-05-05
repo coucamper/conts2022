@@ -1,14 +1,19 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginModel } from 'src/app/models/loginModel';
-import { AuthServiceService } from 'src/app/services/auth-service.service';
+
 import { ClienteService } from 'src/app/services/cliente.service';
 import { LoginService } from 'src/app/services/login.service';
 import { TokenStorageServiceService } from 'src/app/services/token-storage-service.service';
 import { UsersAuthService } from 'src/app/services/users-auth.service';
 import { Usuario } from 'src/app/usuarios/usuario';
 import swal from 'sweetalert2';
+import { finalize } from "rxjs/operators";
+import { UsuarioModel } from 'src/app/models/usuarioModel';
+import { AuthService } from 'src/app/services/auth-service.service';
+import { UserModel } from 'src/app/models/userModel';
 
 
 
@@ -33,32 +38,39 @@ export class LoginComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   roles:any[] = [];
-  user:Usuario;
+  user:UserModel = new UserModel();
   val:any;
 
-  constructor( private router: Router, private activatedR: ActivatedRoute, private _login: LoginService,
-    private authService: AuthServiceService, private tokenStorage: TokenStorageServiceService, private _authService: UsersAuthService, private _clientes:ClienteService ) {
-    this.user = new Usuario();
-    this.creaForm();
+  title = 'Demo';
+  authenticated = false;
+  greeting = {};
 
+  model: any = {};
+  recordarUsuario:boolean;
+  controlRecordarUsuario:any;
+
+  constructor( private router: Router, private activatedR: ActivatedRoute, public _login: LoginService,
+    public authService: AuthService, private tokenStorage: TokenStorageServiceService,
+    public _authService: UsersAuthService,
+    public _clientes:ClienteService,
+    private http: HttpClient ) {
+
+    this.usuario = new UserModel();
+    this.creaForm();
+    this.authenticate();
   }
+
+
+
 
 
   creaForm(){
     this.formLogin = new FormGroup({
       username: new FormControl(),
-      password: new FormControl()
+      password: new FormControl(),
+      recordarUsuario: new FormControl()
     });
   }
-
-
-
-  // onChangeUser(newValue:any){
-  //   this.controlUser = this.formLogin.controls['username'].value;
-  //   this.controlUser = newValue;
-  //   this.usuario = newValue;
-  //   console.log(newValue);
-  // }
 
 
   onChangePassword(newValue:any){
@@ -68,50 +80,60 @@ export class LoginComponent implements OnInit {
     console.log(newValue);
   }
 
-  logIn(){
+  onChangeRecordarUsuario(newValue:any) {
+    this.controlRecordarUsuario = this.formLogin.controls['recordarUsuario'].value;
+    this.controlRecordarUsuario = newValue;  // don't forget to update the model here
+    this.recordarUsuario = newValue;
+    console.log(this.recordarUsuario);
+}
 
-    // this.user.username = this.formLogin.controls['username'].value;
-    // this.user.password = this.formLogin.controls['password'].value;
 
 
-    this._authService.logIn(this.user).subscribe( response =>{
-
+  logIn():void {
+    if(this.user.username == null || this.user.password == null){
+      swal.fire('Error de login',`No se han introducido datos validos`, 'error');
+    }
+    this.authService.login(this.user).subscribe( response =>{
       console.log(response);
-      this.router.navigate(['/clientes']);
-      swal.fire('Login',`Hola ${response.username} has iniciado sesión con éxito`, 'success');
+      console.log(this.user);
+
+     let payload = JSON.parse(atob(response.access_token.split(".")[1]));
+      console.log(payload);
+
+      this.authService.guardarUser(response.access_token);
+      this.authService.guardarToken(response.access_token);
+
+      let usuarioTraido = this.authService.usuario;
+      // for(let i in response){
+      //   console.log(i+":"+ response[i]);
+      // }
+      this.router.navigate(['/panel']);
+      if(response){
+        swal.fire('Login',`Hola ${usuarioTraido.username} has iniciado sesión con éxito`, 'success');
+      }
+
+    },  (error:any) => {
+      if(error.status==400){
+        swal.fire('Error de login',`Usuario o clave erroneas`, 'error');
+      }
     });
     console.log(this.user.password);
   }
 
-  // acceder(){
-  //   this._login.getAuth().subscribe();
-  // }
-
-  // onSubmit(): void {
-
-  //   val = this.formLogin.value;
-
-  //   this.authService.login(this.usuario, this.password).subscribe(
-  //     data => {
-  //       this.tokenStorage.saveToken(data.accessToken);
-  //       this.tokenStorage.saveUser(data);
-  //       this.isLoginFailed = false;
-  //       this.isLoggedIn = true;
-  //       this.roles = this.tokenStorage.getUser().roles;
-  //       this.reloadPage();
-  //     },
-  //     err => {
-  //       this.errorMessage = err.error.message;
-  //       this.isLoginFailed = true;
-  //     }
-  //   );
-  // }
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUser().roles;
     }
+
+    if(this.authService.isAutheticated()){
+      swal.fire('Login', `Hola ${this.authService.usuario.username} ya estás autenticado`,'info');
+      this.router.navigate(['/clientes']);
+    }
+
+    this.recordarUsuario = true;
+    console.log(this.recordarUsuario);
   }
 
 
@@ -119,53 +141,28 @@ export class LoginComponent implements OnInit {
     window.location.reload();
   }
 
+  authenticate() {
+
+    this.http.get(`http://localhost:8093/api/clientes`).subscribe(response => {
+        if (response) {
+            this.authenticated = true;
+            this.http.get('resource').subscribe(data => this.greeting = data);
+        } else {
+            this.authenticated = false;
+        }
+    }, () => { this.authenticated = false; });
+
+  }
+  logout() {
+      this.http.post('logout', {}).pipe(
+        finalize(() => {
+          this.authenticated = false;
+          this.router.navigateByUrl('/login');
+      })).subscribe();
+  }
+
+
+
+
 }
 
-/*
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../_services/auth.service';
-import { TokenStorageService } from '../_services/token-storage.service';
-@Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
-})
-export class LoginComponent implements OnInit {
-  form: any = {
-    username: null,
-    password: null
-  };
-  isLoggedIn = false;
-  isLoginFailed = false;
-  errorMessage = '';
-  roles: string[] = [];
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
-  ngOnInit(): void {
-    if (this.tokenStorage.getToken()) {
-      this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getUser().roles;
-    }
-  }
-  onSubmit(): void {
-    const { username, password } = this.form;
-    this.authService.login(username, password).subscribe(
-      data => {
-        this.tokenStorage.saveToken(data.accessToken);
-        this.tokenStorage.saveUser(data);
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
-        this.roles = this.tokenStorage.getUser().roles;
-        this.reloadPage();
-      },
-      err => {
-        this.errorMessage = err.error.message;
-        this.isLoginFailed = true;
-      }
-    );
-  }
-  reloadPage(): void {
-    window.location.reload();
-  }
-}
-
-*/

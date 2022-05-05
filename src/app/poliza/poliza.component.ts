@@ -32,39 +32,37 @@ export class PolizaComponent implements OnInit {
                 this.mostrarPoliza();
                 this.recuperarVehiculo();
                 this.cambiaTitulo();
-                this.verPolizaVehiculo()
+                //this.verPolizaVehiculo();
 
 
-            this._poliza.getPoliza( this.idx ).subscribe( (dato:any) =>{
+            this._poliza.getPolizaPorVehiculo( this.idx ).subscribe( (dato:any) =>{
               this.poliza = dato;
-              this.poliza.forEach( poliza =>{
 
-                if(poliza.vehiculo.idvehiculo == this.idx ){
-                  this.polizas.push(poliza);
-                  //console.log(this.polizas);
-                }
-              });
+              console.log(this.poliza);
+              return this.poliza;
             });
 
 
   }
 
   mostrarPoliza(){
-    this._poliza.getPoliza( this.idx ).subscribe((pol:any) =>{
+    this._poliza.getPolizaPorVehiculo( this.idx ).subscribe((pol:any) =>{
       //console.log("Soy tu poliza")
       //console.log(this.poliza)
       this.polizaMod=pol;
-      return this.poliza;
+      console.log(this.polizaMod)
+      return this.polizaMod;
     });
   }
 
 
-  verPolizaVehiculo(){
-    this._poliza.getPolizaPorVehiculo( this.idx ).subscribe((p:any) => {
-      this.polvehiculo=p;
-      console.log("soy una poliza" +(this.polvehiculo));
-    });
-  }
+  // verPolizaVehiculo(){
+  //   this._poliza.getPolizaPorVehiculo( this.idx ).subscribe((p:any) => {
+  //     this.polvehiculo=p;
+  //     console.log("soy una poliza" +(this.polvehiculo));
+  //     return this.polvehiculo;
+  //   });
+  // }
 
 
   recuperarVehiculo(){

@@ -1,6 +1,8 @@
+import { AutenticacionGuard } from "./guards/autenticacion.guard";
 
 import { RouterModule, Routes } from "@angular/router";
 import { AvisosComponent } from "./avisos/avisos.component";
+import { ClienteComponent } from "./cliente/cliente.component";
 import { ClientesComponent } from "./clientes/clientes.component";
 import { ContenedoresComponent } from './contenedores/contenedores.component';
 import { ContenedoresrutasComponent } from "./contenedoresrutas/contenedoresrutas.component";
@@ -37,6 +39,7 @@ import { PolizasComponent } from "./polizas/polizas.component";
 import { RutaComponent } from "./ruta/ruta.component";
 import { RutasComponent } from './rutas/rutas.component';
 import { LoginComponent } from "./shared/login/login.component";
+import { TurnosconductoresComponent } from "./turnosconductores/turnosconductores.component";
 import { VacacionesempleadoComponent } from "./vacacionesempleado/vacacionesempleado.component";
 import { VacacionesequipoComponent } from "./vacacionesequipo/vacacionesequipo.component";
 import { VehiculosComponent } from "./vehiculos/vehiculos.component";
@@ -50,6 +53,13 @@ import { PeticionesComponent } from "./vistaEmpleado/peticiones/peticiones.compo
 import { RutasjornadaComponent } from "./vistaEmpleado/rutasjornada/rutasjornada.component";
 import { VacacionesComponent } from "./vistaEmpleado/vacaciones/vacaciones.component";
 import { ZonasComponent } from "./zonas/zonas.component";
+import { RoleGuard } from "./guards/role.guard";
+import { NivelesrutaComponent } from "./nivelesruta/nivelesruta.component";
+import { SalvarcategoriaComponent } from "./inserciones/salvarempleado/salvarcategoria/salvarcategoria.component";
+import { SalvarvacacionesgeneralComponent } from "./inserciones/salvarvacacionesgeneral/salvarvacacionesgeneral.component";
+import { SalvarpolizaComponent } from "./inserciones/salvarpoliza/salvarpoliza.component";
+import { SalvarmultaComponent } from "./inserciones/salvarmulta/salvarmulta.component";
+import { RegistrarnivelcontenedorComponent } from "./inserciones/registrarnivelcontenedor/registrarnivelcontenedor.component";
 
 
 
@@ -65,70 +75,89 @@ import { ZonasComponent } from "./zonas/zonas.component";
 
 
 export const APP_ROUTES: Routes = [
-    { path: 'clientes', component: ClientesComponent },
-    //{ path: 'clientes/:id', component: ClientesComponent },
+    { path: 'clientes', component: ClientesComponent, canActivate:[AutenticacionGuard] },
+    { path: 'clientes/:id', component: ClienteComponent, canActivate:[AutenticacionGuard] },
     { path: 'inicio', component: InicioComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'panel', component: PanelComponent },
-    { path: 'panelempleado', component: PanelempleadoComponent },
-    { path: 'salvarmensaje', component: SalvarmensajeComponent },
-    { path: 'avisos', component: AvisosComponent },
-    { path: 'salvaraviso', component: SalvaravisoComponent },
-    { path: 'respondermensaje/:id', component: RespondermensajeComponent },
-    { path: 'empleados', component: EmpleadosComponent },
+    { path: 'panel', component: PanelComponent, canActivate:[AutenticacionGuard] },
+    { path: 'panelempleado', component: PanelempleadoComponent, canActivate:[AutenticacionGuard] },
+    { path: 'salvarmensaje', component: SalvarmensajeComponent, canActivate:[AutenticacionGuard] },
+    { path: 'avisos', component: AvisosComponent, canActivate:[AutenticacionGuard] },
+    { path: 'avisos/:page', component: AvisosComponent , canActivate:[AutenticacionGuard]},
+    { path: 'salvaraviso', component: SalvaravisoComponent, canActivate:[AutenticacionGuard] },
+    { path: 'respondermensaje/:id', component: RespondermensajeComponent ,canActivate:[AutenticacionGuard] },
+    { path: 'empleados', component: EmpleadosComponent ,canActivate:[AutenticacionGuard] },
+    { path: 'empleados/:page', component: EmpleadosComponent ,canActivate:[AutenticacionGuard] },
     { path: 'peticiones', component: PeticionesComponent },
-    { path: 'permisosretribuidos', component: PermisosretribuidosComponent },
-    { path: 'permisosnoretribuidos', component: PermisosNoRetribuidosComponent},
-    { path: 'horasmedico', component: HorasmedicoComponent },
-    { path: 'vacacionesequipo', component: VacacionesequipoComponent },
-    { path: 'vacacionesempleado/:id', component: VacacionesempleadoComponent },
-    { path: 'salvarvacaciones', component: SalvarvacacionesempleadoComponent },
-    { path: 'salvarvacaciones/:id', component: SalvarvacacionesempleadoComponent },
-    { path: 'empleado/:id', component: EmpleadoComponent },
-    { path: 'salvarempleado', component: SalvarempleadoComponent },
-    { path: 'salvarempleado/:id', component: SalvarempleadoComponent },
-    { path: 'rutas', component: RutasComponent },
-    { path: 'ruta/:id', component: RutaComponent},
-    { path: 'salvarruta', component: SalvarrutaComponent },
-    { path: 'salvarruta/:id', component: SalvarrutaComponent },
-    { path: 'zonas', component: ZonasComponent },
-    { path: 'localidades', component: LocalidadesComponent },
-    { path: 'vehiculos', component: VehiculosComponent},
-    { path: 'mantenimientos', component: MantenimientosComponent},
-    { path: 'salvarmantenimiento', component: SalvarmantenimientoComponent},
-    { path: 'salvarmantenimientoid/:id', component: SalvarmantenimientoComponent},
-    { path: 'mantenimiento', component: MantenimientoComponent},
-    { path: 'mantenimiento/:id', component: MantenimientoComponent},
-    { path: 'niveles/:id', component: NivelesComponent},
-    { path: 'salvarvehiculo', component: SalvarvehiculoComponent},
-    { path: 'salvarvehiculo/:id', component: SalvarvehiculoComponent},
-    { path: 'multas', component: MultasComponent},
-    { path: 'multav/:id', component: MultaComponent},
-    { path: 'polizas', component: PolizasComponent},
-    { path: 'poliza/:id', component: PolizaComponent},
-    { path: 'contenedores', component: ContenedoresComponent },
-    { path: 'contenedoresconductor', component: ContenedoresConductorComponent },
-    { path: 'salvarcontenedor', component: SalvarcontenedorComponent },
-    { path: 'salvarcontenedor/:id', component: SalvarcontenedorComponent },
-    { path: 'contenedoresruta', component: ContenedoresrutasComponent },
-    { path: 'contenedoresruta/:id', component: ContenedoresrutasComponent },
-    { path: 'asociarcontenedor', component: AsociarcontenedorComponent },
-    { path: 'asociarcontenedor/:id', component: AsociarcontenedorComponent },
-    { path: 'insertarcontenedor', component: ContenedorinsertarComponent },
-    { path: 'pesajes', component: PesajesComponent },
-    { path: 'pesaje/:id', component: PesajeComponent },
-    { path: 'pesajesconductor', component: PesajesconductorComponent },
-    { path: 'salvarpesaje/', component: SalvarpesajeComponent },
-    { path: 'salvarpesaje/:id', component: SalvarpesajeComponent },
-    { path: 'insertarpesaje', component: SalvarpesajeComponent },
-    { path: 'incidencias', component: IncidenciasComponent},
-    { path: 'salvarincidencia', component: SalvarincidenciaComponent },
-    { path: 'llenados', component: LlenadosComponent},
-    { path: 'mapa', component: ContenedoresComponent },
+    { path: 'permisosretribuidos', component: PermisosretribuidosComponent, canActivate:[AutenticacionGuard]},
+    { path: 'permisosnoretribuidos', component: PermisosNoRetribuidosComponent , canActivate:[AutenticacionGuard]},
+    { path: 'horasmedico', component: HorasmedicoComponent, canActivate:[AutenticacionGuard] },
+    { path: 'vacacionesequipo', component: VacacionesequipoComponent ,canActivate:[AutenticacionGuard] },
+    { path: 'vacacionesequipo/:page', component: VacacionesequipoComponent ,canActivate:[AutenticacionGuard] },
+    { path: 'vacacionesempleado/:id', component: VacacionesempleadoComponent ,canActivate:[AutenticacionGuard]},
+    { path: 'salvarvacacionesgeneral', component: SalvarvacacionesgeneralComponent , canActivate:[AutenticacionGuard]},
+    { path: 'salvarvacaciones', component: SalvarvacacionesempleadoComponent , canActivate:[AutenticacionGuard]},
+    { path: 'salvarvacaciones/:id', component: SalvarvacacionesempleadoComponent , canActivate:[AutenticacionGuard]},
+    { path: 'editarvacaciones/:id/:vac', component: SalvarvacacionesempleadoComponent , canActivate:[AutenticacionGuard]},
+    { path: 'empleado/:id', component: EmpleadoComponent ,canActivate:[AutenticacionGuard] },
+    { path: 'salvarempleado', component: SalvarempleadoComponent ,canActivate:[AutenticacionGuard] },
+    { path: 'salvarempleado/:id', component: SalvarempleadoComponent , canActivate:[AutenticacionGuard]},
+    { path: 'salvarcategoria', component: SalvarcategoriaComponent ,canActivate:[AutenticacionGuard] },
+    { path: 'rutas', component: RutasComponent, canActivate:[AutenticacionGuard] },
+    { path: 'ruta/:id', component: RutaComponent, canActivate:[AutenticacionGuard]},
+    { path: 'rutas/:page', component: RutasComponent, canActivate:[AutenticacionGuard]},
+    { path: 'salvarruta', component: SalvarrutaComponent, canActivate:[AutenticacionGuard] },
+    { path: 'salvarruta/:id', component: SalvarrutaComponent , canActivate:[AutenticacionGuard]},
+    { path: 'zonas', component: ZonasComponent , canActivate:[AutenticacionGuard]},
+    { path: 'zonas/:page', component: ZonasComponent , canActivate:[AutenticacionGuard]},
+    { path: 'localidades', component: LocalidadesComponent , canActivate:[AutenticacionGuard]},
+    { path: 'localidades/:page', component: LocalidadesComponent , canActivate:[AutenticacionGuard]},
+    { path: 'vehiculos', component: VehiculosComponent, canActivate:[AutenticacionGuard]},
+    { path: 'vehiculos/:page', component: VehiculosComponent, canActivate:[AutenticacionGuard]},
+    { path: 'mantenimientos', component: MantenimientosComponent , canActivate:[AutenticacionGuard]},
+    { path: 'mantenimientos/:page', component: MantenimientosComponent , canActivate:[AutenticacionGuard]},
+    { path: 'salvarmantenimiento', component: SalvarmantenimientoComponent , canActivate:[AutenticacionGuard]},
+    { path: 'salvarmantenimientoid/:id', component: SalvarmantenimientoComponent , canActivate:[AutenticacionGuard]},
+    { path: 'mantenimiento', component: MantenimientoComponent , canActivate:[AutenticacionGuard]},
+    { path: 'mantenimiento/:id', component: MantenimientoComponent , canActivate:[AutenticacionGuard]},
+    { path: 'niveles/:id', component: NivelesComponent , canActivate:[AutenticacionGuard]},
+    { path: 'nivelesruta/:page', component: NivelesrutaComponent , canActivate:[AutenticacionGuard]},
+    { path: 'registrarnivel/:id', component: RegistrarnivelcontenedorComponent , canActivate:[AutenticacionGuard]},
+    { path: 'salvarvehiculo', component: SalvarvehiculoComponent , canActivate:[AutenticacionGuard]},
+    { path: 'salvarvehiculo/:id', component: SalvarvehiculoComponent , canActivate:[AutenticacionGuard]},
+    { path: 'multas', component: MultasComponent, canActivate:[AutenticacionGuard]},
+    { path: 'multas/:page', component: MultasComponent, canActivate:[AutenticacionGuard]},
+    { path: 'multav/:id', component: MultaComponent, canActivate:[AutenticacionGuard]},
+    { path: 'salvarmulta/:id', component: SalvarmultaComponent, canActivate:[AutenticacionGuard]},
+    { path: 'polizas', component: PolizasComponent, canActivate:[AutenticacionGuard]},
+    { path: 'polizas/:page', component: PolizasComponent, canActivate:[AutenticacionGuard]},
+    { path: 'poliza/:id', component: PolizaComponent, canActivate:[AutenticacionGuard]},
+    { path: 'salvarpoliza', component: SalvarpolizaComponent, canActivate:[AutenticacionGuard]},
+    { path: 'contenedores', component: ContenedoresComponent , canActivate:[AutenticacionGuard], data: {role: 'ROLE_ADMIN'}},
+    { path: 'contenedores/:page', component: ContenedoresComponent , canActivate:[AutenticacionGuard], data: {role: 'ROLE_ADMIN'}},
+    { path: 'contenedoresconductor', component: ContenedoresConductorComponent , canActivate:[AutenticacionGuard] },
+    { path: 'salvarcontenedor', component: SalvarcontenedorComponent , canActivate:[AutenticacionGuard]},
+    { path: 'salvarcontenedor/:id', component: SalvarcontenedorComponent , canActivate:[AutenticacionGuard] },
+    { path: 'contenedoresruta', component: ContenedoresrutasComponent , canActivate:[AutenticacionGuard]},
+    { path: 'contenedoresruta/:id', component: ContenedoresrutasComponent , canActivate:[AutenticacionGuard]},
+    { path: 'asociarcontenedor', component: AsociarcontenedorComponent , canActivate:[AutenticacionGuard]},
+    { path: 'asociarcontenedor/:id', component: AsociarcontenedorComponent , canActivate:[AutenticacionGuard]},
+    { path: 'insertarcontenedor', component: ContenedorinsertarComponent , canActivate:[AutenticacionGuard]},
+    { path: 'pesajes', component: PesajesComponent , canActivate:[AutenticacionGuard]},
+    { path: 'pesajes/:page', component: PesajesComponent , canActivate:[AutenticacionGuard]},
+    { path: 'pesaje/:id', component: PesajeComponent , canActivate:[AutenticacionGuard]},
+    { path: 'pesajesconductor', component: PesajesconductorComponent , canActivate:[AutenticacionGuard]},
+    { path: 'salvarpesaje/', component: SalvarpesajeComponent , canActivate:[AutenticacionGuard]},
+    { path: 'salvarpesaje/:id', component: SalvarpesajeComponent , canActivate:[AutenticacionGuard]},
+    { path: 'insertarpesaje', component: SalvarpesajeComponent , canActivate:[AutenticacionGuard]},
+    { path: 'incidencias', component: IncidenciasComponent , canActivate:[AutenticacionGuard]},
+    { path: 'salvarincidencia', component: SalvarincidenciaComponent , canActivate:[AutenticacionGuard]},
+    { path: 'llenados', component: LlenadosComponent , canActivate:[AutenticacionGuard]},
+    { path: 'mapa', component: ContenedoresComponent , canActivate:[AutenticacionGuard]},
         /* RUTAS PARA LA VISTA CONDUCTOR */
-    { path: 'rutasjornada', component: RutasjornadaComponent},
-    { path: '' , pathMatch: 'full', redirectTo: 'panel' },
-    { path: '**' , pathMatch: 'full', redirectTo: 'panel' },
+    { path: 'rutasjornada', component: RutasjornadaComponent , canActivate:[AutenticacionGuard]},
+    { path: '' , pathMatch: 'full', redirectTo: 'login' },
+    { path: '**' , pathMatch: 'full', redirectTo: 'login' },
 
 
 

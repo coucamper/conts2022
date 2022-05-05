@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { tipoincidenciaModel } from '../models/tipoincidenciaModel';
+import { AuthService } from './auth-service.service';
+
 
 
 
@@ -12,7 +14,7 @@ export class TiposincidenciaService {
 
   url = 'http://localhost:8093/tipoincidencia';
 
-  constructor( private http: HttpClient, private activatedRoute: ActivatedRoute) {
+  constructor( private http: HttpClient, private activatedRoute: ActivatedRoute, public _authService: AuthService) {
     console.log("Servicio tipos de incidencia funcionando");
    }
 

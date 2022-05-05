@@ -25,7 +25,7 @@
       </thead>
       <tbody class="table-striped">
         <!-- <tr *ngFor="let rut of rutas; let zn of zona"> -->
-        <tr *ngFor="let cr of avisos">
+        <tr *ngFor="let cr of avisosPages">
           <td>{{ cr.idaviso }}</td>
           <td>{{ cr.fechahora }}</td>
           <td>{{ cr.asunto }}</td>
@@ -33,7 +33,7 @@
           <td>{{ cr.remitente.nomemp }}</td>
           <td><a mat-raised-button color="accent" class="btn"
               [routerLink]="['/salvarruta', cr.idruta ]">Editar</a></td>
-          <td><a mat-raised-button color="warn" class="btn" >Eliminar</a></td>
+          <td><a mat-raised-button color="warn" class="btn" (click)="eliminarAviso(  cr.idaviso ); refresh()" >Eliminar</a></td>
           <!-- <td><a th:href="@{/empleado(idempleado=${r.idempleado})}" class="btn btn-warning">Ficha empleado</a></td> -->
 
 
@@ -48,8 +48,7 @@
         <a href="#" mat-raised-button color="warn" class="btn mr-3 mb-5">Informes</a>
       </div>
       <div class="col">
-        <mat-paginator [length]="200" [pageSizeOptions]="[5, 10]" aria-label="Select page">
-        </mat-paginator>
+        <paginator-avisos *ngIf="paginador"   [paginador]="paginador"></paginator-avisos>
       </div>
     </div>
   </div>

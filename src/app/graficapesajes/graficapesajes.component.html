@@ -1,0 +1,47 @@
+<div class="col-lg-10 offset-lg-1 mt-5">
+  <h3 class="bordbot">Estadísticas de recogida y cargas</h3>
+    <div class="col-lg-4 pl-1">
+      <google-chart #chart
+      [title]="title"
+      [type]="myType"
+      [data]="planPesajesEntreFechas"
+      [columns]="columnNames"
+      [options]="options"
+      [width]="width"
+      [height]="height" *ngIf="datosFiltrados">
+   </google-chart>
+
+   <google-chart #chart
+   [title]="title"
+   [type]="myType"
+   [data]="single"
+   [columns]="columnNames"
+   [options]="options"
+   [width]="width"
+   [height]="height" *ngIf="!datosFiltrados">
+</google-chart>
+
+
+
+
+
+
+    </div>
+
+
+    <form [formGroup]="formPesajes" (ngSubmit)="filtrar()">
+      <div class="col-lg-2 ib">
+        <label for="fechainicio">Seleccionar fecha inicial</label>
+        <input type="date" name="fechainicio" class="chartinput" formControlName="fechainicio" (ngModelChange)="onChangeInicio($event)" value="2022-04-01">
+
+      </div>
+      <div class="col-lg-2 ib">
+        <label for="fechafinturno">Selecionar fecha final</label>
+        <input type="date" name="fechafin" class="chartinput" formControlName="fechafin" value="2022-04-10" (ngModelChange)="onChangeFinal($event)">
+      </div>
+      <div class="col-lg-2 ib  mb-5">
+        <a (click)="filtrar()" value="Filtrar datos"  mat-raised-button color="accent" class="btn mr-3" >Filtrar datos</a>
+      </div>
+    </form>
+
+</div>

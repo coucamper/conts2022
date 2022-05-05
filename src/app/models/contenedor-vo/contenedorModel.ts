@@ -19,4 +19,6 @@ export class ContenedorVOModule {
   coordenadas: string;
   mapa: string;
   fechaimplantacion: string;
+
+  constructor(){}
  }

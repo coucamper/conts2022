@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CalendarHeaderComponent } from './calendar-header.component';
+import { SalvarcategoriaComponent } from './salvarcategoria.component';
 
-describe('CalendarHeaderComponent', () => {
-  let component: CalendarHeaderComponent;
-  let fixture: ComponentFixture<CalendarHeaderComponent>;
+describe('SalvarcategoriaComponent', () => {
+  let component: SalvarcategoriaComponent;
+  let fixture: ComponentFixture<SalvarcategoriaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CalendarHeaderComponent ]
+      declarations: [ SalvarcategoriaComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CalendarHeaderComponent);
+    fixture = TestBed.createComponent(SalvarcategoriaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

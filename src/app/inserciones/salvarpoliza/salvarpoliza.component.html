@@ -1,0 +1,60 @@
+<div class="container-fluid">
+  <app-navegacion></app-navegacion>
+<div class="col-lg-12">
+  <h2 class="pl-2 pt-4" >Asociar Poliza a vehículo</h2>
+
+<form [formGroup]="formPoliza">
+
+
+  <label for="idpoliza" *ngIf="idExiste">ID Poliza</label>
+  <input type="text" id="idpoliza" name="idpoliza" formControlName="idpoliza" class="form-control" *ngIf="idExiste">
+
+  <label for="numpoliza">Nº de Póliza</label>
+  <input type="text" name="numpoliza" id="numpoliza" formControlName="numpoliza" class="form-control">
+
+  <label for="aseguradora">Aseguradora</label>
+  <input type="text" name="aseguradora" id="aseguradora" formControlName="aseguradora" class="form-control">
+
+
+  <label for="fechapoliza">Fecha efecto</label>
+  <input type="date" name="fechapoliza" id="fechapoliza" formControlName="fechapoliza" class="form-control">
+
+  <label for="modalidad">Modalidad</label>
+  <input type="text" name="modalidad" id="modalidad" formControlName="modalidad" class="form-control">
+
+  <label for="franquicia">Franquicia</label>
+  <input type="text" name="franquicia" id="franquicia" formControlName="franquicia" class="form-control">
+
+  <label for="importepoliza">Importe</label>
+  <input type="text" name="importepoliza" id="importepoliza" formControlName="importepoliza" class="form-control">
+
+  <label for="periodofact">Facturación</label>
+  <input type="text" name="periodofact" id="periodofact" formControlName="periodofact" class="form-control">
+
+
+  <label for="vehiculo">Vehículo</label>
+  <select name="vehiculo" id="vehiculo" formControlName="vehiculo" class="form-control" (ngModelChange)="onChangeVehiculo($event)">
+    <option [value]="v.idvehiculo" *ngFor="let v of vehiculos"> {{ v.idvehiculo}} - {{ v.marca }} {{ v.modelo }} - {{ v.matricula }}</option>
+  </select>
+
+
+
+  <div class="ml-3 mt-3">
+      <button type="submit" value="Salvar Vehículo" mat-raised-button color="accent" class="btn submit mr-3" (click)="guardarPoliza()">Salvar póliza</button>
+  </div>
+
+</form>
+
+
+
+</div>
+     <div class="col-lg-12 ml-3 mt-3">
+              <a [routerLink]="['/vehiculos']" routerLinkActive="router-link-active"  mat-raised-button color="warn" class="btn mb-5">Volver</a>
+    </div>
+
+
+
+
+
+
+

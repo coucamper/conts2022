@@ -45,9 +45,9 @@ verEmpleado( idx:number ) {
 
  return this._empleados.getEmpleado( this.idx ).subscribe( ( respuesta:any) => {
     this.emp = respuesta;
-    console.log("el empleado es: "+ this.emp.nomemp);
-    console.log("el id es: "+ this.emp.idempleado);
-    console.log("el nif es: "+ this.emp.nif);
+    // console.log("el empleado es: "+ this.emp.nomemp);
+    // console.log("el id es: "+ this.emp.idempleado);
+    // console.log("el nif es: "+ this.emp.nif);
   });
 
   //return this.emp;

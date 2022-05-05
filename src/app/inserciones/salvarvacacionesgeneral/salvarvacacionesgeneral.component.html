@@ -1,0 +1,64 @@
+<div class="container-fluid">
+  <app-navegacion></app-navegacion>
+  <div class="col-lg-12">
+    <h2 class="pl-2 pt-4" *ngIf="!idExiste">Insertar nuevas vacaciones</h2>
+
+    <form [formGroup]="formVacaEmpleado" #f="ngForm" (ngSubmit)="guardarVacacion()">
+
+      <div *ngIf="!idExiste"> <!-- SI EL ID NO EXISTE EN LA BD -->
+
+        <label for="idempleado">Empleado: </label>
+        <select name="idempleado" id="idempleado" formControlName="idempleado" class="form-control" [(ngModel)]="idempleado" *ngIf="listaEmpleados" (ngModelChange)="onChangeEmpleado($event)">
+          <option [value]="empleado.idempleado" *ngFor="let empleado of listaEmpleados">{{ empleado.idempleado }} - {{ empleado.nomemp }} {{ empleado.ape1emp }}</option>
+        </select>
+
+      </div>
+
+      <input type="text" name="idplanvacaciones" id="idplanvacaciones" class="form-control"
+      formControlName="idplanvacaciones" [(ngModel)]="vacacionEmpleado.idplanvacaciones" *ngIf="idExiste">
+
+      <label for="anyo">Año</label>
+      <input type="text" name="anyo" id="anyo" formControlName="anyo" class="form-control" [(ngModel)]="vacacionEmpleado.anyo"
+      placeholder="Introducir año">
+
+      <label for="mes">Mes</label>
+      <input type="text" name="mes" id="mes" formControlName="mes" class="form-control"
+      placeholder="Introducir nombre del mes"  [(ngModel)]="vacacionEmpleado.mes">
+
+      <label for="diasdisponibles">Dias disponibles (por defecto 21)</label>
+      <input type="number" name="diasdisponibles" id="diasdisponibles"
+      formControlName="diasdisponibles" class="form-control" placeholder="seleccionar número"  [(ngModel)]="vacacionEmpleado.diasdisponibles">
+
+      <label for="finiciovaca">Fecha de inicio</label>
+      <input type="date" name="finiciovaca" id="finiciovaca" formControlName="finiciovaca"
+      class="form-control" placeholder="seleccionar fecha de inicio"  [(ngModel)]="vacacionEmpleado.finiciovaca">
+
+
+      <label for="ffinvaca">Fecha de finalización</label>
+      <input type="date" name="ffinvaca" id="ffinvaca" formControlName="ffinvaca" class="form-control"
+      placeholder="seleccionar fecha de finalización"  [(ngModel)]="vacacionEmpleado.ffinvaca">
+
+      <label for="diasconsume">Dias que disfruta</label>
+      <input type="number" name="diasconsume" id="diasconsume" class="form-control" formControlName="diasconsume"
+      placeholder="seleccionar número"  [(ngModel)]="vacacionEmpleado.diasconsume">
+
+
+      <label for="diasvacaciones">Dias restantes</label>
+      <input type="number" name="diasvacaciones" id="diasvacaciones" formControlName="diasvacaciones"
+      class="form-control" placeholder="seleccionar número"  [(ngModel)]="vacacionEmpleado.diasvacaciones">
+
+
+      <div class="ml-3 mt-3">
+        <button type="button" value="Salvar Ruta" mat-raised-button color="accent" class="btn submit mr-3"
+         (click)="guardarVacacion()">Salvar vacaciones</button>
+      </div>
+
+
+
+    </form>
+
+  </div>
+  <div class="col-lg-12 ml-3 mt-3" *ngIf="empleado">
+    <a [routerLink]="['/vacacionesequipo']" routerLinkActive="router-link-active" mat-raised-button color="warn"
+      class="btn mb-5">Volver</a>
+  </div>

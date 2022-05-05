@@ -18,11 +18,6 @@ import { ContenedoresService } from './services/contenedores.service';
 export class AppComponent {
   title = 'contenedores';
 
-  // contenedores: ContenedorVOModule [] = [];
-  // dataSource = null;
-
-
-  // @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
 
   ngOnInit() {

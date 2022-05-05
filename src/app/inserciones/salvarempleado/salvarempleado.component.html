@@ -33,7 +33,9 @@
                     <label for="nif">DNI: </label>
                     <input type="text" name="nif" id="nif" formControlName="nif"
 
-                    class="form-control" [(ngModel)]="empleado.nif">
+
+                    class="form-control" [(ngModel)]="empleado.nif" (ngModelChange)="onChangeNif($event)">
+
                     <br>
                     <!-- <small *ngIf="nifNoValida" class="text-danger ml-3">Formato de nif no valido</small> -->
 
@@ -96,29 +98,16 @@
 
                     class="form-control" [(ngModel)]="empleado.iban">
                     <br>
-                    <!-- <small *ngIf="ibanNoValida" class="text-danger ml-3">Introducir los 24 caracteres </small> -->
 
-                    <label for="categoria">Categoría: </label>
-                    <select name="categoria" id="categoria" formControlName="categoria" class="form-control" (ngModelChange)="onChange($event)">
-                      <option [value]="categoria.idcategoria" *ngFor="let categoria of categorias">{{ categoria.idcategoria }} - {{ categoria.denom }}</option>
-                    </select>
-                    <!-- <input type="text" name="categoria" id="categoria" formControlName="categoria"
 
-                    class="form-control" [(ngModel)]="empleado.categoria"> -->
                     <br>
                     <!-- <small *ngIf="categoriaNoValida" class="text-danger ml-3">Introducir categría </small> -->
 
-                    <label for="tipocontrato" class="mb-3">Tipo de contrato: </label>
-                    <mat-radio-group aria-label="Select tipocontrato" class="ml-3" formControlName="tipocontrato" [(ngModel)]="empleado.tipocontrato" (ngModelChange)="onChangeContrato($event)">
-                      <mat-radio-button *ngFor="let tipo of tiposContrato" [value]="tipo.idtipocontrato" formControlName="tipocontrato" ngDefaultControl class="mr-5 mat-warn" >{{ tipo.denomcontrato }} </mat-radio-button>
-                       <!-- <mat-radio-button [value]="estructura" formControlName="tipocontrato" ngDefaultControl class="mr-5 mat-warn">Estructura </mat-radio-button>
-                      <mat-radio-button value="insercion" formControlName="tipocontrato" ngDefaultControl class="mat-warn">Inserción </mat-radio-button> -->
-                    </mat-radio-group>
                     <br>
                     <!-- <small *ngIf="tipocontratoNoValida" class="text-danger ml-3">Introducir tipo de contrato </small> -->
 
                     <div class="ml-3 mt-3">
-                      <button type="submit" value="Salvar Empleado" mat-raised-button color="accent" class="btn submit mr-3"
+                      <button type="button" value="Salvar Empleado" mat-raised-button color="accent" class="btn submit mr-3"
                       [routerLink]="['/salvarempleado']" (click)="guardar()">Salvar Empleado</button>
                       <!-- <button type="submit" value="Salvar Empleado" mat-raised-button color="accent" class="btn submit mr-3"
                       (click)="guardar( formEmpleado.value )" [routerLink]="['/empleados']">Salvar Empleado</button> -->
@@ -128,10 +117,15 @@
 
 	        </div> <!-- FIN DE LA PUTA COLUMNA-->
 
+
+
 	    <div class="col-lg-12 pt-3 mb-5">
 	      <a mat-raised-button color="warn" class="enlaces btn mb-5" [routerLink]="['/empleados']" routerLinkActive="active" class="btn ml-3 mb-5">Volver</a>
         <!-- <a mat-raised-button color="warn" class="enlaces btn mb-5"
         [routerLink]="['/empleados']" routerLinkActive="active" class="btn ml-3 mb-5" [disabled]="!formEmpleado.valid">Volver</a> -->
 	    </div>
 	  </div>
+    <div>
+
+    </div>
 </div>

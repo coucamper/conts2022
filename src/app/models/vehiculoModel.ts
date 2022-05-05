@@ -20,6 +20,5 @@ export class VehiculoModel {
 	 modelo: string;
 	 fechacompra: string;
 
-    constructor(){}
 
  }

@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { URL_BACKEND } from '../config/config';
+import { AuthService } from './auth-service.service';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +13,11 @@ import { ActivatedRoute } from '@angular/router';
 export class TipoimportanciamensajeService {
 
 
-  url = 'http://localhost:8093/tipoimportancia';
+  //url = 'http://localhost:8093/tipoimportancia';
 
-  constructor(  private http: HttpClient, private activatedRoute:ActivatedRoute ) {
+  url = URL_BACKEND + '/tipoimportancia';
+
+  constructor(  private http: HttpClient, private activatedRoute:ActivatedRoute, public _authService: AuthService ) {
 
    }
 

@@ -23,7 +23,8 @@
 
 
   <div class="col-lg-12">
-    <h2 class="pl-2 pt-4">Niveles de los contenedores por ruta</h2>
+    <h2 class="pl-2 pt-4">Niveles de los contenedores por pesaje y ruta</h2>
+
     <table class="table bordbot table-striped">
       <thead class="thead-dark">
         <tr>
@@ -41,7 +42,7 @@
         <tr *ngFor="let ncr of nivelContenRuta">
           <td>{{ ncr.idnivelcontenedor }}</td>
           <td>{{ ncr.fecharegistro }}</td>
-          <td>{{ ncr.ruta.denom }}</td>
+          <td>{{ ncr.pesaje.ruta.denom }}</td>
           <td>{{ ncr.contenedor.denom }}</td>
           <td>{{ ncr.nivelregistro.denomnivel }}</td>
           <td>{{ ncr.empleado.nomemp }}</td>
@@ -55,14 +56,13 @@
       </tbody>
     </table>
     <div class="row">
-      <div class="col">
+      <div class="col-lg-4 col-md-6 col-sm-12">
         <a [routerLink]="['/pesajes']" routerLinkActive="router-link-active"  mat-raised-button color="warn" class="btn mr-3">Volver</a>
-        <a [routerLink]="['/insertarpesaje']" routerLinkActive="router-link-active"  mat-raised-button color="warn" class="btn mr-3">Añadir Pesaje</a>
+        <a routerLinkActive="router-link-active"  mat-raised-button color="warn" class="btn mr-3" [routerLink]="['/registrarnivel', idx]">Insertar llenado</a>
         <a href="#"  mat-raised-button color="warn" class="btn mr-3">Informes</a>
       </div>
-      <div class="col">
-        <mat-paginator [length]="200" [pageSizeOptions]="[5, 10]" aria-label="Select page">
-        </mat-paginator>
+      <div class="col-lg-6 col-md-6 col-sm-12" *ngIf="mayorCero">
+        <app-paginator-niveles *ngIf="paginador" [paginador]="paginador"></app-paginator-niveles>
       </div>
     </div>
   </div>

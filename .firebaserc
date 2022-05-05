@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "default": "contenedoresproduccion",
+    "test2": "test24042022",
+    "contenedoresproduccion": "contenedoresproduccion",
+    "contenedores": "contenedoresproduccion"
+  },
+  "targets": {}
+}

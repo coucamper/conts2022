@@ -15,7 +15,7 @@ export class ClaseService {
   constructor( private http: HttpClient,
                private activatedRoute:ActivatedRoute
     ) {
-    console.log("servicio de clases funcionando ");
+
   }
 
 

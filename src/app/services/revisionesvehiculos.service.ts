@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { URL_BACKEND } from '../config/config';
 import { RevisionesVehiculo } from '../models/revisionesVehiculo';
+
 
 
 
@@ -10,7 +12,9 @@ import { RevisionesVehiculo } from '../models/revisionesVehiculo';
 })
 export class RevisionesvehiculosService {
 
-  url = 'http://localhost:8093/revisiones';
+  //url = 'http://localhost:8093/revisiones';
+
+  url = URL_BACKEND +'/revisiones';
 
   constructor( private http:HttpClient , private activatedRoute: ActivatedRoute) {
     console.log("Servicio de revisiones funcionando");

@@ -1,4 +1,4 @@
-<div class="container-fluid" *ngIf="localidades">
+<div class="container-fluid">
 
   <app-navegacion></app-navegacion>
 
@@ -13,7 +13,7 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-link fsmall" [routerLink]="['/zonas']">> Zonas</a>
-          <a class="nav-link fsmall" [routerLink]="['/contenedores']">> Localidades</a>
+          <a class="nav-link fsmall" [routerLink]="['/localidades']">> Localidades</a>
 
 
         </div>
@@ -36,8 +36,8 @@
     <table class="table bordbot table-striped mat-table ">
       <thead class="thead-dark">
         <tr class="mat-header-row">
-          <th>ID</th>
-          <th>LOCALIDAD</th>
+          <th class="localidadId">ID</th>
+          <th class="localidadLine">LOCALIDAD</th>
           <th>CONCEJOS</th>
           <th>EDITAR</th>
           <th>ELIMINAR</th>
@@ -45,7 +45,7 @@
       </thead>
       <tbody class="table-striped">
         <!-- <tr *ngFor="let rut of rutas; let zn of zona"> -->
-        <tr *ngFor="let l of localidades">
+        <tr *ngFor="let l of localidades ">
           <td>{{ l.idconcejo }}</td>
           <td>{{ l.denom}}</td>
           <td><a mat-raised-button class="btn" [routerLink]="['/ruta', l.idconcejo ]">Ver zona</a></td>
@@ -58,14 +58,16 @@
       </tbody>
     </table>
     <div class="row">
-      <div class="col">
+      <div class="col-lg-8">
         <a [routerLink]="['/salvarruta']" routerLinkActive="router-link-active" mat-raised-button color="warn"
           class="btn mr-3 mb-5">Añadir localidad</a>
         <a href="#" mat-raised-button color="warn" class="btn mr-3 mb-5">Informes</a>
       </div>
       <div class="col">
-        <mat-paginator [length]="200" [pageSizeOptions]="[5, 10]" aria-label="Select page">
-        </mat-paginator>
+
+        <paginator-nav *ngIf="paginador"   [paginador]="paginador"></paginator-nav>
+        <!-- <mat-paginator [length]="200" [pageSizeOptions]="[5, 10]" aria-label="Select page">
+        </mat-paginator> -->
       </div>
     </div>
   </div>

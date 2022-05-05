@@ -31,39 +31,40 @@
   <div class="col-lg-12">
     <h2 class="pl-2 pt-4">Planning de vacaciones</h2>
 
-    <table class="table bordbot table-striped">
-      <thead class="thead-dark">
-        <tr>
-          <th>MES</th>
-          <th>NOMBRE</th>
-          <th>APELLIDO 1</th>
-          <th>APELLIDO 2</th>
-          <th>FECHA INICIO</th>
-          <th>FECHA FIN</th>
-          <th>DIAS CONSUME</th>
-          <th>DIAS RESTANTES</th>
-          <th>PENDIENTES ANTERIOR</th>
-          <th>D. PENDIENTES</th>
-          <th>EDITAR</th>
-          <th>ELIMINAR</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let v of vacacionesGlobales | orderBy: 'finiciovaca'">
-          <td>{{ v.mes }}</td>
-          <td>{{ v.empleado.nomemp }}</td>
-          <td>{{ v.empleado.ape1emp }}</td>
-          <td>{{ v.empleado.ape2emp }}</td>
-          <td>{{ v.finiciovaca }}</td>
-          <td>{{ v.ffinvaca }}</td>
-          <td>{{ v.diasconsume }}</td>
-          <td>{{ v.diasrestantes }}</td>
-          <td>{{ v.anyoanterior }}</td>
-          <td>{{ v.pendientesanyoanterior }}</td>
-          <td><a class="btn" mat-raised-button color="accent">Editar</a></td>
-          <td><a class="btn" mat-raised-button color="warn">Eliminar</a></td>
-        </tr>
-      </tbody>
+
+      <table class="table bordbot table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>ID</th>
+            <th>MES</th>
+            <th>NOMBRE</th>
+            <th>APELLIDO 1</th>
+            <th>APELLIDO 2</th>
+            <th>DIAS DISPONIBLES</th>
+            <th>FECHA INICIO</th>
+            <th>FECHA FIN</th>
+            <th>DIAS CONSUME</th>
+            <th>RESTANTES</th>
+            <th>EDITAR</th>
+            <th>ELIMINAR</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let v of vacacionesGlobales | orderBy: 'finiciovaca'">
+            <td>{{ v.idplanvacaciones }}</td>
+            <td>{{ v.mes }}</td>
+            <td>{{ v.empleado.nomemp }}</td>
+            <td>{{ v.empleado.ape1emp }}</td>
+            <td>{{ v.empleado.ape2emp }}</td>
+            <td>{{ v.diasdisponibles }}</td>
+            <td>{{ v.finiciovaca }}</td>
+            <td>{{ v.ffinvaca }}</td>
+            <td>{{ v.diasconsumecalc }}</td>
+            <td>{{ v.diasrestantescalc }}</td>
+            <td><a class="btn" mat-raised-button color="accent" [routerLink]="['/editarvacaciones', v.empleado.idempleado, v.idplanvacaciones]">Editar</a></td>
+            <td><a class="btn" mat-raised-button color="warn">Eliminar</a></td>
+          </tr>
+        </tbody>
 
 
     </table>
@@ -80,11 +81,11 @@
     <div class="row">
       <div class="col">
         <a routerLinkActive="active"  mat-raised-button color="warn" class="btn mr-3" [routerLink]="['/empleados']">Volver</a>
-        <a routerLinkActive="active"  mat-raised-button color="warn" class="btn mr-3" [routerLink]="['/salvarvacaciones']">Añadir vacaciones</a>
+        <a routerLinkActive="active"  mat-raised-button color="warn" class="btn mr-3" [routerLink]="['/salvarvacacionesgeneral']">Añadir vacaciones</a>
         <a mat-raised-button color="warn" class="btn">Informes</a>
       </div>
       <div class="col">
-
+        <app-paginator-vacaciones *ngIf="paginador"   [paginador]="paginador"></app-paginator-vacaciones>
       </div>
     </div>
   </div>

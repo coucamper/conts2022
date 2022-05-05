@@ -12,8 +12,8 @@ import { NgModule } from "@angular/core";
 export class EmpleadocategoriaModel {
 
   idempleadocategoria:number;
-  empleado:string;
-  categoria:string;
+  empleado:number;
+  categoria:number;
 
   constructor(){}
 

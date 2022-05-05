@@ -66,8 +66,7 @@
           <a mat-raised-button color="warn" class="btn">Informes</a>
         </div>
         <div class="col">
-          <mat-paginator [length]="200" [pageSizeOptions]="[5, 10]" aria-label="Select page">
-          </mat-paginator>
+          <app-paginator-contenedores *ngIf="paginador"   [paginador]="paginador"></app-paginator-contenedores>
         </div>
       </div>
 

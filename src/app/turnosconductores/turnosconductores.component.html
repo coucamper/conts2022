@@ -1,0 +1,51 @@
+<div class="col-lg-10 offset-lg-1 mt-5 mb-5 bordbot">
+  <h3>Rotación de turnos de conductores</h3>
+</div>
+
+<div class="col-lg-10 offset-lg-1">
+
+
+  <google-chart #chart2
+  [title]="title"
+  [type]="myTypeTime"
+  [data]="planTurnos"
+  [columns]="columnNamesTime"
+  [options]="options"
+  [width]="widthTime"
+  [height]="heightTime" *ngIf="!datosFiltrados">
+</google-chart>
+
+
+  <google-chart #chart3
+  [title]="title"
+  [type]="myTypeTime"
+  [data]="planTurnosEntreFechas"
+  [columns]="columnNamesTime"
+  [options]="options"
+  [width]="widthTime"
+  [height]="heightTime" *ngIf="datosFiltrados">
+</google-chart>
+
+
+  <form [formGroup]="formTurnos" (ngSubmit)="filtrar()">
+  <div class="col-lg-2 ib">
+    <label for="fechainicioturno">Seleccionar fecha inicial</label>
+    <input type="date" name="fechainicioturno" class="chartinput" formControlName="fechainicioturno" (ngModelChange)="onChangeInicio($event)" value="2022-04-01">
+
+  </div>
+  <div class="col-lg-2 ib">
+    <label for="fechafinturno">Selecionar fecha final</label>
+    <input type="date" name="fechafinturno" class="chartinput" formControlName="fechafinturno" value="2022-04-10" (ngModelChange)="onChangeFinal($event)">
+  </div>
+  <div class="col-lg-2 ib">
+    <a (click)="filtrar()" value="Filtrar datos"  mat-raised-button color="accent" class="btn mr-3" >Filtrar datos</a>
+  </div>
+</form>
+
+
+
+
+
+
+
+</div>

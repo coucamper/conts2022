@@ -1,12 +1,30 @@
 import { getAttrsForDirectiveMatching } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { tap } from 'rxjs/operators';
+import { rutaModel } from '../models/rutaModel';
 import { ComarcasRutaService } from '../services/comarcasruta.service';
 import { ContenedoresService } from '../services/contenedores.service';
 import { ContenedoresRutasService } from '../services/contenedoresrutas.service';
 import { RutasService } from '../services/rutas.service';
 import { ZonasService } from '../services/zonas.service';
 
+
+
+export class Ruta {
+
+  idruta: number;
+  denom: string;
+  zona: number;
+  localidad: number;
+  fechaini: string;
+  periodo: string;
+  ruta: string;
+  ruta_idzona: string;
+
+
+}
 
 
 
@@ -36,31 +54,34 @@ export class RutasComponent implements OnInit {
 
   selec1:string;
   selec2:string;
+  page:any;
+  paginador:any;
+  items: any[] = this.rutas;
+  pageOfItems: Array<any>;
+  totalElements: number;
 
   constructor( private router:Router,
                private activatedRoute: ActivatedRoute,
                private _rutas: RutasService,
                private _comarcasRuta: ComarcasRutaService,
-               private _contenRutas: ContenedoresRutasService) {
+               private _contenRutas: ContenedoresRutasService,
+               private paginator:NgxPaginationModule) {
 
       this.idx = this.activatedRoute.snapshot.params['id'];
       this.div1Function();
-      this.verRutas();
+      //this.verRutas();
+      this.getRutas();
       this.getZonas();
-      this._rutas.getRutas().subscribe( data => {
-      //console.log(data);
-      this.rutas = data;
-      this.rutasF = this.rutas;
-
-      this.verRuta( this.idx );
-  });
-
   }
 
-  getNombreLocalidad(){
-
-
-
+  getRutas(){
+        // Esta parte de codigo es la que genera la ruta
+        this.activatedRoute.paramMap.subscribe(params =>{
+          this.page = this.activatedRoute.snapshot.paramMap.get('page');
+           if(!this.page){
+             this.page = 0;
+           }
+         });
   }
 
 
@@ -110,6 +131,55 @@ export class RutasComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.getRutas();
+    this.idx = this.activatedRoute.snapshot.params['id'];
+    this.activatedRoute.paramMap.subscribe((params) => {
+      let page = this.activatedRoute.snapshot.paramMap.get('page');
+      if (!page) {
+        this.page = 0;
+      }
+
+      this._rutas
+        .getRutasPaginadas(this.page)
+        .pipe(
+          tap((response) => {
+            (response.content as Ruta[]).forEach((ruta) =>
+              console.log(ruta.denom)
+            );
+          })
+        )
+        .subscribe((response) => {
+          this.rutas = response.content as Ruta[];
+          this.paginador = response;
+          console.log(this.rutas);
+        });
+    });
+
   }
+
+  /*
+    this.idx = this.activatedRoute.snapshot.params['id'];
+    this.activatedRoute.paramMap.subscribe((params) => {
+      let page = this.activatedRoute.snapshot.paramMap.get('page');
+      if (!page) {
+        this.page = 0;
+      }
+
+      this._contenedores
+        .getContenedoresPaginados(this.page)
+        .pipe(
+          tap((response) => {
+            (response.content as Contenedor[]).forEach((contenedor) =>
+              console.log(contenedor.denom)
+            );
+          })
+        )
+        .subscribe((response) => {
+          this.contenedores = response.content as Contenedor[];
+          this.paginador = response;
+          console.log(this.contenedores);
+        });
+    });
+  */
 
 }

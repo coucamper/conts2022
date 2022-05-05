@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { URL_BACKEND } from '../config/config';
 import { PermisoNoRetribuidoModel } from '../models/permisonoretribuidoModel';
 
 
@@ -10,7 +11,9 @@ import { PermisoNoRetribuidoModel } from '../models/permisonoretribuidoModel';
 export class PermisosnoretribuidosService {
 
 
-  url = 'http://localhost:8093/permisonr';
+  //url = 'http://localhost:8093/permisonr';
+
+  url = URL_BACKEND + '/permisonr';
 
   constructor( private http: HttpClient, private activatedRoute: ActivatedRoute) {
     console.log("Servicio tipos de incidencia funcionando");

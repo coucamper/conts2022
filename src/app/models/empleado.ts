@@ -28,7 +28,8 @@ export class EmpleadoModel {
   estudios: string;
   numhijos: string;
   domicilio: string;
-  tipocontrato: string;
+  tipocontrato: number;
+  categoria: number;
 
 
     constructor(){}

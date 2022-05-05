@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="ruta">
   <app-navegacion></app-navegacion>
   <div class="col-lg-12">
     <h2 class="pl-2 pt-4 mb-4" *ngIf="idExiste">Asociar contenedor a ruta: <strong>{{ ruta.denom }}</strong></h2>
@@ -9,7 +9,7 @@
       <label for="zona">Contenedores registrados: </label>
       <select name="idcontenedor" class="form-control" formControlName="idcontenedor" [(ngModel)]="idcontenedor"
         (ngModelChange)="onChange($event)">
-        <option *ngFor="let cn of contenedores" [value]="">{{ cn.idcontenedor }} - {{ cn.denom }} - {{ cn.ubicacion}}
+        <option *ngFor="let cn of contenedores" [value]="cn.idcontenedor">{{ cn.idcontenedor }} - {{ cn.denom }} - {{ cn.ubicacion}}
         </option>
       </select>
     </form>

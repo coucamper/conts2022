@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { getAttrsForDirectiveMatching } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Data, Router, RouterLink } from '@angular/router';
 import { AvisoModel } from '../models/avisoModel';
 import { EmpleadoModel } from '../models/empleado';
 import { MensajeModel } from '../models/mensajeModel';
@@ -10,6 +10,22 @@ import { EmpleadosService } from '../services/empleados.service';
 import { MensajesService } from '../services/mensajes.service';
 import { TipoimportanciamensajeService } from '../services/tipoimportanciamensaje.service';
 import { orderBy } from 'lodash';
+import { LegendType, NgxChartsModule } from '@swimlane/ngx-charts';
+import { single } from './data';
+import { Color, ScaleType } from '@swimlane/ngx-charts';
+import { PesajesService } from '../services/pesajes.service';
+import { DonutData } from '../models/donutData';
+import { LegendPosition } from '@swimlane/ngx-charts';
+import { misDatos } from './data';
+import { VacacionesequipoService } from '../services/vacacionesequipo.service';
+import { BlockData } from '../models/blockData';
+import { SeriesData } from '../models/seriesData';
+import { GoogleChartComponent, GoogleChartsModule } from 'angular-google-charts';
+import { ChartType, Row } from "angular-google-charts";
+import { TurnoempleadoService } from '../services/turnoempleado.service';
+import { TurnosconductoresComponent } from '../turnosconductores/turnosconductores.component';
+import { AuthService } from '../services/auth-service.service';
+
 
 
 
@@ -18,7 +34,8 @@ import { orderBy } from 'lodash';
 @Component({
   selector: 'app-panel',
   templateUrl: './panel.component.html',
-  styleUrls: ['./panel.component.css']
+  styleUrls: ['./panel.component.css'],
+
 })
 export class PanelComponent implements OnInit {
 
@@ -34,6 +51,20 @@ export class PanelComponent implements OnInit {
   idtipoimportancia:number;
   mensaje:MensajeModel;
   idaviso:number;
+  data:Data;
+  datos:any[];
+  donutData:DonutData; // Este es el objeto que almacena la data del Donut. Requiere de la creación de una clase para almacenar y aceptar los valores correctos.
+  datosRespuesta:Object[] = [];
+  datosRespuestaVacaciones:Object[] = [];
+  vacaciones:any[] = [];
+  turnos:any[] = [];
+
+  BlockData:BlockData;
+  blockData:BlockData;
+  seriesData:SeriesData;
+  conversor:any[] = [];
+
+  usuarioLogueado:any;
 
 
 
@@ -43,12 +74,14 @@ export class PanelComponent implements OnInit {
                private _clientes:HttpClient,
                private _empleados: EmpleadosService,
                private _avisos: AvisosService ,
-               private _importancia: TipoimportanciamensajeService ) {
+               private _importancia: TipoimportanciamensajeService,
+               private _pesajes: PesajesService,
+               private _vacaciones: VacacionesequipoService,
+               private _turnos: TurnoempleadoService,
+               private _authService: AuthService ) {
 
                 this._mensajes.getMensajes().subscribe( data => {
-                  //console.log(data);
                   this.mensajes = data;
-                  //console.log(this.mensajes);
                 });
 
               this._empleados.getEmpleados().subscribe( (emp:any) =>{
@@ -62,10 +95,11 @@ export class PanelComponent implements OnInit {
 
               this._importancia.getTipoimportancia( this.idtipoimportancia ).subscribe((tipo:any) =>{
                 this.idtipoimportancia=tipo;
-                //console.log(this.idtipoimportancia);
               });
 
+              this.usuarioLogueado = this._authService.usuario.username;
 
+              // CALLING METHODS
               this.mostrarAvisos();
               this.mostrarMensajesDeUsuario();
 }
@@ -74,11 +108,10 @@ export class PanelComponent implements OnInit {
     return this._avisos.getAvisos().subscribe( (av:any) => {
       this.avisos = av;
       //console.log( this.avisos );
-      this.avisosMostrados = this.avisos.slice(this.avisos.length-4, this.avisos.length );
-      console.log(this.avisosMostrados)
+      this.avisosMostrados = this.avisos.slice(0, 4 );
+      //console.log(this.avisosMostrados)
     });
   }
-
 
   eliminarAviso( idaviso:number ){
     return this._avisos.deleteAviso( Number(idaviso) ).subscribe();
@@ -88,23 +121,22 @@ export class PanelComponent implements OnInit {
     return this._mensajes.deleteMensajeFormulario( idmen ).subscribe();
   }
 
-
   mostrarMensajesDeUsuario(){
     this._mensajes.getMensajesReceptor( 1 ).subscribe((mensajes:any) =>{
       this.mensajesreceptor=mensajes;
-      //console.log(this.mensajesreceptor);
     });
 
   }
-
 
   refresh(){
     window.location.reload();
   }
 
-
   ngOnInit(): void {
+
     this.mostrarAvisos();
   }
+
+
 
 }

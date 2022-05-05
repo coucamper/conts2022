@@ -24,7 +24,7 @@
 
 
 
-				<div class="col-l-12">
+				<div class="col-lg-12">
 
 				</div>
 
@@ -41,32 +41,31 @@
               <th>TELEFONO</th>
               <th>ANTIGÜEDAD</th>
               <th>VACACIONES</th>
-              <th>CATEGORIA</th>
+              <!-- <th>CATEGORIA</th> -->
               <th>FICHA EMPLEADO</th>
               <th>ELIMINAR</th>
             </tr>
           </thead>
           <tbody class="table-striped">
-            <tr *ngFor="let ec of empleadoscategorias">
-              <td>{{ ec.empleado.idempleado }}</td>
-              <td>{{ ec.empleado.nomemp }}</td>
-              <td>{{ ec.empleado.ape1emp }}</td>
-              <td>{{ ec.empleado.ape2emp }}</td>
-              <td>{{ ec.empleado.telecontacto}}</td>
-              <td>{{ ec.empleado.antiguedad }}</td>
-              <td><a mat-raised-button class="btn" [routerLink]="['/vacacionesempleado', ec.empleado.idempleado ]">Vacaciones</a></td>
-              <td>{{ ec.categoria.denom }}</td>
-
-              <!-- <td><a mat-raised-button color="accent" class="btn" [routerLink]="['/empleado', em.idempleado]" routerLinkActive="active" (click)="getEmpleado( em.idempleado )">Ficha empleado</a></td> -->
+            <tr *ngFor="let ec of empleados">
+              <td>{{ ec.idempleado }}</td>
+              <td>{{ ec.nomemp }}</td>
+              <td>{{ ec.ape1emp }}</td>
+              <td>{{ ec.ape2emp }}</td>
+              <td>{{ ec.telecontacto}}</td>
+              <td>{{ ec.antiguedad }}</td>
+              <td><a mat-raised-button class="btn" [routerLink]="['/vacacionesempleado', ec.idempleado ]">Vacaciones</a></td>
+              <!-- <td>{{ ec.categoria.denom }}</td> -->
+              <!-- <td><a mat-raised-button color="accent" class="btn" [routerLink]="['/empleado', em.idempleado]"
+                routerLinkActive="active" (click)="getEmpleado( em.idempleado )">Ficha empleado</a></td> -->
 
               <td><a mat-raised-button color="accent" class="btn"
-                [routerLink]="['/empleado', ec.empleado.idempleado]"
-                routerLinkActive="active" (click)="verEmpleado( ec.empleado.idempleado )">Ficha empleado</a></td>
+                [routerLink]="['/empleado', ec.idempleado]"
+                routerLinkActive="active" (click)="verEmpleado( ec.idempleado )">Ficha empleado</a></td>
 
-              <td><a mat-raised-button color="warn" class="btn" [routerLink]="['/empleados']" (click)="borrarEmpleado( ec.empleado.idempleado )">Eliminar</a></td>
+              <td><a mat-raised-button color="warn" class="btn" [routerLink]="['/empleados']" (click)="borrarEmpleado( ec.idempleado )">Eliminar</a></td>
             </tr>
           </tbody>
-
 				</table>
 
 
@@ -84,8 +83,7 @@
 						<a href="#" mat-raised-button color="warn" class="btn">Informes</a>
 					</div>
 					<div class="col">
-						<mat-paginator [pageSizeOptions]="[1, 5, 10]" aria-label="Select page" [pageSize]="2" [pageIndex]="pgIndex">
-						</mat-paginator>
+            <app-paginator-empleados *ngIf="paginador"   [paginador]="paginador"></app-paginator-empleados>
 					</div>
 				</div>
 			</div>
